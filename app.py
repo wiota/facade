@@ -1,23 +1,37 @@
-import os
-from flask import Flask
+import os, sys
+from flask import Flask, render_template
+from pymongo import Connection
+from urlparse import urlparse
+from bson.objectid import ObjectId
+
+MONGO_URL = os.environ.get('MONGOHQ_URL')
+
+if MONGO_URL:
+    connection = Connection(MONGO_URL)
+    db = connection[urlparse(MONGO_URL).path[1:]]
+else:
+    sys.exit("MongoDB URL not found, exiting")
 
 app = Flask(__name__)
+# Turn on debugging if it's set
+app.debug = os.environ.get('FLASK_DEBUG') == 'True'
+# Tell jinja to trim blocks
+app.jinja_env.trim_blocks = True
 
 @app.route('/')
 def hello():
-  return "<p style='display:block;width: auto;color:#43bf78;font-size: 20px; padding: 10px; margin: 0; border-width: 0 0 1px;z-index:1000;font-family: \"Helvetica Neue\", \"Arial\", \"san-serif\";'><a style='color:#43bf78' href='/joke'>Click Here Dustin!!</a></p>"
-
+    return render_template('index.html', name="Ryan")
 
 @app.route('/joke/')
 def joke():
-  return "<p style='width: auto;color:#BF5A43;font-size: 20px; padding: 10px; margin: 0; border-width: 0 0 1px;z-index:1000;font-family: \"Helvetica Neue\", \"Arial\", \"san-serif\";' >A barber, a bald man and an absent minded professor take a journey together. They have to camp overnight, so decide to take turns watching the luggage. When it's the barber's turn, he gets bored, so amuses himself by shaving the head of the professor. When the professor is woken up for his shift, he feels his head, and <a style='color:#43bf78;' href='/punchline'>says...</a></p>"
+    joke = db.joke.find_one()
+    return render_template('joke.html', setup=joke['setup'], joke_id=joke['_id'])
 
-@app.route('/punchline/')
-def punchline():
-  return "<p style='width: auto;color:#BF5A43;font-size: 20px; padding: 10px; margin: 0; border-width: 0 0 1px;z-index:1000;font-family: \"Helvetica Neue\", \"Arial\", \"san-serif\";' > \"How stupid is that barber? He's woken up the bald man instead of me.\" <a style='color:#43bf78;' href='/'>ha ha</a></p>"
-
+@app.route('/punchline/<joke_id>')
+def punchline(joke_id):
+    joke = db.joke.find_one({'_id':ObjectId(joke_id)})
+    return render_template('punch.html', punchline=joke['punchline'])
 
 if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
