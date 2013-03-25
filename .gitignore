@@ -1,3 +1,6 @@
+# Environment vars for foreman (heroku)
+.env
+
 venv
 *.py[cod]
 
