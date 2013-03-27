@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 
-app = Blueprint('admin', __name__, url_prefix='/admin')
+mod = Blueprint('admin', __name__, url_prefix='/admin')
 
-@app.route('/')
+@mod.route('/')
 def hello():
-    return "admin interface" 
+    return "admin interface"
