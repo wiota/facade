@@ -3,6 +3,7 @@ Jinja2==2.6
 Werkzeug==0.8.3
 argparse==1.2.1
 distribute==0.6.27
+newrelic==1.10.2.38
 pymongo==2.5
 pytz==2013b
 wsgiref==0.1.2
