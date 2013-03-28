@@ -9,7 +9,6 @@ class HostDispatcher(object):
 
     def get_application(self, host):
         host = host.split(':')[0]
-        print "Host is: " + host
         with self.lock:
             app = self.instances.get(host)
             if app is None:
