@@ -20,6 +20,7 @@ def create_app(host):
     app.jinja_env.trim_blocks = True
 
     app.config['STATIC_FOLDER'] = 'static'
+    app.config['COMMON_FOLDER'] = 'common'
     app.config['DIRECTORY_INDEX'] = 'index.html'
     app.config['HOST'] = host
 

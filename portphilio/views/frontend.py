@@ -8,9 +8,10 @@ mod = Blueprint('frontend', __name__)
 @mod.route('/<path:path>')
 def root(path):
     try :
-        if path.startswith(app.config['STATIC_FOLDER']) :
-            return send_file(path)
+        if path.startswith(app.config['COMMON_FOLDER']) :
+            return send_file('/'.join([app.config['STATIC_FOLDER'], path]))
         elif '.' in path.split('/')[-1] :
+            print domain(path)
             return send_file(domain(path))
         else :
             return send_file(index(path))
