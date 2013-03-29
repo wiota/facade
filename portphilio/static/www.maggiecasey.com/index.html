@@ -5,10 +5,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="./javascripts/swfobject.js"></script>
     <script type="text/javascript" src="./javascripts/string.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="./styles/ryanhinkel.css" rel="stylesheet" type="text/css">
     <!--[if lte IE 6]>
     <link rel="stylesheet" type="text/css" href="../styles/ie.css" />
     <![endif]-->
+    <script>
+    $(function() {
+        getWork("installations");
+        getWork("sculpture");
+    });
+    function makeWorkList(name, works) {
+        ul = $('<ul>');
+        works.forEach( function(e, i, a) {
+            ul.append($('<li>').append($('<a>').attr('href', ['work', name, e.slug].join('/')).append(e.title)));
+        });
+        $('#container').append($('<div>').attr('id',name).append($('<h2>').append(name.toUpperCase())).append(ul));
+    }
+    function getWork(name){
+        $.ajax({
+            url:"/api/v1/work/" + name,
+            success: function(msg) {
+                makeWorkList(name, msg.works);
+            }
+        });
+    }
+    </script>
     </head>
     <body id='home'>
         <div id="header">
@@ -18,37 +40,6 @@
             </div>
         </div>
         <div id="container">
-            <div id="installations">
-            <h2>Installations</h2>
-            <ul>
-                <li><a href="../installations/show.php?id=114">Range</a></li>
-                <li><a href="../installations/show.php?id=113">Gold Tooth</a></li>
-                <li><a href="../installations/show.php?id=103">Processions: an Elaborative Cartography</a></li>
-                <li><a href="../installations/show.php?id=100">Gold Tooth; Tapestries</a></li>
-                <li><a href="../installations/show.php?id=94">Feathers</a></li>
-                <li><a href="../installations/show.php?id=93">Train Track</a></li>
-                <li><a href="../installations/show.php?id=88">Staircase</a></li>
-                <li><a href="../installations/show.php?id=91">Two Chairs</a></li>
-                </ul>
-            </div>
-            <div id="sculptures">
-            <h2>Sculpture</h2>
-            <ul>
-                <li><a href="../sculptures/show.php?id=110">Memorial to Tray Anning</a></li>
-                <li><a href="../sculptures/show.php?id=112">His </a></li>
-                <li><a href="../sculptures/show.php?id=106">Hers</a></li>
-                <li><a href="../sculptures/show.php?id=105">Comma</a></li>
-                <li><a href="../sculptures/show.php?id=111">Adorned Spill</a></li>
-                <li><a href="../sculptures/show.php?id=107">Retro</a></li>
-                <li><a href="../sculptures/show.php?id=108">Host</a></li>
-                <li><a href="../sculptures/show.php?id=109">Fugitive</a></li>
-                <li><a href="../sculptures/show.php?id=104">Constellation: Whale</a></li>
-                <li><a href="../sculptures/show.php?id=98">Model: Cloud</a></li>
-                <li><a href="../sculptures/show.php?id=95">Model: Splitting</a></li>
-                <li><a href="../sculptures/show.php?id=86">Model: Hanging Angle</a></li>
-                <li><a href="../sculptures/show.php?id=96">Duck and Silkworm Celebrate Synthetic Advancement</a></li>
-                </ul>
-            </div>
             <div id="footer">hey what are you doing down here</div>
         </div>
         <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
