@@ -4,6 +4,16 @@ import os
 
 mod = Blueprint('frontend', __name__)
 
+def index(path):
+    return '/'.join([domain(path), app.config['DIRECTORY_INDEX']])
+
+def domain(path):
+    return '/'.join([app.config['STATIC_FOLDER'], app.config['HOST'], path])
+
+@mod.route('/robots.txt')
+def static_from_root():
+    return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
+
 @mod.route('/', defaults={'path': ''})
 @mod.route('/<path:path>')
 def root(path):
@@ -17,12 +27,14 @@ def root(path):
     except IOError:
         abort(404)
 
-@mod.route('/robots.txt')
-def static_from_root():
-    return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
+@mod.route('/work')
+def work() :
+    return "Maybe list all works here?"
 
-def index(path):
-    return '/'.join([domain(path), app.config['DIRECTORY_INDEX']])
+@mod.route('/work/<category>')
+def work_category(category) :
+    return "List all works in category " + category
 
-def domain(path):
-    return '/'.join([app.config['STATIC_FOLDER'], app.config['HOST'], path])
+@mod.route('/work/<category>/<_id>')
+def work_individual(category, _id) :
+    return "Show individual work (cat: " + category + ", _id: " + _id + ")"
