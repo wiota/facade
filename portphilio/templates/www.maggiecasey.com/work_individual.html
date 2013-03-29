@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Maggie Casey</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="/javascripts/swfobject.js"></script>
+        <script type="text/javascript" src="/javascripts/string.js"></script>
+        <link href="/styles/ryanhinkel.css" rel="stylesheet" type="text/css">
+        <!--[if lte IE 6]>
+        <link rel="stylesheet" type="text/css" href="../styles/ie.css" />
+        <![endif]-->
+    </head>
+    <body id='show'>
+        <div id="container">
+            <div id="thumbnails">
+                {% for media in work.media %}
+                <a href="#{{ media._id }}">
+                <div class="thumb">
+                    <img src="{{ media.thumb_href }}" height="{{ media.height
+                    }}" width="{{ media.width }}" alt="" />
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+            {% for media in work.media %}
+            <div class="image" id="{{ media._id }}">
+                <img src="{{ media.href }}" height="{{ media.height }}"
+                width="{{ media.width }}" alt="" />
+            </div>
+            </a>
+            {% endfor %}
+            <div class="info">
+                <h1 class="title">{{ work.title }}</h1>
+                <p class="medium">{{ work.medium }}</p>
+                <p class="size">{{ work.size }}</p>
+                <p class="date">{{ work.date }}</p>
+                <p class="description">{{ work.description }}</p>
+                <a class="left_link" href="/">Home</a>
+            </div>
+            <div id="footer"></div>
+        </div>
+        <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+        <script type="text/javascript">_uacct = "UA-860414-1";urchinTracker();</script>
+    </body>
+</html>
