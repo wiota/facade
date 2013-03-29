@@ -1,5 +1,6 @@
 from flask import Blueprint, request, send_file, abort, send_from_directory
 from flask import current_app as app
+from flask import render_template
 import os
 
 mod = Blueprint('frontend', __name__)
@@ -27,6 +28,12 @@ def root(path):
     except IOError:
         abort(404)
 
+@mod.route('/events')
+@mod.route('/events/')
+def events() :
+    template = '/'.join([app.config['HOST'], 'events.html'])
+    return render_template(template)
+
 @mod.route('/work')
 def work() :
     return "Maybe list all works here?"
@@ -35,6 +42,16 @@ def work() :
 def work_category(category) :
     return "List all works in category " + category
 
-@mod.route('/work/<category>/<_id>')
-def work_individual(category, _id) :
-    return "Show individual work (cat: " + category + ", _id: " + _id + ")"
+@mod.route('/work/<category>/<slug>')
+def work_individual(category, slug) :
+    work = db.work.find_one({'host':app.config['HOST'], 'slug':slug})
+    if work is not None :
+        work['media'] = deref_list('media', work['media'])
+    template = '/'.join([app.config['HOST'], 'work_individual.html'])
+    return render_template(template, work=work)
+
+def deref_list(collection, _list):
+    return [dereference(collection, x) for x in _list]
+
+def dereference(collection, _id):
+    return db[collection].find_one({'_id': _id})

@@ -29,6 +29,7 @@ def create_app(host):
     from portphilio.views import joker
     from portphilio.views import api
     joker.db = db
+    frontend.db = db
     frontend.config = app.config
     api.db = db
     api.config = app.config
