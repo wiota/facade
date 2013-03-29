@@ -1,0 +1,116 @@
+
+body {background-color:#222220; margin: 0;}
+
+/* Typography */
+
+body {font-family: "Helvetica", "Arial", san-serif;}
+h1 {margin:0;}
+h2 {font-size: 14px; font-weight: normal; text-transform: uppercase;letter-spacing: 1px;}
+ul {font-size: 13px; font-weight: normal; color:#545752; list-style:none;}
+a {text-decoration: none;color:#fff;}
+
+
+
+/* HOME */
+
+body#home {line-height: 24px; color:#333;}
+#home h1 {text-indent: -9999px; overflow:hidden;}
+#home a {color:#545752;}
+#footer {font-size: 9px;letter-spacing: 1px; text-transform: uppercase;font-family:arial;}
+a.left_link {font-size: 12px; text-transform:uppercase;line-height: 16px;color: #ccc;background: url('../images/home_arrow.png') no-repeat #222220;}
+
+
+/* SHOW */
+
+body#show {line-height: 16px;color: #ccc;}
+
+#show .info {color: #ccc;background-color:#222220; opacity: 0.9;}
+#show h1 {}
+#show p {font-size: 10px;margin: 0; }
+#show .title {font-size: 14px; font-weight:normal; letter-spacing: 1px;margin: 0;}
+#show .medium {font-weight: normal;text-transform: uppercase; color:#aaa;}
+#show .date {font-size: 12px;}
+#show .size {font-size: 11px;}
+#show .description {}
+#show a {font-weight:bold;}
+ 
+/* CONTACT */
+
+#contact {color: #ccc;}
+#contact p {font-size: 10px;margin: 3px 0; }
+#contact a {color: #aaa; font-size: 12px; text-decoration: underline;}
+#contact dl {margin: 50px 0; padding: 0;font-size: 10px; line-height: 16px;}
+#contact dt {margin: 20px 0 0;padding:0;text-transform:uppercase;color: #555;}
+#contact dd {margin:0;padding:0;}
+#contact dd a {font-size: 10px; text-decoration: underline;}
+
+#contact #contact_info h1 {display:block; width:126px; height:21px; text-indent: -9999px; overflow:hidden; background: url('../images/small_name.gif') no-repeat;}
+
+#contact #contact_info img {margin: 10px 0 50px;}
+
+
+#contact #links {padding: 100px 0 100px 50px; margin: 0 0 0 330px;background-color:#252523;}
+#contact #links a {display:block;margin: 20px 0;}
+
+
+ 
+ 
+/* EVENTS */
+
+
+
+#events {padding: 100px 0 100px 50px; margin: 0 0 0 330px;background-color:#252523}
+#events h2 {color:#888;font-size: 16px;margin: 10px 0 10px;font-weight:bold;}
+
+#events .newevent, #events .pastevent {margin: 30px 0;}
+#events .title, #events .title a {font-size: 16px; font-weight:normal; letter-spacing: 0px;margin: 0;width:300px;}
+#events .description {font-weight: normal; font-size: 11px; color:#eee;width: 300px;margin: 10px 0;}
+#events .date {font-size: 10px;width: 200px;color:#888;}
+#events .size {font-size: 11px;}
+
+
+
+
+/* SITEWIDE */
+ul {margin:0; padding: 0;}
+img {border-style:none;margin:0;display:block;}
+
+#container, #header { margin: 0 auto; width: 1024px; position: relative;}
+#footer {height: 39px;clear:both;position:absolute; bottom: 0;}
+
+a.left_link {padding: 3px 20px 3px 30px ;margin: 30px 0;display:block}
+
+
+/* HOME */
+
+#home #header {
+	background: url('../images/h1_no_flash.jpg') #f4f4f2 no-repeat;
+	height: 239px;
+	}
+
+#home #container {
+	background: url('../images/background.jpg') #f4f4f2 no-repeat;width: 974px; height:1000px;
+	padding: 88px 0 0px 50px;
+	position:relative;
+	}
+
+#installations, #sculptures {float:left; width: 482px;}
+#installations {margin-bottom: 200px;}
+#sculptures {}
+#making {clear:both;margin-top: 100px;}
+
+/* SHOW */
+
+
+#thumbnails {position:fixed; right: 50px; top: 0; margin: 50px 0;display:none;}
+
+#show .info {position:fixed;  top: 30px;padding: 10px 10px 10px; margin: 10px 0 0px  720px;width:300px}
+#show .image {margin: 0 0 0px;padding: 50px 0 0;}
+#show #container {padding: 0 0 0 10px; width 1014px;}
+
+
+/* CONTACT */
+
+
+#contact #contact_info {position:fixed; top: 100px;left:50px;}
+#contact  a.left_link {position:fixed; top: 15px; left:50px;}
