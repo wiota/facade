@@ -17,9 +17,9 @@ def work_name(name) :
     resp = Response(response=dumps(ret), status=200, mimetype="application/json")
     return resp
 
-@mod.route('/work/<name>/<_id>')
-def work_individual(name, _id) :
-    return "Show individual work (name: " + name + ", _id: " + _id + ")"
+@mod.route('/work/<name>/<slug>')
+def work_individual(name, slug) :
+    return "Show individual work (name: " + name + ", slug: " + slug + ")"
 
 def deref_list(collection, _list):
     return [dereference(collection, x) for x in _list]
