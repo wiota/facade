@@ -24,9 +24,11 @@ def check_host(host):
     host_exists = db.host.find_one({'hostname':host}) is not None
     return host_exists
 
+def get_workset(config, workset_name):
+    """ Allow a template to query the DB for a workset"""
+    return db.worksets.find_one({'host':config["HOST"], 'name':workset_name})
+
 def create_app(host):
-    print "App created for " + host
-    print "Host exists? "
 
     # Create a starter app
     app = Flask(__name__)
@@ -34,6 +36,8 @@ def create_app(host):
     app.debug = os.environ.get('FLASK_DEBUG') == 'True'
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
+    # Expose the function to the template
+    app.jinja_env.globals.update(get_workset=get_workset)
 
     # Check if the host is in our host list
     if check_host(host) :
@@ -56,6 +60,8 @@ def create_app(host):
         app.register_blueprint(joker.mod)
         app.register_blueprint(frontend.mod)
         app.register_blueprint(api.mod)
+
+        app.logger.debug("App created for %s" % (host))
     else :
         # This host doesn't exist!
         abort(404)

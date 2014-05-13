@@ -10,27 +10,6 @@
     <!--[if lte IE 6]>
     <link rel="stylesheet" type="text/css" href="../styles/ie.css" />
     <![endif]-->
-    <script>
-    $(function() {
-        getWork("installations");
-        getWork("sculpture");
-    });
-    function makeWorkList(name, works) {
-        ul = $('<ul>');
-        works.forEach( function(e, i, a) {
-            ul.append($('<li>').append($('<a>').attr('href', ['work', name, e.slug].join('/')).append(e.title)));
-        });
-        $('#container').append($('<div>').attr('id',name).append($('<h2>').append(name.toUpperCase())).append(ul));
-    }
-    function getWork(name){
-        $.ajax({
-            url:"/api/v1/work/" + name,
-            success: function(msg) {
-                makeWorkList(name, msg.works);
-            }
-        });
-    }
-    </script>
     </head>
     <body id='home'>
         <div id="header">
@@ -40,6 +19,19 @@
             </div>
         </div>
         <div id="container">
+            {% for workset in ['installations', 'sculpture'] %}
+            {% set ws = get_workset(config, workset) %}
+            <div id="{{ ws['name'] }}">
+                <h2>{{ ws['display_name'] }}</h2>
+                <ul>
+                    {% for work in ws['works'] %}
+                    <li>
+                        <a href="/work/{{ ws['name'] }}/{{ work['slug'] }}">{{ work['title'] }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
             <div id="footer">hey what are you doing down here</div>
         </div>
         <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
