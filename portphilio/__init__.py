@@ -4,38 +4,60 @@ from pymongo import Connection
 from urlparse import urlparse
 from bson.objectid import ObjectId
 
+# Get the URL for the database from the environment
 MONGO_URL = os.environ.get('MONGOHQ_URL')
 
 if MONGO_URL:
+    # Create a new DB connection
     connection = Connection(MONGO_URL)
-    db = connection[urlparse(MONGO_URL).path[1:]]
+    # Parse the DB name from the URL
+    db_name = urlparse(MONGO_URL).path[1:]
+    # Create a new DB
+    db = connection[db_name]
 else:
+    # The environmental variable is not set
     sys.exit("MongoDB URL not found, exiting")
 
+def check_host(host):
+    """ Check if the requested hostname exists. """
+    # TODO: move this into a DB wrapper class
+    host_exists = db.host.find_one({'hostname':host}) is not None
+    return host_exists
+
 def create_app(host):
+    print "App created for " + host
+    print "Host exists? "
+
+    # Create a starter app
     app = Flask(__name__)
     # Turn on debugging if it's set
     app.debug = os.environ.get('FLASK_DEBUG') == 'True'
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
 
-    app.config['STATIC_FOLDER'] = 'static'
-    app.config['COMMON_FOLDER'] = 'common'
-    app.config['DIRECTORY_INDEX'] = 'index.html'
-    app.config['HOST'] = host
+    # Check if the host is in our host list
+    if check_host(host) :
+        # Make it a full-fledged tenant app
+        app.config['STATIC_FOLDER'] = 'static'
+        app.config['COMMON_FOLDER'] = 'common'
+        app.config['DIRECTORY_INDEX'] = 'index.html'
+        app.config['HOST'] = host
 
-    from portphilio.views import frontend
-    from portphilio.views import admin
-    from portphilio.views import joker
-    from portphilio.views import api
-    joker.db = db
-    frontend.db = db
-    frontend.config = app.config
-    api.db = db
-    api.config = app.config
-    app.register_blueprint(admin.mod)
-    app.register_blueprint(joker.mod)
-    app.register_blueprint(frontend.mod)
-    app.register_blueprint(api.mod)
+        from portphilio.views import frontend
+        from portphilio.views import admin
+        from portphilio.views import joker
+        from portphilio.views import api
+        joker.db = db
+        frontend.db = db
+        frontend.config = app.config
+        api.db = db
+        api.config = app.config
+        app.register_blueprint(admin.mod)
+        app.register_blueprint(joker.mod)
+        app.register_blueprint(frontend.mod)
+        app.register_blueprint(api.mod)
+    else :
+        # This host doesn't exist!
+        abort(404)
 
     return app
