@@ -48,7 +48,6 @@ def create_app(host):
         app.config['HOST'] = host
 
         from portphilio.views import frontend
-        from portphilio.views import admin
         from portphilio.views import joker
         from portphilio.views import api
         joker.db = db
@@ -56,7 +55,6 @@ def create_app(host):
         frontend.config = app.config
         api.db = db
         api.config = app.config
-        app.register_blueprint(admin.mod)
         app.register_blueprint(joker.mod)
         app.register_blueprint(frontend.mod)
         app.register_blueprint(api.mod)
