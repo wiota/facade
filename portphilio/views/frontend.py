@@ -54,12 +54,4 @@ def work_category(category) :
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug) :
     work = db.work.find_one({'host':app.config['HOST'], 'slug':slug})
-    if work is not None :
-        work['media'] = deref_list('media', work['media'])
     return render_template(template_path('work_individual.html'), work=work)
-
-def deref_list(collection, _list):
-    return [dereference(collection, x) for x in _list]
-
-def dereference(collection, _id):
-    return db[collection].find_one({'_id': _id})
