@@ -29,12 +29,6 @@ def create_app(host):
 
     # Create a starter app
     app = Flask(__name__)
-    # Turn on debugging if it's set
-    app.debug = os.environ.get('FLASK_DEBUG') == 'True'
-    # Tell jinja to trim blocks
-    app.jinja_env.trim_blocks = True
-    # Expose the function to the template
-    app.jinja_env.globals.update(get_subset=get_subset)
 
     # MongoEngine configuration
     app.config["MONGODB_SETTINGS"] = {
@@ -47,23 +41,30 @@ def create_app(host):
     try :
         # Check if the host is in our host list
         owner = Host.objects.get(hostname=host).owner
-
-        # Make it a full-fledged tenant app
-        app.config['STATIC_FOLDER'] = 'static'
-        app.config['COMMON_FOLDER'] = 'common'
-        app.config['DIRECTORY_INDEX'] = 'index.html'
-        app.config['HOST'] = host
-        app.config['OWNER'] = owner
-
-        from portphilio.views import frontend
-        frontend.db = db
-        frontend.config = app.config
-        app.register_blueprint(frontend.mod)
-
-        app.logger.debug("App created for %s" % (host))
     except :
         # This host doesn't exist!
-        # TODO: return an app that gives a proper response
-        pass
+        # TODO: return an app that gives a better response
+        return app
+
+    # Turn on debugging if it's set
+    app.debug = os.environ.get('FLASK_DEBUG') == 'True'
+    # Tell jinja to trim blocks
+    app.jinja_env.trim_blocks = True
+    # Expose the function to the template
+    app.jinja_env.globals.update(get_subset=get_subset)
+
+    # Make it a full-fledged tenant app
+    app.config['STATIC_FOLDER'] = 'static'
+    app.config['COMMON_FOLDER'] = 'common'
+    app.config['DIRECTORY_INDEX'] = 'index.html'
+    app.config['HOST'] = host
+    app.config['OWNER'] = owner
+
+    from portphilio.views import frontend
+    frontend.db = db
+    frontend.config = app.config
+    app.register_blueprint(frontend.mod)
+
+    app.logger.debug("App created for %s" % (host))
 
     return app
