@@ -3,6 +3,8 @@ from flask import Flask, request, render_template
 from pymongo import Connection
 from urlparse import urlparse
 from bson.objectid import ObjectId
+from portphilio_lib.models import *
+from flask.ext.mongoengine import MongoEngine
 
 # Get the URL for the database from the environment
 MONGO_URL = os.environ.get('MONGOHQ_URL')
@@ -13,20 +15,15 @@ if MONGO_URL:
     # Parse the DB name from the URL
     db_name = urlparse(MONGO_URL).path[1:]
     # Create a new DB
-    db = connection[db_name]
+    db_pm = connection[db_name]
 else:
     # The environmental variable is not set
     sys.exit("MongoDB URL not found, exiting")
 
-def check_host(host):
-    """ Check if the requested hostname exists. """
-    # TODO: move this into a DB wrapper class
-    host_exists = db.host.find_one({'hostname':host}) is not None
-    return host_exists
 
-def get_workset(config, workset_name):
-    """ Allow a template to query the DB for a workset"""
-    return db.worksets.find_one({'host':config["HOST"], 'name':workset_name})
+def get_subset(config, subset_name):
+    return Subset.objects.get(slug=subset_name, owner=config["OWNER"])
+
 
 def create_app(host):
 
@@ -37,28 +34,40 @@ def create_app(host):
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
     # Expose the function to the template
-    app.jinja_env.globals.update(get_workset=get_workset)
+    app.jinja_env.globals.update(get_subset=get_subset)
 
-    # Check if the host is in our host list
-    if check_host(host) :
+    # MongoEngine configuration
+    app.config["MONGODB_SETTINGS"] = {
+        "DB": urlparse(MONGO_URL).path[1:],
+        "host": MONGO_URL}
+
+    # MongoEngine DB
+    db = MongoEngine(app)
+
+    try :
+        # Check if the host is in our host list
+        owner = Host.objects.get(hostname=host).owner
+
         # Make it a full-fledged tenant app
         app.config['STATIC_FOLDER'] = 'static'
         app.config['COMMON_FOLDER'] = 'common'
         app.config['DIRECTORY_INDEX'] = 'index.html'
         app.config['HOST'] = host
+        app.config['OWNER'] = owner
 
         from portphilio.views import frontend
         from portphilio.views import api
         frontend.db = db
         frontend.config = app.config
-        api.db = db
+        api.db = db_pm
         api.config = app.config
         app.register_blueprint(frontend.mod)
         app.register_blueprint(api.mod)
 
         app.logger.debug("App created for %s" % (host))
-    else :
+    except :
         # This host doesn't exist!
-        abort(404)
+        # TODO: return an app that gives a proper response
+        pass
 
     return app

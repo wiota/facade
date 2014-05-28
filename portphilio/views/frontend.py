@@ -1,6 +1,7 @@
 from flask import Blueprint, request, send_file, abort, send_from_directory
 from flask import current_app as app
 from flask import render_template
+from portphilio_lib.models import Work
 import os
 
 mod = Blueprint('frontend', __name__)
@@ -53,5 +54,5 @@ def work_category(category) :
 
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug) :
-    work = db.work.find_one({'host':app.config['HOST'], 'slug':slug})
+    work = Work.objects.get(owner=app.config['OWNER'], slug=slug)
     return render_template(template_path('work_individual.html'), work=work)
