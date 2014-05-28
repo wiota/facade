@@ -19,14 +19,14 @@
             </div>
         </div>
         <div id="container">
-            {% for workset in ['installations', 'sculpture'] %}
-            {% set ws = get_workset(config, workset) %}
-            <div id="{{ ws['name'] }}">
-                <h2>{{ ws['display_name'] }}</h2>
+            {% for subset in ['installations', 'sculpture'] %}
+            {% set ss = get_subset(config, subset) %}
+            <div id="{{ ss.slug }}">
+                <h2>{{ ss.title }}</h2>
                 <ul>
-                    {% for work in ws['works'] %}
+                    {% for w in ss.subset %}
                     <li>
-                        <a href="/work/{{ ws['name'] }}/{{ work['slug'] }}">{{ work['title'] }}</a>
+                        <a href="/work/{{ ss.slug }}/{{ w.slug }}">{{ w.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
