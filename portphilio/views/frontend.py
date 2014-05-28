@@ -10,9 +10,11 @@ mod = Blueprint('frontend', __name__)
 def template_path(template_name) :
     return '/'.join([app.config['HOST'], template_name])
 
+# Create a path to the index file in a static directory
 def static_index(path):
     return '/'.join([domain(path), app.config['DIRECTORY_INDEX']])
 
+# Put the static folder and domain into a path
 def domain(path):
     return '/'.join([app.config['STATIC_FOLDER'], app.config['HOST'], path])
 
@@ -20,6 +22,7 @@ def domain(path):
 def static_from_root():
     return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
 
+# Render the index template
 @mod.route('/')
 def index():
     return render_template(template_path('index.html'))
