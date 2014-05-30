@@ -1,44 +1,22 @@
-import os
-from flask import Flask, request, render_template
-from urlparse import urlparse
-from bson.objectid import ObjectId
-from portphilio_lib.models import *
-from flask.ext.mongoengine import MongoEngine
-
-# Get the URL for the database from the environment
-MONGO_URL = os.environ.get('MONGOHQ_URL')
-
-def get_subset(config, subset_name):
-    return Subset.objects.get(slug=subset_name, owner=config["OWNER"])
+from flask import Flask
+from portphilio_lib import tools
 
 
 def create_app(host):
-
-    # Create a starter app
     app = Flask(__name__)
+    db = tools.initialize_db(app)
 
-    # MongoEngine configuration
-    app.config["MONGODB_SETTINGS"] = {
-        "DB": urlparse(MONGO_URL).path[1:],
-        "host": MONGO_URL}
+    # Get the owner of the hostname
+    owner = tools.get_owner(host)
 
-    # MongoEngine DB
-    db = MongoEngine(app)
-
-    try :
-        # Check if the host is in our host list
-        owner = Host.objects.get(hostname=host).owner
-    except :
-        # This host doesn't exist!
+    if owner is None:
         # TODO: return an app that gives a better response
         return app
 
-    # Turn on debugging if it's set
-    app.debug = os.environ.get('FLASK_DEBUG') == 'True'
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
-    # Expose the function to the template
-    app.jinja_env.globals.update(get_subset=get_subset)
+    # Expose a function to the template
+    app.jinja_env.globals.update(get_subset=tools.get_subset)
 
     # Make it a full-fledged tenant app
     app.config['STATIC_FOLDER'] = 'static'
@@ -47,6 +25,7 @@ def create_app(host):
     app.config['HOST'] = host
     app.config['OWNER'] = owner
 
+    # Register the frontend blueprint
     from portphilio.views import frontend
     frontend.db = db
     frontend.config = app.config
