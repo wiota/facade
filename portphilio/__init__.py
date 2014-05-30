@@ -1,6 +1,5 @@
 import os
 from flask import Flask, request, render_template
-from pymongo import Connection
 from urlparse import urlparse
 from bson.objectid import ObjectId
 from portphilio_lib.models import *
@@ -8,18 +7,6 @@ from flask.ext.mongoengine import MongoEngine
 
 # Get the URL for the database from the environment
 MONGO_URL = os.environ.get('MONGOHQ_URL')
-
-if MONGO_URL:
-    # Create a new DB connection
-    connection = Connection(MONGO_URL)
-    # Parse the DB name from the URL
-    db_name = urlparse(MONGO_URL).path[1:]
-    # Create a new DB
-    db_pm = connection[db_name]
-else:
-    # The environmental variable is not set
-    sys.exit("MongoDB URL not found, exiting")
-
 
 def get_subset(config, subset_name):
     return Subset.objects.get(slug=subset_name, owner=config["OWNER"])
