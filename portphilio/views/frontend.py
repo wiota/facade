@@ -1,8 +1,5 @@
-from flask import Blueprint, request, send_file, abort, send_from_directory
+from flask import Blueprint, request, send_file, abort, render_template
 from flask import current_app as app
-from flask import render_template
-from portphilio_lib.models import Work
-import os
 
 mod = Blueprint('frontend', __name__)
 
@@ -18,6 +15,7 @@ def static_index(path):
 def domain(path):
     return '/'.join([app.config['STATIC_FOLDER'], app.config['HOST'], path])
 
+# TODO: Figure out what is going on here
 @mod.route('/robots.txt')
 def static_from_root():
     return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
@@ -42,7 +40,6 @@ def root(path):
     except IOError:
         abort(404)
 
-@mod.route('/events')
 @mod.route('/events/')
 def events() :
     return render_template(template_path('events.html'))
@@ -57,5 +54,5 @@ def work_category(category) :
 
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug) :
-    work = Work.objects.get(owner=app.config['OWNER'], slug=slug)
-    return render_template(template_path('work_individual.html'), work=work, media=work.subset)
+    work, media = tools.get_work_from_slug(app.config['OWNER'], slug)
+    return render_template(template_path('work_individual.html'), work=work, media=media)
