@@ -13,19 +13,17 @@
     <body id='show'>
         <div id="container">
             <div id="thumbnails">
-                {% for media in work.media %}
-                <a href="#{{ media._id }}">
+                {% for medium in media %}
+                <a href="#{{ medium._id }}">
                 <div class="thumb">
-                    <img src="{{ media.thumb_href }}" height="{{ media.height
-                    }}" width="{{ media.width }}" alt="" />
+                    <img src="{{ medium.thumb_href }}" height="{{ media.height }}" width="{{ media.width }}" alt="" />
                 </div>
                 </a>
                 {% endfor %}
             </div>
-            {% for media in work.media %}
-            <div class="image" id="{{ media._id }}">
-                <img src="{{ media.href }}" height="{{ media.height }}"
-                width="{{ media.width }}" alt="" />
+            {% for medium in media %}
+            <div class="image" id="{{ medium._id }}">
+                <img src="{{ medium.href }}" height="{{ media.height }}" width="{{ media.width }}" alt="" />
             </div>
             </a>
             {% endfor %}

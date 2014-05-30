@@ -58,4 +58,4 @@ def work_category(category) :
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug) :
     work = Work.objects.get(owner=app.config['OWNER'], slug=slug)
-    return render_template(template_path('work_individual.html'), work=work)
+    return render_template(template_path('work_individual.html'), work=work, media=work.subset)
