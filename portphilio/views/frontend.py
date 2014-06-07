@@ -1,5 +1,6 @@
 from flask import Blueprint, request, send_file, abort, render_template
 from flask import current_app as app
+from portphilio_lib.tools import get_work_from_slug
 
 mod = Blueprint('frontend', __name__)
 
@@ -54,5 +55,5 @@ def work_category(category) :
 
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug) :
-    work, media = tools.get_work_from_slug(app.config['OWNER'], slug)
+    work, media = get_work_from_slug(app.config['OWNER'], slug)
     return render_template(template_path('work_individual.html'), work=work, media=media)
