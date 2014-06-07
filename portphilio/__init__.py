@@ -1,9 +1,11 @@
+import os
 from flask import Flask
 from portphilio_lib import tools
 
 
 def create_app(host):
     app = Flask(__name__)
+    app.debug = os.environ.get('FLASK_DEBUG') == 'True'
     db = tools.initialize_db(app)
 
     # Get the owner of the hostname
