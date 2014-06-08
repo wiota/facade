@@ -78,3 +78,13 @@ def work_individual(category, slug):
 @mod.route('/image/<image_name>')
 def image(image_name):
     return retrieve_image(image_name, app.config['OWNER'].username)
+
+# TODO: REMOVE
+@mod.route('/image_test/<filename>')
+def test(filename):
+    return '''
+        <img src="/image/''' + filename + '''"/></br>
+        <img src="/image/''' + filename + '''?w=100&h=100"/></br>
+        <img src="/image/''' + filename + '''?w=100"/></br>
+        <img src="/image/''' + filename + '''?h=100"/></br>
+    '''
