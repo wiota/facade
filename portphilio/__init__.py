@@ -18,7 +18,7 @@ def create_app(host):
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
     # Expose a function to the template
-    app.jinja_env.globals.update(get_subset=tools.get_subset)
+    app.jinja_env.globals.update(get_category=tools.get_category)
 
     # Make it a full-fledged tenant app
     app.config['STATIC_FOLDER'] = 'static'

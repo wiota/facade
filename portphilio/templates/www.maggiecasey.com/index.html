@@ -19,12 +19,12 @@
             </div>
         </div>
         <div id="container">
-            {% for subset in ['installations', 'sculpture'] %}
-            {% set ss = get_subset(config, subset) %}
+            {% for cat in ['installations', 'sculpture'] %}
+            {% set ss = get_category(config, cat) %}
             <div id="{{ ss.slug }}">
                 <h2>{{ ss.title }}</h2>
                 <ul>
-                    {% for w in ss.subset %}
+                    {% for w in ss.succset %}
                     <li>
                         <a href="/work/{{ ss.slug }}/{{ w.slug }}">{{ w.title }}</a>
                     </li>
