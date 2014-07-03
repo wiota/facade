@@ -1,6 +1,6 @@
 from flask import Blueprint, request, send_file, abort, render_template
 from flask import current_app as app
-from portphilio_lib.tools import get_work_from_slug, retrieve_image
+from portphilio_lib.tools import get_work_from_slug, get_category_from_slug, retrieve_image
 
 mod = Blueprint('frontend', __name__)
 
@@ -62,11 +62,19 @@ def image(image_name):
 def events():
     return render_template(template_path('events.html'))
 
+
 @mod.route('/work/<slug>')
 def work_individual(slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
     return render_template(
         template_path('work_individual.html'), work=work, media=media)
+
+
+@mod.route('/category/<slug>')
+def category_individual(slug):
+    category = get_category_from_slug(app.config['HOST'].owner, slug)
+    return render_template(
+        template_path('category_individual.html'), slug=slug, category=category)
 
 
 # TODO: Leave this in for posterity for now, but remove
