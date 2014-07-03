@@ -4,36 +4,36 @@ from portphilio_lib.tools import get_work_from_slug, retrieve_image
 
 mod = Blueprint('frontend', __name__)
 
-# Create a path to a named template with the host name
 
-
-def template_path(template_name):
-    return '/'.join([app.config['HOST'], template_name])
-
-# Create a path to the index file in a static directory
+def template_path(template_file):
+    """ Create a path to a named template with the host name
+    """
+    return '/'.join([app.config['HOST'].template, template_file])
 
 
 def static_index(path):
+    """ Create a path to the index file in a static directory
+    """
     return '/'.join([domain(path), app.config['DIRECTORY_INDEX']])
-
-# Put the static folder and domain into a path
 
 
 def domain(path):
-    return '/'.join([app.config['STATIC_FOLDER'], app.config['HOST'], path])
-
-# TODO: Figure out what is going on here
+    """ Put the static folder and domain into a path
+    """
+    return '/'.join([app.config['STATIC_FOLDER'],
+                     app.config['HOST'].hostname, path])
 
 
 @mod.route('/robots.txt')
 def static_from_root():
+    # TODO: Figure out what is going on here
     return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
-
-# Render the index template
 
 
 @mod.route('/')
 def index():
+    """ Render the index template
+    """
     return render_template(template_path('index.html'))
 
 
@@ -70,21 +70,23 @@ def work_category(category):
 
 @mod.route('/work/<category>/<slug>')
 def work_individual(category, slug):
-    work, media = get_work_from_slug(app.config['OWNER'], slug)
+    work, media = get_work_from_slug(app.config['HOST'].owner, slug)
     return render_template(
         template_path('work_individual.html'), work=work, media=media)
 
 
 @mod.route('/image/<image_name>')
 def image(image_name):
-    return retrieve_image(image_name, app.config['OWNER'].username)
+    return retrieve_image(image_name, app.config['HOST'].owner.username)
 
 # TODO: REMOVE
+
+
 @mod.route('/image_test/<filename>')
 def test(filename):
-    return '''
-        <img src="/image/''' + filename + '''"/></br>
-        <img src="/image/''' + filename + '''?w=100&h=100"/></br>
-        <img src="/image/''' + filename + '''?w=100"/></br>
-        <img src="/image/''' + filename + '''?h=100"/></br>
-    '''
+    return """
+        <img src="/image/""" + filename + """"/></br>
+        <img src="/image/""" + filename + """?w=100&h=100"/></br>
+        <img src="/image/""" + filename + """?w=100"/></br>
+        <img src="/image/""" + filename + """?h=100"/></br>
+    """

@@ -3,15 +3,15 @@ from flask import Flask
 from portphilio_lib import tools
 
 
-def create_app(host):
+def create_app(hostname):
     app = Flask(__name__)
     app.debug = os.environ.get('FLASK_DEBUG') == 'True'
     db = tools.initialize_db(app)
 
     # Get the owner of the hostname
-    owner = tools.get_owner(host)
+    host = tools.get_host_by_hostname(hostname)
 
-    if owner is None:
+    if host is None:
         # TODO: return an app that gives a better response
         return app
 
@@ -25,7 +25,6 @@ def create_app(host):
     app.config['COMMON_FOLDER'] = 'common'
     app.config['DIRECTORY_INDEX'] = 'index.html'
     app.config['HOST'] = host
-    app.config['OWNER'] = owner
 
     # Register the frontend blueprint
     from portphilio.views import frontend
