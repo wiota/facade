@@ -1,0 +1,20 @@
+{% for medium in media %}
+<a href="#{{ medium._id }}">
+<div class="thumb">
+    <img src="{{ medium.thumb_href }}" height="{{ media.height }}" width="{{ media.width }}" alt="" />
+</div>
+</a>
+{% endfor %}
+</div>
+{% for medium in media %}
+<div class="image" id="{{ medium._id }}">
+<img src="{{ medium.href }}" height="{{ media.height }}" width="{{ media.width }}" alt="" />
+</div>
+</a>
+{% endfor %}
+<div class="info">
+<h1 class="title">{{ work.title }}</h1>
+<p class="medium">{{ work.medium }}</p>
+<p class="size">{{ work.size }}</p>
+<p class="date">{{ work.date }}</p>
+<p class="description">{{ work.description }}</p>

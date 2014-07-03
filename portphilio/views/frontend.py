@@ -53,35 +53,31 @@ def root(path):
         abort(404)
 
 
+@mod.route('/image/<image_name>')
+def image(image_name):
+    return retrieve_image(image_name, app.config['HOST'].owner.username)
+
+
 @mod.route('/events/')
 def events():
     return render_template(template_path('events.html'))
 
-
-@mod.route('/work')
-def work():
-    return "Maybe list all works here?"
-
-
-@mod.route('/work/<category>')
-def work_category(category):
-    return "List all works in category " + category
-
-
-@mod.route('/work/<category>/<slug>')
-def work_individual(category, slug):
+@mod.route('/work/<slug>')
+def work_individual(slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
     return render_template(
         template_path('work_individual.html'), work=work, media=media)
 
 
-@mod.route('/image/<image_name>')
-def image(image_name):
-    return retrieve_image(image_name, app.config['HOST'].owner.username)
+# TODO: Leave this in for posterity for now, but remove
+@mod.route('/work/<category>/<slug>')
+def work_individual_old(category, slug):
+    work, media = get_work_from_slug(app.config['HOST'].owner, slug)
+    return render_template(
+        template_path('work_individual.html'), work=work, media=media)
+
 
 # TODO: REMOVE
-
-
 @mod.route('/image_test/<filename>')
 def test(filename):
     return """
