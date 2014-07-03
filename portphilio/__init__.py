@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from portphilio_lib import tools
+from portphilio_lib import tools, template_tools
 
 
 def create_app(hostname):
@@ -18,7 +18,8 @@ def create_app(hostname):
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
     # Expose a function to the template
-    app.jinja_env.globals.update(get_category=tools.get_category)
+    app.jinja_env.globals.update(get_category=template_tools.get_category)
+    app.jinja_env.globals.update(get_body=template_tools.get_body)
 
     # Make it a full-fledged tenant app
     app.config['STATIC_FOLDER'] = 'static'
