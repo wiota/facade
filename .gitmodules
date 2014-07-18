@@ -1,7 +1,6 @@
-[submodule "portphilio_lib"]
-	path = portphilio_lib
-	url = git@github.com:di/portphilio_lib.git
-	ignore = untracked
 [submodule "landlord"]
 	path = landlord
 	url = git@github.com:wiota/landlord.git
+[submodule "lime_lib"]
+	path = lime_lib
+	url = https://github.com/wiota/lime_lib.git
