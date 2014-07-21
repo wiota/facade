@@ -1,6 +1,6 @@
 from flask import Blueprint, request, send_file, abort, render_template
 from flask import current_app as app
-from portphilio_lib.tools import get_work_from_slug, get_category_from_slug, retrieve_image
+from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
 
 mod = Blueprint('frontend', __name__)
 

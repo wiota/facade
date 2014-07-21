@@ -28,7 +28,7 @@ def create_app(hostname):
     app.config['HOST'] = host
 
     # Register the frontend blueprint
-    from portphilio.views import frontend
+    from facade.views import frontend
     frontend.db = db
     frontend.config = app.config
     app.register_blueprint(frontend.mod)
