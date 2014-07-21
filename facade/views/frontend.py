@@ -1,6 +1,7 @@
-from flask import Blueprint, request, send_file, abort, render_template
+from flask import Blueprint, request, send_file, abort, render_template, render_template_string
 from flask import current_app as app
 from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
+from toolbox.models import Host, CustomPage
 
 mod = Blueprint('frontend', __name__)
 
@@ -50,7 +51,7 @@ def root(path):
             # The path is for a static directory we don't usually support
             return send_file(static_index(path))
     except IOError:
-        abort(404)
+        return(abort(404))
 
 
 @mod.route('/image/<image_name>')
@@ -94,3 +95,11 @@ def test(filename):
         <img src="/image/""" + filename + """?w=100"/></br>
         <img src="/image/""" + filename + """?h=100"/></br>
     """
+
+
+@mod.route('/<slug>')
+def custom_page(slug):
+    cp = app.config['HOST'].custom_from_slug(slug)
+    if cp is not None:
+        return render_template_string(cp.template_string, cp=cp)
+    return abort(404)
