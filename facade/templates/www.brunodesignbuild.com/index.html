@@ -27,7 +27,8 @@ a.category::after {
 {% set about_page = get_page(config, "about")  %}
 Title: {{ about_page.title }}<br/>
 Content: {{ about_page.content }}<br/>
-<h3>Events:</h3>
-{% for event in get_events(config) %}
-    <b>Event:</b> {{ event.title }} in {{ event.location }}, {{ event.start_date }}
+<h3>Happenings:</h3>
+{% for happening in get_happenings(config) %}
+    <b>Event:</b> {{ happening.title }} in {{ happening.location }}, {{ happening.date_string }}<br/>
+    <b>Description:</b> {{ happening.description }}<br/>
 {% endfor %}
