@@ -1,0 +1,29 @@
+<style>
+a.work::after {
+    content: " (THIS IS A WORK)"
+}
+a.category::after {
+    content: " (THIS IS A CATEGORY)"
+}
+</style>
+<h3>THIS GENERIC TEMPLATE BROUGHT TO YOU BY <a href="http://wiota.co">WIOTA CO.</a><br/></h3>
+<br/>
+{% set body = get_body(config) %}
+<ul>
+{% for v in body.succset %}
+    <li>
+        {% set class = v._cls.split('.')[-1].lower() %}
+        <a class="{{ class }}" href="/{{ class }}/{{ v.slug }}">{{ v.title }}</a><br/>
+    </li>
+{% endfor %}
+</ul>
+<h3>A list of custom pages:</h3>
+<ul>
+{% for cp in config["HOST"].custom_pages %}
+    <li><a href="./{{ cp.slug }}">{{ cp.title }}</a></li>
+{% endfor %}
+</ul>
+<h3>A specific custom page, embedded:</h3>
+{% set about_page = get_page(config, "about")  %}
+Title: {{ about_page.title }}<br/>
+Content: {{ about_page.content }}<br/>
