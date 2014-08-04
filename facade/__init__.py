@@ -20,6 +20,7 @@ def create_app(hostname):
     # Expose a function to the template
     app.jinja_env.globals.update(get_category=template_tools.get_category)
     app.jinja_env.globals.update(get_body=template_tools.get_body)
+    app.jinja_env.globals.update(get_page=template_tools.get_page)
 
     # Make it a full-fledged tenant app
     app.config['STATIC_FOLDER'] = 'static'
