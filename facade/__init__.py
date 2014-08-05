@@ -22,6 +22,7 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_body=template_tools.get_body)
     app.jinja_env.globals.update(get_page=template_tools.get_page)
     app.jinja_env.globals.update(get_happenings=template_tools.get_happenings)
+    app.jinja_env.globals.update(get_tag=template_tools.get_tag)
 
     # Make it a full-fledged tenant app
     app.config['STATIC_FOLDER'] = 'static'

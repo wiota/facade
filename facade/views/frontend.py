@@ -59,11 +59,6 @@ def image(image_name):
     return retrieve_image(image_name, app.config['HOST'].owner.username)
 
 
-@mod.route('/events/')
-def events():
-    return render_template(template_path('events.html'))
-
-
 @mod.route('/work/<slug>')
 def work_individual(slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
@@ -97,7 +92,7 @@ def test(filename):
     """
 
 
-@mod.route('/<slug>')
+@mod.route('/<slug>/')
 def custom_page(slug):
     cp = app.config['HOST'].custom_from_slug(slug)
     if cp is not None:
