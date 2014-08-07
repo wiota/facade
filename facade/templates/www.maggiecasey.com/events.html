@@ -22,16 +22,16 @@
             <div id='events'>
                 <h2>Upcoming Events</h2>
                 {% for happening in get_tag(config, 'upcoming-events') %} <div class='newevent'>
-                    <p class='title'>{{ happening.title }}</p>
+                    <p class='title'>{{ happening.title|safe }}</p>
                     <p class='description'>{{ happening.location }}</p>
-                    <p class='date'>{{ happening.date_string }}</p>
+                    <p class='date'>{{ happening.date_string|safe }}</p>
                 </div>
                 {% endfor %}
                 <h2>Past Events</h2>
                 {% for happening in get_tag(config, 'past-events') %} <div class='pastevent'>
-                    <p class='title'> {{ happening.title }}</p>
+                    <p class='title'> {{ happening.title|safe }}</p>
                     <p class='description'> {{ happening.location }}</p>
-                    <p class='date'> {{ happening.date_string }}</p>
+                    <p class='date'> {{ happening.date_string|safe }}</p>
                 </div>
                 {% endfor %}
             </div>
