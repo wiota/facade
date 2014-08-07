@@ -96,5 +96,5 @@ def test(filename):
 def custom_page(slug):
     cp = app.config['HOST'].custom_from_slug(slug)
     if cp is not None:
-        return render_template_string(cp.template_string, cp=cp)
+        return render_template(template_path("%s.html" % (cp.slug)), cp=cp)
     return abort(404)
