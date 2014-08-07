@@ -5,7 +5,7 @@ from toolbox import tools, template_tools
 
 def create_app(hostname):
     app = Flask(__name__)
-    app.debug = os.environ.get('FLASK_DEBUG') == 'True'
+    app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
 
     # Get the owner of the hostname
