@@ -4,7 +4,8 @@ from toolbox import tools, template_tools
 
 
 def create_app(hostname):
-    app = Flask(__name__)
+    static_folder = "./templates/%s/static/" % (hostname)
+    app = Flask(__name__, static_url_path="/static", static_folder=static_folder)
     app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
 
@@ -25,7 +26,6 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_tag=template_tools.get_tag)
 
     # Make it a full-fledged tenant app
-    app.config['STATIC_FOLDER'] = 'static'
     app.config['COMMON_FOLDER'] = 'common'
     app.config['DIRECTORY_INDEX'] = 'index.html'
     app.config['HOST'] = host

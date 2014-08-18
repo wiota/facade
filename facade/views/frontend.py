@@ -38,22 +38,6 @@ def index():
     return render_template(template_path('index.html'))
 
 
-@mod.route('/<path:path>')
-def root(path):
-    try:
-        if path.startswith(app.config['COMMON_FOLDER']):
-            # The path starts with /common, send from the static folder
-            return send_file('/'.join([app.config['STATIC_FOLDER'], path]))
-        elif '.' in path.split('/')[-1]:
-            # The last path element has an *.something extension
-            return send_file(domain(path))
-        else:
-            # The path is for a static directory we don't usually support
-            return send_file(static_index(path))
-    except IOError:
-        return(abort(404))
-
-
 @mod.route('/image/<image_name>')
 def image(image_name):
     return retrieve_image(image_name, app.config['HOST'].owner.username)
