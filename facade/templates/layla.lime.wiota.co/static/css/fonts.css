@@ -1,0 +1,236 @@
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Bazar';
+  src: url('../fonts/Bazar.ttf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Metropolis';
+  src: url('../fonts/Metropolis1920.otf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Miso';
+  src: url('../fonts/miso_light.otf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Miso';
+  src: url('../fonts/miso.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Miso';
+  src: url('../fonts/miso_bold.otf');
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'CubicSans';
+  src: url('../fonts/CubicSansFont.ttf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato/Lato-Bold.ttf');
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/Roboto-Thin.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/Roboto-Medium.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/Roboto-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/Roboto-Black.ttf');
+  font-weight: 900;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../fonts/Inconsolata/Inconsolata-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../fonts/Inconsolata/Inconsolata-Regular.ttf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Outline.otf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Light.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Bold.otf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Bold-Strips.otf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Bold-Shadow.otf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Canter';
+  src: url('../fonts/canter/Canter-Bold-3D.otf');
+  font-weight: 900;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Josefin Slab';
+  src: url('../fonts/Josefin_Slab/JosefinSlab-Thin.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Josefin Slab';
+  src: url('../fonts/Josefin_Slab/JosefinSlab-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Josefin Slab';
+  src: url('../fonts/Josefin_Slab/JosefinSlab-Bold.ttf');
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Retro';
+  src: url('../fonts/Retro/Alt_Retro_Light.ttf');
+  font-weight: 300;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Glasoor';
+  src: url('../fonts/glasoor.otf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Vetka';
+  src: url('../fonts/Vetka/Vetka.otf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Biko';
+  src: url('../fonts/Biko_Regular.otf');
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Sequi';
+  src: url('../fonts/Sequi/Sequi_light.otf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Sequi';
+  src: url('../fonts/Sequi/Sequi_regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Sequi';
+  src: url('../fonts/Sequi/Sequi_bold.otf');
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../fonts/comfortaa/Comfortaa-Light.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../fonts/comfortaa/Comfortaa-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('../fonts/comfortaa/Comfortaa-Bold.ttf');
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------- */
+
+@font-face {
+  font-family: 'SciFly-Sans';
+  src: url('../fonts/SciFly-Sans.ttf');
+  font-weight: 400;
+}
+

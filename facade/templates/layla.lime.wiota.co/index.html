@@ -1,28 +1,56 @@
-<style>
-a.work::after {
-    content: " (THIS IS A WORK)"
-}
-a.category::after {
-    content: " (THIS IS A CATEGORY)"
-}
-</style>
-<h3>THIS GENERIC TEMPLATE BROUGHT TO YOU BY <a href="http://wiota.co">WIOTA CO.</a><br/></h3>
-<br/>
-{% set body = get_body(config) %}
-<ul>
-</ul>
-<h3>A list of custom pages:</h3>
-<ul>
-{% for cp in config["HOST"].custom_pages %}
-    <li><a href="./{{ cp.slug }}">{{ cp.title }}</a></li>
-{% endfor %}
-</ul>
-<h3>A specific custom page, embedded:</h3>
-{% set about_page = get_page(config, "about")  %}
-Title: {{ about_page.title }}<br/>
-Content: {{ about_page.content }}<br/>
-<h3>Happenings:</h3>
-{% for happening in get_happenings(config) %}
-    <b>Event:</b> {{ happening.title }} in {{ happening.location }}, {{ happening.date_string }}<br/>
-    <b>Description:</b> {{ happening.description }}<br/>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AAXXX</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/sitewide.css">
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+  <script type="text/javascript" src="/static/js/pauser.js"></script>
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      var a = new pauser('.aaxxx.image', 50);
+    // parse images
+    })
+  </script>
+
+</head>
+<body class='aaxxx'>
+
+  <div class='page'>
+
+    <!--
+    <div id='nav'>
+      <a>Simulacra</a>
+      <a href='projects.html'>Projects</a>
+      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+    </div>
+    -->
+
+    <div class='frame'>
+      <div class='title_triangle rotate'>
+        <img class='' src="/static/shapes/triangle_base.svg" id="shape" alt="">
+        <h1 class=''>AAXXX</h1>
+      </div>
+      <b class='speed_display rotate'></b>
+    </div>
+
+    <div class='images'>
+      {% for work in get_category(config, "aaxxx").succset %}
+        {% for photo in work.succset %}
+          <div class='aaxxx image'><img src='{{ photo.href }}' /></div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+</html>
