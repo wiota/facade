@@ -1,7 +1,8 @@
 import os
 from flask import Flask
 from toolbox import tools, template_tools
-
+from toolbox.email import FacadeExceptionEmail
+import traceback
 
 def create_app(hostname):
     static_folder = "./templates/%s/static/" % (hostname)
@@ -35,6 +36,13 @@ def create_app(hostname):
     frontend.db = db
     frontend.config = app.config
     app.register_blueprint(frontend.mod)
+
+    # Set the error handler/mailer
+    if not app.debug:
+        @app.errorhandler(Exception)
+        def catch_all(exception):
+            tb = traceback.format_exc()
+            FacadeExceptionEmail(exception, tb).send()
 
     app.logger.debug("App created for %s" % (host))
 
