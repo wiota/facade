@@ -46,8 +46,8 @@
 
     <div class='images'>
       {% for work in get_category(config, "aaxxx").succset %}
-        {% for photo in work.succset %}
-          <div class='aaxxx image'><img src='{{ photo.href }}' /></div>
+        {% for cover in work.cover %}
+          <div class='aaxxx image'><img src='{{ cover.href }}' /></div>
         {% endfor %}
       {% endfor %}
     </div>
