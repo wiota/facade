@@ -15,6 +15,12 @@ def create_app(hostname):
 
     if host is None:
         # TODO: return an app that gives a better response
+
+        # This host doesn't exist. Add a ping endpoint for monitoring.
+        @app.route('/ping')
+        def ping():
+            return ''
+
         return app
 
     # Tell jinja to trim blocks
