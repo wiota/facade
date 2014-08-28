@@ -1,4 +1,5 @@
-from flask import Blueprint, request, send_file, abort, render_template, render_template_string, Response
+from flask import Blueprint, abort, Response
+from flask import render_template as rt
 from flask import current_app as app
 from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
 from toolbox.models import Host, CustomPage
@@ -6,10 +7,13 @@ from toolbox.models import Host, CustomPage
 mod = Blueprint('frontend', __name__)
 
 
-def template_path(template_file):
-    """ Create a path to a named template with the host name
+def render_template(filename, **kwargs):
     """
-    return '/'.join([app.config['HOST'].template, template_file])
+    Extend the default Flask render_template function. Creates a path to a
+    named template with the host name which sits in our /templates folder. Then
+    calls rt (which is the original render_template), passing along the kwargs.
+    """
+    return rt('/'.join([app.config['HOST'].template, filename]), **kwargs)
 
 
 @mod.route('/robots.txt')
@@ -19,9 +23,7 @@ def static_from_root():
 
 @mod.route('/')
 def index():
-    """ Render the index template
-    """
-    return render_template(template_path('index.html'))
+    return render_template('index.html')
 
 
 @mod.route('/image/<image_name>')
@@ -32,23 +34,20 @@ def image(image_name):
 @mod.route('/work/<slug>')
 def work_individual(slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
-    return render_template(
-        template_path('work_individual.html'), work=work, media=media)
+    return render_template('work_individual.html', work=work, media=media)
 
 
 @mod.route('/category/<slug>')
 def category_individual(slug):
     category = get_category_from_slug(app.config['HOST'].owner, slug)
-    return render_template(
-        template_path('category_individual.html'), slug=slug, category=category)
+    return render_template('category_individual.html', slug=slug, category=category)
 
 
 # TODO: Leave this in for posterity for now, but remove
 @mod.route('/work/<category>/<slug>')
 def work_individual_old(category, slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
-    return render_template(
-        template_path('work_individual.html'), work=work, media=media)
+    return render_template('work_individual.html', work=work, media=media)
 
 
 # TODO: REMOVE
@@ -66,5 +65,5 @@ def test(filename):
 def custom_page(slug):
     cp = app.config['HOST'].custom_from_slug(slug)
     if cp is not None:
-        return render_template(template_path("%s.html" % (cp.slug)), cp=cp)
+        return render_template("%s.html" % (cp.slug), cp=cp)
     return abort(404)
