@@ -1,4 +1,4 @@
-from flask import Blueprint, request, send_file, abort, render_template, render_template_string
+from flask import Blueprint, request, send_file, abort, render_template, render_template_string, Response
 from flask import current_app as app
 from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
 from toolbox.models import Host, CustomPage
@@ -12,23 +12,9 @@ def template_path(template_file):
     return '/'.join([app.config['HOST'].template, template_file])
 
 
-def static_index(path):
-    """ Create a path to the index file in a static directory
-    """
-    return '/'.join([domain(path), app.config['DIRECTORY_INDEX']])
-
-
-def domain(path):
-    """ Put the static folder and domain into a path
-    """
-    return '/'.join([app.config['STATIC_FOLDER'],
-                     app.config['HOST'].hostname, path])
-
-
 @mod.route('/robots.txt')
 def static_from_root():
-    # TODO: Figure out what is going on here
-    return send_file('/'.join([app.config['STATIC_FOLDER'], request.path[1:]]))
+    return Response("User-agent: *\rDisallow: ", mimetype="text")
 
 
 @mod.route('/')
