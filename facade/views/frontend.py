@@ -28,7 +28,7 @@ def index():
 
 @mod.route('/image/<image_name>')
 def image(image_name):
-    return retrieve_image(image_name, app.config['HOST'].owner.username)
+    return retrieve_image(image_name, app.config['HOST'].owner.email_hash)
 
 
 @mod.route('/work/<slug>')
