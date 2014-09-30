@@ -2,7 +2,7 @@ from flask import Blueprint, abort, Response
 from flask import render_template as rt
 from flask import current_app as app
 from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
-from toolbox.models import Host, CustomPage
+from toolbox.models import Host, CustomPage, Vertex
 
 mod = Blueprint('frontend', __name__)
 
@@ -36,6 +36,14 @@ def work_individual(slug):
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
     return render_template('work_individual.html', work=work, media=media)
 
+@mod.route('/id/<id>')
+def by_id(id):
+    vertex = Vertex.objects.get(owner=app.config['HOST'].owner, id=id)
+    if vertex._cls == 'Vertex.Work':
+        return render_template('work_individual.html', work=vertex, media=vertex.succset)
+    elif vertex._cls == 'Vertex.Category':
+        return render_template('category_individual.html', category=vertex, media=vertex.succset)
+    return abort(404)
 
 @mod.route('/category/<slug>')
 def category_individual(slug):
@@ -44,10 +52,11 @@ def category_individual(slug):
 
 
 # TODO: Leave this in for posterity for now, but remove
-@mod.route('/work/<category>/<slug>')
-def work_individual_old(category, slug):
+@mod.route('/work/<categoryslug>/<slug>')
+def work_individual_old(categoryslug, slug):
+    category = get_category_from_slug(app.config['HOST'].owner, categoryslug)
     work, media = get_work_from_slug(app.config['HOST'].owner, slug)
-    return render_template('work_individual.html', work=work, media=media)
+    return render_template('work_individual.html', work=work, media=media, category=category)
 
 
 # TODO: REMOVE
