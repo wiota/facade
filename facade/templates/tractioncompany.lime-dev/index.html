@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Traction Company</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+
+  <link href="/static/css/traction.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+
+</head>
+
+<body class='home notlive'>
+
+<div id="header">
+  <div id="nameplate_div">
+  <h1>Philadelphia Traction Company</h1>
+  <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
+  </div>
+</div>
+
+<div class='block exhibitions happenings'>
+  <div class='happenings_menu'>
+    <a class='happening_tag upcoming'>Current &amp; Upcoming Events</a>
+    <a class='happening_tag past'>Past Events</a>
+    <a class='happening_tag various'>Various Shop Projects</a>
+  </div>
+
+  <div class='happenings_display'>
+      <div class='display_tag upcoming'>
+        <img src='/static/img/truss_website.jpg' alt='Truss' />
+      </div>
+
+      <div class='display_tag past'>
+        <img src='/static/img/subtraction_final.jpg' alt='Subtraction' />
+        <img src='/static/img/rodger_binyone.jpg' alt='Subtraction' />
+        <img src='/static/img/Katz_invite.jpg' alt='Subtraction' />
+        <img src='/static/img/joe_boruchow_1.jpg' alt='Subtraction' />
+      </div>
+
+      <div class='display_tag various'>
+        <img src='/static/img/post_2012.jpg' alt='Subtraction' />
+      </div>
+  </div>
+</div>
+
+<div id='nav'>
+  <h2>Artists</h2>
+  <ul>
+  {% for artist in get_category(config, "artists").succset %}
+
+    <li class='category'><a href='/category/{{ artist.slug }}'>{{ artist.title }}</a></li>
+
+  {% endfor %}
+  </ul>
+</div>
+
+
+<div id='home_standard'>
+
+
+  <div id='about_text'>
+    <h2>About the shop:</h2>
+    <p style='font-weight: bold'>Mission:</p>
+
+    <p><em>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
+
+    <p><em>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
+
+    <p><em>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
+
+
+    <p><b>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </p>
+
+    <p> Join Traction Company on <a href ='https://www.facebook.com/TractionCompany'> <u>Facebook</u></a>
+
+    <p>Contact Traction Company via <b> <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a> </b></p>
+
+  </div>
+</div>
+
+<script type='text/javascript'>
+
+
+  $(document).ready(function(){
+
+    var hapmen = $('.happenings_menu .happening_tag');
+    var hapdis = $('.happenings_display .display_tag');
+
+    $.each(hapmen, function(key, val){
+      var menu = $(this);
+      var display = hapdis[key];
+
+      menu.on('click', function(){
+        $.each(hapdis, function(){
+          $(this).hide();
+        });
+        $(display).fadeIn();
+      });
+
+
+      $(display).hide();
+
+    });
+
+    hapdis.first().fadeIn();
+
+  });
+
+</script>
+
+</body>
+</html>

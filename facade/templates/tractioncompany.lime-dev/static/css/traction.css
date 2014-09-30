@@ -1,0 +1,174 @@
+/*
+
+Styles for default install of portfolio
+Written by Ryan Hinkel
+
+*/
+
+/* NOT LIVE */
+
+.notlive .happenings {max-width:920px; position: relative;}
+.notlive .happenings img {width: 100%; margin: 0 20px 20px 0;}
+
+.notlive .happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
+.notlive .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
+
+.notlive .happenings_display {width: 100%;}
+.notlive .happenings_display .display_tag {width: 100%;}
+.notlive .happenings_display .display_tag img {width: 50%;float:left;margin: 0 3% 3% 0;}
+
+.notlive #header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.9); width: 100%; height: 50px;}
+.notlive #header h1 {display:none;}
+.notlive #nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
+
+.notlive #nav {position:fixed; top: 85px; left: 560px;}
+
+}
+
+
+
+/* Site Wide */
+
+html {margin:0;}
+body {background: #fefefe; font: 10px/14px 'Helvetica Neue', Helvetica, Arial, san-serif; font-weight: 200;margin:0;padding:70px 0 0;}
+body.event {padding:70px 0 0;}
+body.document_page {padding:70px 0 0;}
+p {font: normal 14px/22px 'Helvetica Neue', Helvetica, 'san-serif';}
+a, a img, img {border-style:none; text-decoration: none;color: #000;}
+
+h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 800;margin:20px 0 20px;}
+
+/* Home */
+#home_standard {position:relative;background-color:#ddd;clear:both;}
+.home .block {padding: 20px 30px 30px;}
+.home .block p {font-size:12px;}
+.home .block a {text-decoration: underline;}
+.mini_head {font-style:italic;font-size:10px;margin: 0 0 5px;}
+.exhibitions {max-width:920px; position: relative;}
+.exhibitions img {width: 100%; margin: 0 20px 20px 0;}
+.close {position:absolute; top:0px; right: 0px;font-size:14px;padding: 20px 20px 0 0;}
+.links {clear:both;padding: 20px 30px 30px;}
+.links a {font-size: 14px;line-height: 20px;text-decoration:underline;}
+
+/* Header */
+#header {padding:0;position:absolute; top:0px; left: 0;z-index: 10;}
+#header h1 {display:none;}
+#nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;background: #fff;padding: 20px 0 10px;}
+#nameplate_div {width:94px;}
+#nameplate_div #email {font-size: 11px; width:130px; height: 11px; position: fixed; top: 50px; right: 30px;text-align:right;text-transform:lowercase;}
+#nameplate_div:hover #email {display:block;}
+
+#nav {position:absolute; top: 0px; left: 510px;}
+#nav ul { padding: 0; list-style-type:none;margin:0;}
+#nav li {display:block;}
+#nav a {color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
+#nav a:hover {color: #666;}
+#nav li.no_work a {color: #000;text-decoration: none;}
+#nav li.no_work a:hover {color: #000;}
+#nav .selected a{color: #888;text-decoration:none;font-weight:normal;}
+
+#about_text {position:absolute; top: 0px; left: 30px; width: 400px;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;background: #fff;}
+
+.about #nav_about a,
+.contact #nav_contact a,
+.events #nav_news a,
+.home #nav_home a,
+.portfolio #nav_work a{color: #555;text-decoration:underline;font-weight:bold;}
+
+#subnav {position:fixed; top:40px; left: 0;margin: 0px auto; padding: 0; list-style-type:none; text-align:center;width:100%;z-index: 11;}
+#subnav li {display:inline;}
+#subnav a {color: #000; font: 12px/12px 'Helvetica Neue', Helvetica, san-serif normal; text-decoration:none;padding: 0 5px;}
+#subnav a:hover {color: #333;}
+#subnav .selected a {color: #111;font-weight: normal;text-decoration:none;background-color:#ccc;}
+
+h1 {margin: 0 auto;font: bold 18px/24px 'Helvetica Neue', Helvetica, san-serif;margin:0;}
+
+/* Home Page */
+body.home #header {}
+body.home {padding:50px 0 0; margin:0;}
+body.home #background_image img {display:block;margin:0; padding:0;position:absolute; top:50%;left:50%;}
+
+body.home #name {text-align:left;position:absolute; top:40px;left:40px; font-size: 24px; font-weight: 200;color: #fff;text-transform: uppercase;}
+body.home #clicker {text-align:left;position:absolute; top:60px;left:40px; font-size: 12px; font-weight: 200;color: #fff;}
+
+/* Work Page */
+#category_tag {margin: 20px 30px 20px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_tag p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_tag h2 {margin: 18px 0;font-weight: normal;}
+#category_tag h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
+#category_tag a {text-decoration:underline;}
+
+/* Index Block */
+.work_index {padding:0 10px 0 30px;margin-top:0;overflow:hidden;min-width:500px;}
+
+/* Work Block */
+.work_index .work.block {margin:10px 20px 0 0;float:left;}
+.work_index .work.block:hover {outline: none;}
+.work_index .work.block h2 {font: normal 16px/36px 'Helvetica Neue', Helvetica, serif; color: #111;}
+.work_index .work.block .info {font: normal 14px/18px 'Helvetica Neue', Helvetica, serif;color: #333;}
+.work_index .work.block span {display:block;}
+.work_index .work.block:hover {}
+
+
+.work_show {padding:0 10px 0 30px;margin:0;overflow:hidden;}
+.work_show .block {position:relative;margin:10px 20px 0 0;float:left;}
+.work_show .info {position:absolute; top: 600px; background-color: rgb(255,255,255); width: 410px; }
+.work_show .title {}
+.work_show .medium, .work_show .date, .work_show .size {font: italic 12px/18px 'Helvetica Neue', Helvetica, serif;color: #111;}
+.work_show .info.large .title, .work_show .info.large .medium, .work_show .info.large .date, .work_show .info.large .size {font:  italic normal  22px/48px 'Helvetica Neue', Helvetica, serif;color: #111;}
+.work_show .description {font: normal 12px/18px 'Arial', san-serif;color: #111;margin-bottom: 1em}
+.work_show p span {display:block;}
+.work_show p.caption {position: absolute; top: 287px; left: 5px; font: normal 16px/18px 'Helvetica Neue', Helvetica, serif;color: #7d797a;}
+
+/* Event Page */
+
+/* Index Block */
+.event_index {padding:24px;margin:0px auto 100px;overflow:hidden;width: 470px;}
+
+/* Event Block */
+.event_index .event.block {display:block;padding: 20px;background-color: #f8f8f8; margin: 0 auto 30px;}
+.event_index .event.block h2 {font: normal 24px/30px 'Helvetica Neue', Helvetica, serif; letter-spacing: 0px;color: #7d797a;width: 200px;}
+.event_index .event.block .info {width: 300px;font: normal 14px/22px 'Arial', serif;color: #111;}
+.event_index .event.block span {display:block;padding: 0px;}
+
+
+
+
+
+/* Documents */
+
+.document_page .document {margin: 0px auto 30px;width:600px;}
+
+.document p {font-size: 16px; line-height: 30px; margin: 3em 0 3em 2em;font-family: 'Helvetica Neue', Helvetica serif;}
+.document a {font-size: 16px; line-height: 30px; margin: 3em 0 3em 2em; font-weight: bold;text-decoration:underline;font-family: 'Helvetica Neue', Helvetica serif;}
+.document .site_info {margin: 160px 0 10px;text-align:center;}
+.document .site_info a, .document .site_info span {display:block;margin: 0;font-weight: normal;font-size: 10px; line-height: 12px;}
+.document .site_info span {margin: 10px 0 0;}
+.document .site_info a {font-size: 14px;margin: 10px 0;}
+.document .links {text-align:center;}
+.document .links a {font-size:22px; line-height: 40px; margin: 3em 0 3em 0em; font-weight: normal; }
+
+
+/* Horizontal blocks */
+
+
+
+
+
+
+/* Sort Fork Block */
+
+
+/* Show */
+
+
+
+
+/* Image Sort */
+
+
+
+/* About */
+
+
+/* News */
