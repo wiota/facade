@@ -26,6 +26,12 @@
   </div>
 </div>
 
+<div id='category_tag'>
+  <h2>{{category.title}}</h2>
+  <div><a>Biography</a></div>
+  <div id='bio' style='display:none;'></div>
+</div>
+
 <div class='work_index block' id='horizontal'>
 
 {% for work in category.succset %}
@@ -38,10 +44,7 @@
 
 </div>
 
-<div id='category_tag'>
-  <h2>{{category.title}}</h2>
-  <div id='bio' style='display:none;'></div>
-</div>
+
 
 <script type='text/javascript'>
 

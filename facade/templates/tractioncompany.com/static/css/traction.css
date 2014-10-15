@@ -61,7 +61,8 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 #nav {position:absolute; top: 0px; left: 510px;}
 #nav ul { padding: 0; list-style-type:none;margin:0;}
 #nav li {display:block;}
-#nav a {color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
+#nav ul a {color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
+#nav a {color: #000; text-decoration:underline;}
 #nav a:hover {color: #666;}
 #nav li.no_work a {color: #000;text-decoration: none;}
 #nav li.no_work a:hover {color: #000;}
