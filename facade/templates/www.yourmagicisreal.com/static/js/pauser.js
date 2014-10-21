@@ -30,9 +30,9 @@
       this.speed_bar_speed = 3;
 
       var t = this;
-      
+
       this.load_images();
-      
+
     },
 
     load_images: function(){
@@ -68,7 +68,7 @@
         var h_space = docwidth - item.width();
         var v_space = docheight - item.height();
 
-        // set placement based on parent 
+        // set placement based on parent
         // if parent is not full height of page, this poses a problem
         //var h_space = item.parent().width() - item.width();
         //var v_space = item.parent().height() - item.height();
@@ -105,8 +105,6 @@
       })
 
       $('.frame').on('mousedown', function(e){
-        //alert('on');
-        //alert(e.which);
         if(e.which!=1){
           // if not primary mouse button
           return true;
@@ -138,16 +136,18 @@
         'z-index':'15'
       })
 
+      t.speed_display(10);
+
       this.speed_bar_timer = setInterval(function(){
         var w = t.speed_bar.width()+t.speed_bar_speed;
         t.speed_bar.css({'width':w+'px'})
         var seconds = t.speed_display((new Date() - t.timer_start)/t.speed_control_ratio);
-        
+
         if(seconds >= 3){
           t.resume();
         }
       },10)
-      
+
     },
 
     remove_speed_bar: function(){
@@ -189,12 +189,12 @@
 
       if(++this.current_image > this.items.length-1){
         this.current_image = 0;
-      }  
+      }
 
       $(this.items[this.current_image]).show();
 
       // cycling
-    
+
     },
 
     cycle: function(){
@@ -205,14 +205,14 @@
 
       // first image
       this.loop_through_next_image();
-      
+
       // timer
       this.timer = setInterval(this.loop_through_next_image.bind(this), this.speed)
 
     },
 
     cycle_once: function(){
-      
+
       var t = this;
 
       $(this.items[this.current_image]).show();
@@ -220,15 +220,9 @@
       // timer
       this.timer = setInterval(this.step_through_next_image.bind(this), this.speed);
 
-      // speed adjustment
-      //this.speed *= 4;
-      //if(this.speed >= 1000){
-      //  this.speed = 50;
-      //}
-
     },
 
-    
+
     step_through_next_image: function(){
 
       console.log(this.current_image);
@@ -237,14 +231,14 @@
       if(this.current_image++ > this.items.length-1){
         clearInterval(this.timer);
         this.current_image = 0;
-        
+
         return false;
-      }  
+      }
 
       // cycling
       $(this.items[this.current_image]).show();
-      
-    
+
+
     }
 
   })
