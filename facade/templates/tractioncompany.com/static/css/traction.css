@@ -1,27 +1,19 @@
-/*
 
-Styles for default install of portfolio
-Written by Ryan Hinkel
+.happenings {max-width:920px; position: relative;}
+.happenings img {width: 100%; margin: 0 20px 20px 0;}
 
-*/
+.happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
+.happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
 
-/* NOT LIVE */
+.happenings_display {width: 100%;}
+.happenings_display .display_tag {width: 100%;}
+.happenings_display .display_tag img {width: 50%;float:left;margin: 0 3% 3% 0;}
 
-.notlive .happenings {max-width:920px; position: relative;}
-.notlive .happenings img {width: 100%; margin: 0 20px 20px 0;}
+#header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.9); width: 100%; height: 50px;}
+#header h1 {display:none;}
+#nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
 
-.notlive .happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
-.notlive .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
-
-.notlive .happenings_display {width: 100%;}
-.notlive .happenings_display .display_tag {width: 100%;}
-.notlive .happenings_display .display_tag img {width: 50%;float:left;margin: 0 3% 3% 0;}
-
-.notlive #header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.9); width: 100%; height: 50px;}
-.notlive #header h1 {display:none;}
-.notlive #nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
-
-.notlive #nav {position:fixed; top: 85px; left: 560px;}
+#nav {position:fixed; top: 85px; left: 560px;}
 
 }
 
@@ -30,16 +22,21 @@ Written by Ryan Hinkel
 /* Site Wide */
 
 html {margin:0;}
-body {background: #fefefe; font: 10px/14px 'Helvetica Neue', Helvetica, Arial, san-serif; font-weight: 200;margin:0;padding:70px 0 0;}
-body.event {padding:70px 0 0;}
-body.document_page {padding:70px 0 0;}
-p {font: normal 14px/22px 'Helvetica Neue', Helvetica, 'san-serif';}
+body {background: #fefefe; margin:0;padding:70px 0 0;}
 a, a img, img {border-style:none; text-decoration: none;color: #000;}
 
+/* Typography */
+body {font: 10px/14px 'Helvetica Neue', Helvetica, Arial, san-serif; font-weight: 200;}
+p {font: normal 14px/22px 'Helvetica Neue', Helvetica, 'san-serif';}
 h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 800;margin:20px 0 20px;}
 
+.block {
+
+}
+
+
 /* Home */
-#home_standard {position:relative;background-color:#ddd;clear:both;}
+/*
 .home .block {padding: 20px 30px 30px;}
 .home .block p {font-size:12px;}
 .home .block a {text-decoration: underline;}
@@ -49,14 +46,15 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 .close {position:absolute; top:0px; right: 0px;font-size:14px;padding: 20px 20px 0 0;}
 .links {clear:both;padding: 20px 30px 30px;}
 .links a {font-size: 14px;line-height: 20px;text-decoration:underline;}
+*/
 
 /* Header */
-#header {padding:0;position:absolute; top:0px; left: 0;z-index: 10;}
+#header {padding:0;position:absolute; top:0px; left: 0; right: 0;z-index: 10;}
 #header h1 {display:none;}
 #nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;background: #fff;padding: 20px 0 10px;}
 #nameplate_div {width:94px;}
-#nameplate_div #email {font-size: 11px; width:130px; height: 11px; position: fixed; top: 50px; right: 30px;text-align:right;text-transform:lowercase;}
-#nameplate_div:hover #email {display:block;}
+#header h2 {position:absolute;top:2px; left: 330px; right: 0;}
+
 
 #nav {position:absolute; top: 0px; left: 510px;}
 #nav ul { padding: 0; list-style-type:none;margin:0;}
@@ -68,7 +66,7 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 #nav li.no_work a:hover {color: #000;}
 #nav .selected a{color: #888;text-decoration:none;font-weight:normal;}
 
-#about_text {position:absolute; top: 0px; left: 30px; width: 400px;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;background: #fff;}
+#about_text {width: 400px;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;background: #fff;}
 
 .about #nav_about a,
 .contact #nav_contact a,
@@ -93,11 +91,11 @@ body.home #name {text-align:left;position:absolute; top:40px;left:40px; font-siz
 body.home #clicker {text-align:left;position:absolute; top:60px;left:40px; font-size: 12px; font-weight: 200;color: #fff;}
 
 /* Work Page */
-#category_tag {margin: 20px 30px 20px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_tag {margin: 0px 30px 20px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
 #category_tag p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
 #category_tag h2 {margin: 18px 0;font-weight: normal;}
 #category_tag h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
-#category_tag a {text-decoration:underline;}
+#category_tag a {text-decoration:underline;padding: 0 5px 0 0;}
 
 /* Index Block */
 .work_index {padding:0 10px 0 30px;margin-top:0;overflow:hidden;min-width:500px;}

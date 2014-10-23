@@ -1,7 +1,7 @@
 from flask import Blueprint, abort, Response
 from flask import render_template as rt
 from flask import current_app as app
-from toolbox.tools import get_work_from_slug, get_category_from_slug, retrieve_image
+from toolbox.tools import get_work_from_slug, get_category_from_slug, get_category_from_slug, retrieve_image
 from toolbox.models import Host, CustomPage, Vertex
 
 mod = Blueprint('frontend', __name__)
@@ -50,6 +50,10 @@ def category_individual(slug):
     category = get_category_from_slug(app.config['HOST'].owner, slug)
     return render_template('category_individual.html', slug=slug, category=category)
 
+@mod.route('/happening/<slug>')
+def happening_individual(slug):
+    happening = get_happening_from_slug(app.config['HOST'].owner, slug)
+    return render_template('happening_individual.html', slug=slug, happening=happening)
 
 # TODO: Leave this in for posterity for now, but remove
 @mod.route('/work/<categoryslug>/<slug>')
