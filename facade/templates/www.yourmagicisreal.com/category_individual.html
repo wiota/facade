@@ -1,19 +1,103 @@
-<style>
-a.work::after {
-    content: " (THIS IS A WORK)"
-}
-a.category::after {
-    content: " (THIS IS A CATEGORY)"
-}
-</style>
-<h3>THIS GENERIC TEMPLATE BROUGHT TO YOU BY <a href="http://wiota.co">WIOTA CO.</a><br/></h3>
-{{ slug }}<br/>
-{{ category.title }}<br/>
-<ul>
-{% for v in category.succset %}
-    <li>
-        {% set class = v._cls.split('.')[-1].lower() %}
-        <a class="{{ class }}" href="/{{ class }}/{{ v.slug }}">{{ v.title }}</a><br/>
-    </li>
-{% endfor %}
-</ul>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ category.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/sitewide.css">
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+
+  <script type="text/javascript" src="/static/js/title_slide.js"></script>
+  <script type="text/javascript" src="/static/js/layers.js"></script>
+  <script type="text/javascript" src="/static/js/openable.js"></script>
+
+
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      var a = new title_slide('.title_circle', 10, 400, '0', '-200%');
+      var l = new layer('.column2', -0.4);
+      var o = new openable('a.show');
+    })
+  </script>
+
+  <style type="text/css">
+  </style>
+
+
+
+</head>
+<body class='projects'>
+
+
+
+  <div class='page'>
+
+    <div id='nav'>
+      <a>Simulacra</a>
+      <a href='projects.html'>Projects</a>
+      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+    </div>
+
+
+    <div class='title_circle'><h1>Projects</h1></div>
+
+    <a class='display_close'>X</a>
+
+    <div class='column2 subnav'>
+    {% for project in category.succset %}
+      {% if project.succset|length > 1 %}
+        {% set class = ['left', 'center', 'right'] | random() | string() %}
+        <a class='{{class}} show' rel='link_{{project.id}}'>{{project.title}}</a>
+      {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class='column1'>
+
+      {% for project in category.succset %}
+        {% if project.succset|length > 1 %}
+
+        <div id='display_{{project.id}}' class='project_block high openable'>
+          <h2>{{project.title}}</h2>
+          <a class='show' rel='link_{{project.id}}'>
+            <img src='{{project.succset[0].resize_href}}' alt='' />
+          </a>
+          <div class='hide'>
+            {% for media in project.succset %}
+            <img src='{{media.resize_href}}' alt='' />
+            {% endfor %}
+          </div>
+        </div>
+
+
+        {% elif project.succset %}
+
+        <div class='project_block low'>
+          <h2>{{project.title}}</h2>
+          <a class='show'>
+            <img src='{{project.succset[0].resize_href}}' alt='' />
+          </a>
+        </div>
+
+        {% endif %}
+
+
+      {% endfor %}
+
+
+
+    </div>
+  </div>
+
+</body>
+</html>

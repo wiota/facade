@@ -5,7 +5,7 @@ html {overflow-x: hidden;}
 body {font-family: 'Roboto', Arial, Helvetica, 'san-serif';font-weight: bold;}
 
 h1 {
-  font-family: 'Metropolis', Arial, Helvetica, 'san-serif'; 
+  font-family: 'Metropolis', Arial, Helvetica, 'san-serif';
   text-transform: uppercase;
   margin: 0px;
   font-weight: normal;
@@ -17,7 +17,7 @@ h1 {
 
 #nav {
   position:fixed;
-  z-index: 50; 
+  z-index: 50;
   padding: 0;
   width: 120px;
   height: 120px;
@@ -48,8 +48,9 @@ h1 {
   padding-top: 9%;
   height:24%;
   background-color: #f5ea3d;
-  color: #00aae6; 
+  color: #00aae6;
   text-decoration: none;
+  cursor: pointer;
   }
 
   #nav a:hover {
@@ -83,12 +84,12 @@ h1 {
   background-color:#fff;
   color: #ff0000;
 }
-  
+
 .projects .title_circle {
   z-index: 19;
-  position:absolute; 
-  top: 200%; 
-  left: 0px; 
+  position:absolute;
+  top: 200%;
+  left: 0px;
   right: 0;
   background-color: rgba(160,244,244, .8);
   padding: 40% 0 40%;
@@ -101,7 +102,7 @@ h1 {
   -ms-transition: all .4s ease-out;
   -o-transition: all .4s ease-out;
   transition: all .4s ease-out;
-    
+
 }
 
 
@@ -119,45 +120,65 @@ h1 {
 .projects h2 {
   color:#ff0000;
   font-size: 30px;
-  text-align: center; font-weight: normal; 
-  margin: 0px; 
-  left: 0; 
+  text-align: center; font-weight: normal;
+  margin: 0px;
+  left: 0;
   right: 0px;
-  width: 100%;  
+  width: 100%;
   z-index: 10;
   }
 
 .projects .subnav {
-  
+
   position:fixed;
   top:  0;
   left: 0;
   right:0;
-  margin: 500px 0 0; 
+  margin: 500px 0 0;
   z-index: 11;
 }
 
 .projects .subnav a{
-  font-family: 'Josefin Slab';
-  font-weight: 600;
+  font-family: 'Sequi';
+  font-weight: 200;
   display:block;
   margin: 100px 2%;
   color:#f4827e;
   font-size: 70px;
   text-align: center;
+  cursor: pointer;
 }
+  .projects .subnav a:hover {
+    color: #5bce52;
+  }
 
 
 .projects .subnav a.left {text-align: left;}
 .projects .subnav a.center {text-align: center;}
 .projects .subnav a.right {text-align: right;}
 
-
+.projects .display_close {
+  display:none;
+  position:fixed;
+  z-index: 500;
+  font-size: 200px;
+  top:5%;
+  right: 5%;
+  font-family: 'Sequi';
+  font-weight: 600;
+}
 
 
 
 .projects .page {margin: 30% 0 30% 0%;overflow: hidden;}
 .projects .column1 {z-index: 5;}
+
+.projects .column1.single .project_block {opacity: 0;}
+.projects .column1.single .project_block.open {opacity: 1;}
+
+.projects .column1.single .project_block.open .show {display:none;}
+.projects .column1.single .project_block.open .hide {display:block;}
+.projects .column1.single .project_block.open.high {width: 94%;}
 
 .project_block {margin:10% 2%;}
 .project_block.high h2 {display:none;}
@@ -174,9 +195,9 @@ h1 {
   .projects .project_block.high {width:47%; margin: 8% 2% 0 0;}
   .projects .project_block.low {display:block;width:22.5%; margin: 8% 2% 0 0;}
   .projects .project_block h2 {position:absolute;top: -30px; left: 0;}
-  
+
   .projects .title_circle {
-    top: 50%; 
+    top: 50%;
     padding: 25% 0 25%;
     width: 50%;
     margin: -25% 25% 0;
@@ -202,10 +223,10 @@ h1 {
 
 .aaxxx .frame {
   border-style: none;
-  position:absolute; 
-  top: 0%; 
-  left: 0%; 
-  right: 0%; 
+  position:absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
   bottom: 0%;
   z-index: 16;
   cursor: pointer;
@@ -220,7 +241,7 @@ h1 {
   height: 0;
   margin: -50% 0 0 -50%;
   padding: 0 0 100%;
-  
+
 }
 
 .aaxxx #shape {
@@ -240,15 +261,15 @@ h1 {
   margin-left: -67px;
 }
 
-.aaxxx .speed_display { 
+.aaxxx .speed_display {
   position: fixed;
-  z-index: 21; 
+  z-index: 21;
   display:block;
   font-size: 40px;
   color: #f5ea3d;
-  position:fixed; 
-  z-index: 21; 
-  top: 2%; 
+  position:fixed;
+  z-index: 21;
+  top: 2%;
   left: 2%;
   padding: 30px 0 0;
   width: 120px;
