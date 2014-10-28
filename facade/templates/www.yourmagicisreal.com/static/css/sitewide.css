@@ -120,8 +120,8 @@ h1 {
 .projects h2 {
   color:#ff0000;
   font-size: 30px;
-  text-align: center; font-weight: normal;
-  margin: 0px;
+  text-align: left; font-weight: normal;
+  margin: 150px 0px;
   left: 0;
   right: 0px;
   width: 100%;
@@ -161,11 +161,14 @@ h1 {
   display:none;
   position:fixed;
   z-index: 500;
-  font-size: 200px;
+  font-size: 20px;
   top:5%;
   right: 5%;
   font-family: 'Sequi';
   font-weight: 600;
+}
+.projects .display_close span {
+  font-size: 200px;
 }
 
 
@@ -181,9 +184,6 @@ h1 {
 .projects .column1.single .project_block.open.high {}
 
 .project_block {margin:10% 2%;}
-.project_block h2 {display:none;}
-.project_block.low {display:none;}
-.project_block.low h2 {display:none;}
 
 .project_block a {display:block;}
 .project_block img {width: 100%;display:block;}
@@ -196,7 +196,10 @@ h1 {
 .project_block .additional img {
   float: right;
   width: 60%;
-  margin: 2% 0;
+  margin: 2% 0 0 2%;
+}
+
+.project_block .addition .description {
 }
 
 

@@ -50,9 +50,9 @@
     </div>
 
 
-    <div class='title_circle'><h1>Projects</h1></div>
+    <div class='title_circle'><h1>{{ category.title }}</h1></div>
 
-    <a class='display_close'>X</a>
+    <a class='display_close'>close<span>X</span></a>
 
     <div class='column2 subnav'>
     {% for project in category.succset %}
@@ -73,17 +73,19 @@
             <img src='{{project.succset[0].resize_href}}' alt='' />
           </a>
           <div class='additional'>
+            {% for media in project.succset %}
+            <img src='{{media.resize_href}}' alt='' />
+            {% endfor %}
+
             {% if project.title %}
               <h2>{{project.title}}</h2>
             {% endif %}
 
             {% if project.description %}
-              <pre>{{project.description}}</pre>
+              <pre class='description'>{{project.description}}</pre>
             {% endif %}
 
-            {% for media in project.succset %}
-            <img src='{{media.resize_href}}' alt='' />
-            {% endfor %}
+
           </div>
         </div>
 
@@ -91,7 +93,6 @@
         {% elif project.succset %}
 
         <div class='project_block low'>
-          <h2>{{project.title}}</h2>
           <a class='show'>
             <img src='{{project.succset[0].resize_href}}' alt='' />
           </a>
