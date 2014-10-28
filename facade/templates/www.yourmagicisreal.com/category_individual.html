@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/static/css/fonts.css">
   <link rel="stylesheet" href="/static/css/sitewide.css">
 
+
   <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
 
@@ -25,7 +26,7 @@
   <script type='text/javascript'>
     $(document).ready(function(){
       var a = new title_slide('.title_circle', 10, 400, '0', '-200%');
-      var l = new layer('.column2', -0.4);
+      var l = new layer('.column2', 'auto');
       var o = new openable('a.show');
     })
   </script>
@@ -68,11 +69,18 @@
         {% if project.succset|length > 1 %}
 
         <div id='display_{{project.id}}' class='project_block high openable'>
-          <h2>{{project.title}}</h2>
           <a class='show' rel='link_{{project.id}}'>
             <img src='{{project.succset[0].resize_href}}' alt='' />
           </a>
-          <div class='hide'>
+          <div class='additional'>
+            {% if project.title %}
+              <h2>{{project.title}}</h2>
+            {% endif %}
+
+            {% if project.description %}
+              <p>{{project.description}}</p>
+            {% endif %}
+
             {% for media in project.succset %}
             <img src='{{media.resize_href}}' alt='' />
             {% endfor %}

@@ -134,7 +134,7 @@ h1 {
   top:  0;
   left: 0;
   right:0;
-  margin: 500px 0 0;
+  padding: 300px 0 0;
   z-index: 11;
 }
 
@@ -177,24 +177,34 @@ h1 {
 .projects .column1.single .project_block.open {opacity: 1;}
 
 .projects .column1.single .project_block.open .show {display:none;}
-.projects .column1.single .project_block.open .hide {display:block;}
-.projects .column1.single .project_block.open.high {width: 94%;}
+.projects .column1.single .project_block.open .additional {display:block;}
+.projects .column1.single .project_block.open.high {}
 
 .project_block {margin:10% 2%;}
-.project_block.high h2 {display:none;}
+.project_block h2 {display:none;}
 .project_block.low {display:none;}
 .project_block.low h2 {display:none;}
 
 .project_block a {display:block;}
 .project_block img {width: 100%;display:block;}
-.project_block .hide {display:none;}
+
+
+.project_block .additional {
+  display:none;
+  overflow: scroll;
+}
+.project_block .additional img {
+  float: right;
+  width: 60%;
+  margin: 2% 0;
+}
 
 
 @media (min-width: 480px) {
-  .projects .project_block {max-width: 800px;float:right;position:relative;}
+  .projects .project_block {max-width: 800px;float:right;}
   .projects .project_block.high {width:47%; margin: 8% 2% 0 0;}
   .projects .project_block.low {display:block;width:22.5%; margin: 8% 2% 0 0;}
-  .projects .project_block h2 {position:absolute;top: -30px; left: 0;}
+
 
   .projects .title_circle {
     top: 50%;

@@ -7,30 +7,26 @@
 
   _.extend(layer.prototype, {
 
-    init: function(layer,speed){
+    init: function(layer){
       this.layer = $(layer);
-      this.layer.css({'position':'absolute'})
-
-      if(speed=='auto'){
-        this.speed = this.calculate_speed();
-      } else {
-        this.speed = speed;
-      }
-
       var t = this;
       $(window).on('scroll', t.adjust.bind(t))
     },
 
     calculate_speed: function(){
-      return 1;
-
+      var wh = $(document).outerHeight();
+      var lh = this.layer.outerHeight();
+      return lh/wh;
     },
 
     adjust: function(){
+      this.speed = this.calculate_speed();
+
       adjust = $(window).scrollTop()*this.speed;
+
       // this.layer.css({'top': -adjust+'px'})
-      this.layer.css({'transform': 'translate(0px,'+(-adjust)+'px)'}) 
-      
+      this.layer.css({'transform': 'translate(0px,'+(-adjust)+'px)'})
+
     }
   })
 

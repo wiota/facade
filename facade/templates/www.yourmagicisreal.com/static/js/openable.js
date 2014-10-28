@@ -10,11 +10,10 @@
 
   _.extend(openable.prototype, {
 
-    init: function(m_i, d_i){
+    init: function(){
 
       // items
-      menu_items = $(m_i);
-      display_items = $(d_i);
+      menu_items = $('.show');
 
       menu_items.click(this.show);
 
@@ -23,16 +22,14 @@
 
 
     show: function(){
+      var top = $(window).scrollTop();
       var mi = $(this);
       var id = mi.attr('rel').slice(5);
       $('.display_close').fadeIn();
       $('.subnav').fadeOut();
       $('.column1').addClass('single');
       $('#display_'+id).addClass('open');
-      //$('.project_block').css({'opacity': 0});
-      //$('#display_'+id).css({'opacity':1})
-      //$('#display_'+id+' .show').hide();
-      //$('#display_'+id+' .hide').fadeIn();
+      $('#display_'+id+' .additional').css({'position':'absolute', 'left':'2%', 'right': '2%', 'top': top})
 
     },
 
@@ -41,9 +38,6 @@
       $('.subnav').fadeIn();
       $('.column1').removeClass('single');
       $('.project_block').removeClass('open');
-      //$('.project_block').css({'opacity': 1});
-      //$('.project_block .show').fadeIn();
-      //$('.project_block .hide').hide();
 
     }
 
