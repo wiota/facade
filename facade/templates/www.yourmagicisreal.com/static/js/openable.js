@@ -26,7 +26,6 @@
       var top = $(window).scrollTop();
       var mi = $(this);
       var id = mi.attr('rel').slice(5);
-      console.log(id);
       $('.display_close').fadeIn();
       $('.subnav').fadeOut();
       $('.column1').addClass('single');

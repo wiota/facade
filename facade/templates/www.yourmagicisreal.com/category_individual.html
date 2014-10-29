@@ -70,7 +70,9 @@
 
         <div id='display_{{project.id}}' class='project_block high openable'>
           <a class='show' rel='link_{{project.id}}'>
-            <img src='{{project.succset[0].resize_href}}' alt='' />
+            {% for cover in project.cover %}
+              <img src='{{cover.resize_href}}' alt='' />
+            {% endfor %}
           </a>
           <div class='additional'>
             {% for media in project.succset %}
