@@ -120,25 +120,29 @@ h1 {
 .projects h2 {
   color:#ff0000;
   font-size: 30px;
-  text-align: left; font-weight: normal;
+  text-align: left;
+  font-weight: bold;
   margin: 150px 0px;
   left: 0;
   right: 0px;
   width: 100%;
   z-index: 10;
+  font-family: 'Sequi';
+  font-weight: 200;
   }
 
 .projects .subnav {
-
+  pointer-events:none;
   position:fixed;
   top:  0;
   left: 0;
   right:0;
-  padding: 300px 0 0;
+  margin: 300px 0 0;
   z-index: 11;
 }
 
 .projects .subnav a{
+  pointer-events:auto;
   font-family: 'Sequi';
   font-weight: 200;
   display:block;
@@ -158,6 +162,7 @@ h1 {
 .projects .subnav a.right {text-align: right;}
 
 .projects .display_close {
+  cursor: pointer;
   display:none;
   position:fixed;
   z-index: 500;
@@ -166,7 +171,12 @@ h1 {
   right: 5%;
   font-family: 'Sequi';
   font-weight: 600;
+  color:#f4827e;
 }
+  .projects .display_close:hover {
+
+    color: #5bce52;
+  }
 .projects .display_close span {
   font-size: 200px;
 }
@@ -176,18 +186,14 @@ h1 {
 .projects .page {margin: 30% 0 30% 0%;overflow: hidden;}
 .projects .column1 {z-index: 5;}
 
-.projects .column1.single .project_block {opacity: 0;}
-.projects .column1.single .project_block.open {opacity: 1;}
-
-.projects .column1.single .project_block.open .show {display:none;}
-.projects .column1.single .project_block.open .additional {display:block;}
-.projects .column1.single .project_block.open.high {}
-
 .project_block {margin:10% 2%;}
 
 .project_block a {display:block;}
 .project_block img {width: 100%;display:block;}
 
+.project_block .show {
+  cursor: pointer;
+}
 
 .project_block .additional {
   display:none;
@@ -201,6 +207,14 @@ h1 {
 
 .project_block .addition .description {
 }
+
+
+.projects .column1.single .project_block {opacity: 0;}
+.projects .column1.single .project_block.open {opacity: 1;}
+
+.projects .column1.single .project_block.open .show {display:none;}
+.projects .column1.single .project_block.open .additional {display:block;}
+.projects .column1.single .project_block.open.high {}
 
 
 @media (min-width: 480px) {
