@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Traction Company - {{happening.title}}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+
+  <link href="/static/css/traction.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+
+</head>
+
+
+<body class='happenings'>
+
+<div class='page'>
+  <div id="header">
+    <div id="nameplate_div">
+    <h1>Philadelphia Traction Company</h1>
+    <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
+    </div>
+    <h2>{{happening.title}}</h2>
+  </div>
+
+  <div id='nav' class=''>
+    {% set artists = get_category_by_id(config, "541c2202a114600f7458b98d") %}
+    {% set residents = get_category_by_id(config, "543e9174a1146015e32404ce") %}
+    {% set group = get_category_by_id(config, "543848fea1146002f1f84d3b") %}
+    {% set alumni = get_category_by_id(config, "54384804a1146002f1f84d1d") %}
+
+    <h2>{{artists.title}}</h2>
+    <ul>
+    {% for artist in artists.succset %}
+      <li class='category'><a href='/category/{{ artist.slug }}'>{{ artist.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <h2><a href='/category/{{residents.slug}}'>{{residents.title}}</a></h2>
+
+    <h2><a href='/category/{{group.slug}}'>{{group.title}}</a></h2>
+
+    <h2><a href='/category/{{alumni.slug}}'>{{alumni.title}}</a></h2>
+  </div>
+
+  <div class='happening left_column'>
+
+    <img src='{{ happening.succset[0].resize_href }}?h=300' alt='' />
+
+    {% if happening.description %}
+    <p class='description'>{{ happening.description }}</p>
+    {% endif %}
+
+    {% for media in happening.succset[1:] %}
+      <img src='{{ media.resize_href }}?h=300' alt='' />
+    {% endfor %}
+
+  </div>
+</div>
+
+
+<script type='text/javascript'>
+jQuery(document).ready(function() {
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+

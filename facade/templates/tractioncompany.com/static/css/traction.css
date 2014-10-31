@@ -1,24 +1,3 @@
-
-.happenings {max-width:920px; position: relative;}
-.happenings img {width: 100%; margin: 0 20px 20px 0;}
-
-.happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
-.happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
-
-.happenings_display {width: 100%;}
-.happenings_display .display_tag {width: 100%;}
-.happenings_display .display_tag img {width: 50%;float:left;margin: 0 3% 3% 0;}
-
-#header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.9); width: 100%; height: 50px;}
-#header h1 {display:none;}
-#nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
-
-#nav {position:fixed; top: 85px; left: 560px;}
-
-}
-
-
-
 /* Site Wide */
 
 html {margin:0;}
@@ -30,34 +9,24 @@ body {font: 10px/14px 'Helvetica Neue', Helvetica, Arial, san-serif; font-weight
 p {font: normal 14px/22px 'Helvetica Neue', Helvetica, 'san-serif';}
 h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 800;margin:20px 0 20px;}
 
-.block {
 
-}
+/* Page */
+.left_column {max-width: 450px;position:relative;}
 
-
-/* Home */
-/*
-.home .block {padding: 20px 30px 30px;}
-.home .block p {font-size:12px;}
-.home .block a {text-decoration: underline;}
-.mini_head {font-style:italic;font-size:10px;margin: 0 0 5px;}
-.exhibitions {max-width:920px; position: relative;}
-.exhibitions img {width: 100%; margin: 0 20px 20px 0;}
-.close {position:absolute; top:0px; right: 0px;font-size:14px;padding: 20px 20px 0 0;}
-.links {clear:both;padding: 20px 30px 30px;}
-.links a {font-size: 14px;line-height: 20px;text-decoration:underline;}
-*/
+.left_column {width: 42%; padding: 0 4%; position: relative;}
+.single_column {width: 92%; padding: 0 4%; position: relative;}
+.horizontal_column {width: 92%; padding: 0 4%; position: relative;}
 
 /* Header */
-#header {padding:0;position:absolute; top:0px; left: 0; right: 0;z-index: 10;}
+#header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.95); width: 100%; height: 50px;}
 #header h1 {display:none;}
-#nameplate {width:100%; position: absolute; top: 0px; left: 30px; text-transform:uppercase;font-size: 20px;text-align:left;background: #fff;padding: 20px 0 10px;}
+#nameplate {width:98%; position: absolute; top: 0px; left:4%; text-transform:uppercase;font-size: 24px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
 #nameplate_div {width:94px;}
-#header h2 {position:absolute;top:2px; left: 330px; right: 0;}
+#header h2 {position:absolute;top:2px;  left:4%; right: 0; margin-left: 300px;}
 
-
-#nav {position:absolute; top: 0px; left: 510px;}
-#nav ul { padding: 0; list-style-type:none;margin:0;}
+/* Nav */
+#nav {position:fixed; top: 80px; left: 50%;padding: 0 0 0 4%; width: 48%;}
+#nav ul { padding:0;list-style-type:none;margin:0;}
 #nav li {display:block;}
 #nav ul a {color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
 #nav a {color: #000; text-decoration:underline;}
@@ -66,13 +35,11 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 #nav li.no_work a:hover {color: #000;}
 #nav .selected a{color: #888;text-decoration:none;font-weight:normal;}
 
-#about_text {width: 400px;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;background: #fff;}
-
 .about #nav_about a,
 .contact #nav_contact a,
 .events #nav_news a,
 .home #nav_home a,
-.portfolio #nav_work a{color: #555;text-decoration:underline;font-weight:bold;}
+.category #nav_work a{color: #555;text-decoration:underline;font-weight:bold;}
 
 #subnav {position:fixed; top:40px; left: 0;margin: 0px auto; padding: 0; list-style-type:none; text-align:center;width:100%;z-index: 11;}
 #subnav li {display:inline;}
@@ -83,22 +50,36 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 h1 {margin: 0 auto;font: bold 18px/24px 'Helvetica Neue', Helvetica, san-serif;margin:0;}
 
 /* Home Page */
-body.home #header {}
-body.home {padding:50px 0 0; margin:0;}
-body.home #background_image img {display:block;margin:0; padding:0;position:absolute; top:50%;left:50%;}
+body.home .happenings {}
 
-body.home #name {text-align:left;position:absolute; top:40px;left:40px; font-size: 24px; font-weight: 200;color: #fff;text-transform: uppercase;}
-body.home #clicker {text-align:left;position:absolute; top:60px;left:40px; font-size: 12px; font-weight: 200;color: #fff;}
+body.home .happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
+body.home .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
+
+body.home .happenings_display {width: 100%;overflow: auto;}
+body.home .happenings_display .display_tag {width: 100%;}
+body.home .happenings_display .display_tag img {width: 100%;margin: 0 3% 3% 0}
+
+body.home #about_text {font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;}
+
+/* Happening Page */
+body.happenings .happening {}
+body.happenings .happening img {width:100%;margin: 0 3% 3% 0}
+body.happenings .happening p {
+  font: normal 40px/55px 'Helvetica Neue', Helvetica, arial san-serif;
+}
 
 /* Work Page */
-#category_tag {margin: 0px 30px 20px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+
+
+/* Work Page */
+#category_tag {margin: 0px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
 #category_tag p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
 #category_tag h2 {margin: 18px 0;font-weight: normal;}
 #category_tag h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
 #category_tag a {text-decoration:underline;padding: 0 5px 0 0;}
 
 /* Index Block */
-.work_index {padding:0 10px 0 30px;margin-top:0;overflow:hidden;min-width:500px;}
+.work_index {overflow:hidden;min-width:500px;}
 
 /* Work Block */
 .work_index .work.block {margin:10px 20px 0 0;float:left;}
@@ -147,27 +128,3 @@ body.home #clicker {text-align:left;position:absolute; top:60px;left:40px; font-
 .document .links {text-align:center;}
 .document .links a {font-size:22px; line-height: 40px; margin: 3em 0 3em 0em; font-weight: normal; }
 
-
-/* Horizontal blocks */
-
-
-
-
-
-
-/* Sort Fork Block */
-
-
-/* Show */
-
-
-
-
-/* Image Sort */
-
-
-
-/* About */
-
-
-/* News */

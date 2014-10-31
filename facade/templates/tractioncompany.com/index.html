@@ -18,102 +18,111 @@
 
 <body class='home'>
 
-<div id="header">
-  <div id="nameplate_div">
-    <h1>Philadelphia Traction Company</h1>
-    <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
-  </div>
-</div>
-
-<div class='happenings'>
-
-  <div class='happenings_menu'>
-    {% set current = get_category_by_id(config, "54490d51a114605a5cb4636d") %}
-    {% set past = get_category_by_id(config, "54490d55a114605a5cb46373") %}
-    {% set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") %}
-
-    {% if(current.succset) %}
-    <a class='happening_tag current'>{{current.title}}</a>
-    {% endif %}
-
-    {% if(past.succset) %}
-    <a class='happening_tag past'>{{past.title}}</a>
-    {% endif %}
-
-    {% if(shophappenings.succset) %}
-    <a class='happening_tag shophappenings'>{{shophappenings.title}}</a>
-    {% endif %}
+<div class='page'>
+  <div id="header">
+    <div id="nameplate_div">
+      <h1>Philadelphia Traction Company</h1>
+      <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
+    </div>
   </div>
 
-  <div class='happenings_display'>
+  <div id='nav' class=''>
 
-      <div class='display_tag current'>
-      {% for happening in current.succset if happening.succset %}
-        <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
-      {% endfor %}
-      </div>
+    <!-- dev -->
+    <!--"541c2202a114600f7458b98d"-->
+    <!--"543e9174a1146015e32404ce"-->
+    <!--"543848fea1146002f1f84d3b"-->
+    <!--"54384804a1146002f1f84d1d"-->
 
-      <div class='display_tag past'>
-      {% for happening in past.succset if happening.succset %}
-        <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
-      {% endfor %}
-      </div>
+    {% set artists = get_category_by_id(config, "542aba17a49f72000719970f") %}
+    {% set residents = get_category_by_id(config, "5453f2cb97787200073ad239") %}
+    {% set group = get_category_by_id(config, "5453f2da97787200073ad25b") %}
+    {% set alumni = get_category_by_id(config, "5453f2f597787200073ad284") %}
 
-      <div class='display_tag shophappenings'>
-      {% for happening in shophappenings.succset if happening.succset %}
-        <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
-      {% endfor %}
-      </div>
+    <h2>{{artists.title}}</h2>
+    <ul>
+    {% for artist in artists.succset %}
+      <li class='category'><a href='/category/{{ artist.slug }}'>{{ artist.title }}</a></li>
+    {% endfor %}
+    </ul>
 
+    <h2><a href='/category/{{residents.slug}}'>{{residents.title}}</a></h2>
+
+    <h2><a href='/category/{{group.slug}}'>{{group.title}}</a></h2>
+
+    <h2><a href='/category/{{alumni.slug}}'>{{alumni.title}}</a></h2>
   </div>
-</div>
 
-<div id='nav'>
-  {% set artists = get_category_by_id(config, "541c2202a114600f7458b98d") %}
-  {% set residents = get_category_by_id(config, "543e9174a1146015e32404ce") %}
-  {% set group = get_category_by_id(config, "543848fea1146002f1f84d3b") %}
-  {% set alumni = get_category_by_id(config, "54384804a1146002f1f84d1d") %}
+  <div class='happenings left_column'>
 
-  <h2>{{artists.title}}</h2>
-  <ul>
-  {% for artist in artists.succset %}
+    <div class='happenings_menu'>
 
-    <li class='category'><a href='/category/{{ artist.slug }}'>{{ artist.title }}</a></li>
+      <!-- dev -->
+      <!--"54490d51a114605a5cb4636d"-->
+      <!--"54490d55a114605a5cb46373"-->
+      <!--"54495d51a114606f9a495bb9"-->
 
-  {% endfor %}
-  </ul>
+      {% set current = get_category_by_id(config, "544a71b46786ed00075c9f03") %}
+      {% set past = get_category_by_id(config, "544a71b76786ed00075c9f09") %}
+      {% set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") %}
 
-  <h2><a href='/category/{{residents.slug}}'>{{residents.title}}</a></h2>
+      {% if(current.succset) %}
+      <a class='happening_tag current'>{{current.title}}</a>
+      {% endif %}
 
-  <h2><a href='/category/{{group.slug}}'>{{group.title}}</a></h2>
+      {% if(past.succset) %}
+      <a class='happening_tag past'>{{past.title}}</a>
+      {% endif %}
 
-  <h2><a href='/category/{{alumni.slug}}'>{{alumni.title}}</a></h2>
+      {% if(shophappenings.succset) %}
+      <a class='happening_tag shophappenings'>{{shophappenings.title}}</a>
+      {% endif %}
+    </div>
+
+    <div class='happenings_display'>
+
+        <div class='display_tag current'>
+        {% for happening in current.succset if happening.succset %}
+          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
+        {% endfor %}
+        </div>
+
+        <div class='display_tag past'>
+        {% for happening in past.succset if happening.succset %}
+          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
+        {% endfor %}
+        </div>
+
+        <div class='display_tag shophappenings'>
+        {% for happening in shophappenings.succset if happening.succset %}
+          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].resize_href }}' alt='' /></a>
+        {% endfor %}
+        </div>
+
+    </div>
+  </div>
+
+  <div class='about left_column'>
 
 
+    <div id='about_text'>
+      <h2>About the shop:</h2>
+      <p style='font-weight: bold'>Mission:</p>
 
-</div>
+      <p><em>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
 
+      <p><em>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
 
-<div class='about'>
-
-
-  <div id='about_text'>
-    <h2>About the shop:</h2>
-    <p style='font-weight: bold'>Mission:</p>
-
-    <p><em>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
-
-    <p><em>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
-
-    <p><em>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
+      <p><em>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
 
 
-    <p><b>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </p>
+      <p><b>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </p>
 
-    <p> Join Traction Company on <a href ='https://www.facebook.com/TractionCompany'> <u>Facebook</u></a>
+      <p> Join Traction Company on <a href ='https://www.facebook.com/TractionCompany'> <u>Facebook</u></a>
 
-    <p>Contact Traction Company via <b> <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a> </b></p>
+      <p>Contact Traction Company via <b> <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a> </b></p>
 
+    </div>
   </div>
 </div>
 
