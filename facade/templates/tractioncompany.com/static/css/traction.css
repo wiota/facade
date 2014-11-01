@@ -18,7 +18,7 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 .horizontal_column {width: 92%; padding: 0 4%; position: relative;}
 
 /* Header */
-#header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,0.95); width: 100%; height: 50px;}
+#header {padding:0;position:fixed; top:0px; left: 0;z-index: 10;background-color: rgba(255,255,255,1); width: 100%; height: 50px;}
 #header h1 {display:none;}
 #nameplate {width:98%; position: absolute; top: 0px; left:4%; text-transform:uppercase;font-size: 24px;text-align:left;padding: 20px 0 10px;background-color:transparent;}
 #nameplate_div {width:94px;}
@@ -65,7 +65,7 @@ body.home #about_text {font: normal 16px/30px 'Helvetica Neue', Helvetica, arial
 body.happenings .happening {}
 body.happenings .happening img {width:100%;margin: 0 3% 3% 0}
 body.happenings .happening p {
-  font: normal 40px/55px 'Helvetica Neue', Helvetica, arial san-serif;
+  font: normal 30px/45px 'Helvetica Neue', Helvetica, arial san-serif;
 }
 
 /* Work Page */
