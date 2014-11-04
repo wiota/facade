@@ -1,19 +1,10 @@
 from flask import Blueprint, abort, Response
-from flask import render_template as rt
+from flask import render_template
 from flask import current_app as app
 from toolbox.tools import get_work_from_slug, get_category_from_slug, get_category_from_slug, get_happening_from_slug, retrieve_image
 from toolbox.models import Host, CustomPage, Vertex
 
 mod = Blueprint('frontend', __name__)
-
-
-def render_template(filename, **kwargs):
-    """
-    Extend the default Flask render_template function. Creates a path to a
-    named template with the host name which sits in our /templates folder. Then
-    calls rt (which is the original render_template), passing along the kwargs.
-    """
-    return rt('/'.join([app.config['HOST'].template, filename]), **kwargs)
 
 
 @mod.route('/robots.txt')
