@@ -1,0 +1,41 @@
+/* Customize container */
+@media (min-width: 900px) {
+  .container {
+    max-width: 900px;
+  }
+}
+
+.thumbnail{
+    border:none;
+}
+
+h1, .caption {
+    text-transform: uppercase;
+}
+
+h1, h3, p, .caption {
+    text-align: center;
+}
+
+.page-header a:hover {
+    text-decoration: none;
+}
+
+.page-header a h1 {
+    color: #000;
+}
+
+.page-header a p, .thumbnail > .caption {
+    color: #888;
+}
+
+a img {
+    transition: opacity 0.2s ease-in-out;
+    /* To fix the CSS3 transition wiggle due to non-integer maxwidths */
+    -webkit-transform: translateZ(0);
+}
+
+a:hover img {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}

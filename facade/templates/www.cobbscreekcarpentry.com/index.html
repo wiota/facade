@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for category in get_body(config).succset %}
+        <h3>{{ category.title }}</h3>
+        <div class="row">
+        {% for work in category.succset %}
+            <a href="/work/{{ work.slug }}">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                            <img src="{{ work.cover[0].resize_href }}?w=735&h=735&function=resize_to_fill"/>
+                        <div class="caption">
+                            <p>{{ work.title }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
