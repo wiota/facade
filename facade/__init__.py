@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from toolbox import tools, template_tools
-from toolbox.email import FacadeExceptionEmail
+from toolbox.emailer import FacadeExceptionEmail
 import traceback
 
 def create_app(hostname):
