@@ -24,12 +24,12 @@ def image(image_name):
 
 @mod.route('/work/<slug>')
 def work_individual(slug):
-    work, media = get_work_from_slug(app.config['HOST'].owner, slug)
+    work, media = get_work_from_slug(app.config['HOST'], slug)
     return render_template('work_individual.html', work=work, media=media)
 
 @mod.route('/id/<id>')
 def by_id(id):
-    vertex = Vertex.objects.get(owner=app.config['HOST'].owner, id=id)
+    vertex = Vertex.by_id(id, host=app.config['HOST'])
     if vertex._cls == 'Vertex.Work':
         return render_template('work_individual.html', work=vertex, media=vertex.succset)
     elif vertex._cls == 'Vertex.Category':
@@ -38,19 +38,19 @@ def by_id(id):
 
 @mod.route('/category/<slug>')
 def category_individual(slug):
-    category = get_category_from_slug(app.config['HOST'].owner, slug)
+    category = get_category_from_slug(app.config['HOST'], slug)
     return render_template('category_individual.html', slug=slug, category=category)
 
 @mod.route('/happening/<slug>')
 def happening_individual(slug):
-    happening = get_happening_from_slug(app.config['HOST'].owner, slug)
+    happening = get_happening_from_slug(app.config['HOST'], slug)
     return render_template('happening_individual.html', slug=slug, happening=happening)
 
 # TODO: Leave this in for posterity for now, but remove
 @mod.route('/work/<categoryslug>/<slug>')
 def work_individual_old(categoryslug, slug):
-    category = get_category_from_slug(app.config['HOST'].owner, categoryslug)
-    work, media = get_work_from_slug(app.config['HOST'].owner, slug)
+    category = get_category_from_slug(app.config['HOST'], categoryslug)
+    work, media = get_work_from_slug(app.config['HOST'], slug)
     return render_template('work_individual.html', work=work, media=media, category=category)
 
 
