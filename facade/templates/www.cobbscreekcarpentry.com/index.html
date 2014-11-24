@@ -7,7 +7,11 @@
             <a href="/work/{{ work.slug }}">
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
+                        {% if work.cover %}
                             <img src="{{ work.cover[0].resize_href }}?w=735&h=735&function=resize_to_fill"/>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/missing.jpg')}}"/>
+                        {% endif %}
                         <div class="caption">
                             <p>{{ work.title }}</p>
                         </div>
