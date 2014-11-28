@@ -19,7 +19,7 @@ def index():
 
 @mod.route('/image/<image_name>')
 def image(image_name):
-    return retrieve_image(image_name, app.config['HOST'].owner.email_hash)
+    return retrieve_image(image_name, app.config['HOST'].bucketname)
 
 
 @mod.route('/work/<slug>')
