@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
     <h3 class="title">{{ work.title }}</h3>
-    <p class="description">{{ work.description }}</p>
+    <p class="description">
+    {% if work.description %}
+        {{ work.description }}
+    {% else %}
+        <i>No description.</i>
+    {% endif %}
+    </p>
     <div class="row">
-        {% for medium in media %}
-        <div class="thumbnail">
-            <img src="{{ medium.resize_href }}?w=800"/>
-        </div>
-        {% endfor %}
+        {% if media %}
+            {% for medium in media %}
+            <div class="thumbnail">
+                <img src="{{ medium.resize_href }}?w=800"/>
+            </div>
+            {% endfor %}
+        {% else %}
+            <i>No images.</i>
+        {% endif %}
     </div>
 {% endblock %}
