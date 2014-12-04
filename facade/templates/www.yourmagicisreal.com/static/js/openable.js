@@ -18,8 +18,24 @@
       menu_items.click(this.show);
 
       $('.display_close').click(this.hide);
+
+      this.test();
+
+
     },
 
+    test: function(){
+      $('#nav').mousedown(function(){
+        console.log('mousedown');
+        $(document).on('mousemove',function(){
+          console.log('move');
+        });
+      })
+      $('#nav').on('mouseup',function(){
+        console.log('mouseup');
+        $(document).off('mousemove');
+      })
+    },
 
     show: function(){
 
