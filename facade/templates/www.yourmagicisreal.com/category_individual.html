@@ -71,12 +71,12 @@
         <div id='display_{{project.id}}' class='project_block high openable'>
           <a class='show' rel='link_{{project.id}}'>
             {% for cover in project.cover %}
-              <img src='{{cover.resize_href}}' alt='' />
+              <img src='{{cover.href}}' alt='' />
             {% endfor %}
           </a>
           <div class='additional'>
             {% for media in project.succset %}
-            <img src='{{media.resize_href}}' alt='' />
+            <img src='{{media.href}}' alt='' />
             {% endfor %}
 
             {% if project.title %}
@@ -96,7 +96,7 @@
 
         <div class='project_block low'>
           <a class=''>
-            <img src='{{project.succset[0].resize_href}}' alt='' />
+            <img src='{{project.succset[0].href}}' alt='' />
           </a>
         </div>
 

@@ -12,7 +12,7 @@
         {% if media %}
             {% for medium in media %}
             <div class="thumbnail">
-                <img src="{{ medium.resize_href }}?w=800"/>
+                <img src="{{ medium.href }}?w=800"/>
             </div>
             {% endfor %}
         {% else %}

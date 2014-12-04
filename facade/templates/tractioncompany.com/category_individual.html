@@ -38,7 +38,7 @@
   {% for work in category.succset %}
     {% for cover in work.cover %}
       <a class="work block" href='/work/{{category.slug}}/{{work.slug}}'>
-        <img src='{{ cover.resize_href }}?h=300' alt='' />
+        <img src='{{ cover.href }}?h=300' alt='' />
       </a>
     {% endfor %}
   {% endfor %}

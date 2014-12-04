@@ -26,11 +26,13 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 
 /* Nav */
 #nav {position:fixed; top: 80px; left: 50%;padding: 0 0 0 4%; width: 48%;}
-#nav ul { padding:0;list-style-type:none;margin:0;}
+#nav h2 {margin: 0px 0 10px;}
+#nav h2 a {text-decoration: none;}
+#nav h2:hover a {background-color: #f3ff8e; text-decoration: underline;}
+#nav ul {margin: 0 0 30px; padding:0;list-style-type:none;}
 #nav li {display:block;}
 #nav ul a {color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
-#nav a {color: #000; text-decoration:underline;}
-#nav a:hover {color: #666;}
+#nav ul a:hover {color: #666;}
 #nav li.no_work a {color: #000;text-decoration: none;}
 #nav li.no_work a:hover {color: #000;}
 #nav .selected a{color: #888;text-decoration:none;font-weight:normal;}
@@ -52,7 +54,8 @@ h1 {margin: 0 auto;font: bold 18px/24px 'Helvetica Neue', Helvetica, san-serif;m
 /* Home Page */
 body.home .happenings {}
 
-body.home .happenings_menu {font-style:italic;font-size:12px;margin: 0 0 5px;}
+body.home .happenings_menu {font-style:italic;font-size:14px;margin: 0 0 5px;}
+body.home .happenings_menu .showing {background-color: #f3ff8e;border-bottom: 1px dashed #e2003d;}
 body.home .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
 
 body.home .happenings_display {width: 100%;overflow: auto;}
@@ -65,7 +68,7 @@ body.home #about_text {font: normal 16px/30px 'Helvetica Neue', Helvetica, arial
 body.happenings .happening {}
 body.happenings .happening img {width:100%;margin: 0 3% 3% 0}
 body.happenings .happening p {
-  font: normal 30px/45px 'Helvetica Neue', Helvetica, arial san-serif;
+  font: normal 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
 }
 
 /* Work Page */
