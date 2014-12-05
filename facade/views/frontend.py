@@ -24,7 +24,10 @@ def image(image_name):
 
 @mod.route('/work/<slug>')
 def work_individual(slug):
-    work, media = get_work_from_slug(app.config['HOST'], slug)
+    try:
+        work, media = get_work_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return abort(404)
     return render_template('work_individual.html', work=work, media=media)
 
 @mod.route('/id/<id>')
