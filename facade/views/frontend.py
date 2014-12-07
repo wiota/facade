@@ -1,7 +1,7 @@
 from flask import Blueprint, abort, Response
 from flask import render_template
 from flask import current_app as app
-from toolbox.tools import get_work_from_slug, get_category_from_slug, get_category_from_slug, get_happening_from_slug, retrieve_image
+from toolbox.tools import get_body, get_work_from_slug, get_category_from_slug, get_happening_from_slug, retrieve_image
 from toolbox.models import Host, CustomPage, Vertex
 
 mod = Blueprint('frontend', __name__)
@@ -14,7 +14,8 @@ def static_from_root():
 
 @mod.route('/')
 def index():
-    return render_template('index.html')
+    body = get_body(app.config['HOST'])
+    return render_template('index.html', body=body);
 
 
 @mod.route('/image/<image_name>')
