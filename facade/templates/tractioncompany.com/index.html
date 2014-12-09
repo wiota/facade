@@ -42,53 +42,30 @@
 
   </div>
 
+  {% set happenings = get_happenings(config) %}
   <div class='happenings left_column'>
 
     <div class='happenings_menu'>
 
+      {% for item in happenings.succset %}
+        {% if(item.succset) %}
+          <a class='happening_tag {{ item.slug }}'>{{ item.title }}</a>
+        {% endif %}
+      {% endfor %}
 
-      <!-- dev -->
-      {# set current = get_category_by_id(config, "54490d51a114605a5cb4636d") #}
-      {# set past = get_category_by_id(config, "54490d55a114605a5cb46373") #}
-      {# set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") #}
-
-      <!-- live -->
-      {% set current = get_category_by_id(config, "544a71b46786ed00075c9f03") %}
-      {% set past = get_category_by_id(config, "544a71b76786ed00075c9f09") %}
-      {% set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") %}
-
-      {% if(current.succset) %}
-      <a class='happening_tag current'>{{current.title}}</a>
-      {% endif %}
-
-      {% if(past.succset) %}
-      <a class='happening_tag past'>{{past.title}}</a>
-      {% endif %}
-
-      {% if(shophappenings.succset) %}
-      <a class='happening_tag shophappenings'>{{shophappenings.title}}</a>
-      {% endif %}
     </div>
 
     <div class='happenings_display'>
 
-        <div class='display_tag current'>
-        {% for happening in current.succset if happening.succset %}
-          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
+        {% for item in happenings.succset %}
+          {% if(item.succset) %}
+            <div class='display_tag {{ item.slug }}'>
+              {% for happening in item.succset %}
+                <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
+              {% endfor %}
+            </div>
+          {% endif %}
         {% endfor %}
-        </div>
-
-        <div class='display_tag past'>
-        {% for happening in past.succset if happening.succset %}
-          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
-        {% endfor %}
-        </div>
-
-        <div class='display_tag shophappenings'>
-        {% for happening in shophappenings.succset if happening.succset %}
-          <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
-        {% endfor %}
-        </div>
 
     </div>
   </div>
