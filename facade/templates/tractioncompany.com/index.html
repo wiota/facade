@@ -48,14 +48,14 @@
 
 
       <!-- dev -->
-      {# set current = get_category_by_id(config, "54490d51a114605a5cb4636d") #}
-      {# set past = get_category_by_id(config, "54490d55a114605a5cb46373") #}
-      {# set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") #}
+      {% set current = get_category_by_id(config, "54490d51a114605a5cb4636d") %}
+      {% set past = get_category_by_id(config, "54490d55a114605a5cb46373") %}
+      {% set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") %}
 
       <!-- live -->
-      {% set current = get_category_by_id(config, "544a71b46786ed00075c9f03") %}
-      {% set past = get_category_by_id(config, "544a71b76786ed00075c9f09") %}
-      {% set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") %}
+      {# set current = get_category_by_id(config, "544a71b46786ed00075c9f03") #}
+      {# set past = get_category_by_id(config, "544a71b76786ed00075c9f09") #}
+      {# set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") #}
 
       {% if(current.succset) %}
       <a class='happening_tag current'>{{current.title}}</a>
