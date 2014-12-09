@@ -43,7 +43,10 @@ def by_id(id):
 @mod.route('/category/<slug>')
 def category_individual(slug):
     category = get_category_from_slug(app.config['HOST'], slug)
-    return render_template('category_individual.html', slug=slug, category=category)
+    if category.layout:
+        return render_template('/layouts/'+category.layout+'/category_individual.html', slug=slug, category=category)
+    else:
+        return render_template('category_individual.html', slug=slug, category=category)
 
 @mod.route('/happening/<slug>')
 def happening_individual(slug):
