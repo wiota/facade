@@ -28,47 +28,18 @@
 
   <div id='nav' class=''>
 
-    <!-- This could be replaced by the body succset, but how do I change the behavior of the links? -->
-
-    <!-- dev -->
-    {% set artists = get_category_by_id(config, "541c2202a114600f7458b98d") %}
-    {% set residents = get_category_by_id(config, "543e9174a1146015e32404ce") %}
-    {% set groups = get_category_by_id(config, "543848fea1146002f1f84d3b") %}
-    {% set alumni = get_category_by_id(config, "54384804a1146002f1f84d1d") %}
-
-    <!-- live -->
-    {# set artists = get_category_by_id(config, "542aba17a49f72000719970f") #}
-    {# set residents = get_category_by_id(config, "5453f2cb97787200073ad239") #}
-    {# set groups = get_category_by_id(config, "5453f2da97787200073ad25b") #}
-    {# set alumni = get_category_by_id(config, "5453f2f597787200073ad284") #}
-
-    <h2><a>{{artists.title}}</a></h2>
+    {% set first = body.succset[0] %}
+    <h2><a>{{first.title}}</a></h2>
     <ul>
-    {% for artist in artists.succset %}
-      <li class='category'><a href='/category/{{ artist.slug }}'>{{ artist.title }}</a></li>
+    {% for item in first.succset %}
+      <li class='category'><a href='/category/{{ item.slug }}'>{{ item.title }}</a></li>
     {% endfor %}
     </ul>
 
-    <!-- ******************************** -->
-    <h2><a>{{residents.title}}</a></h2>
-    <ul>
-    {% for resident in residents.succset %}
-      <li class='category'><a href='/category/{{ resident.slug }}'>{{ resident.title }}</a></li>
+    {% for rest in body.succset[1:] %}
+    <h2><a href='/category/{{rest.slug}}'>{{rest.title}}</a></h2>
     {% endfor %}
-    </ul>
-    <!-- ******************************** -->
 
-    <!-- ******************************** -->
-    <h2><a href='/category/{{groups.slug}}'>{{groups.title}}</a></h2>
-
-    <!-- ******************************** -->
-
-    <h2><a>{{alumni.title}}</a></h2>
-    <ul>
-    {% for alum in alumni.succset %}
-      <li class='category'><a href='/category/{{ alum.slug }}'>{{ alum.title }}</a></li>
-    {% endfor %}
-    </ul>
   </div>
 
   <div class='happenings left_column'>
@@ -77,14 +48,14 @@
 
 
       <!-- dev -->
-      {% set current = get_category_by_id(config, "54490d51a114605a5cb4636d") %}
-      {% set past = get_category_by_id(config, "54490d55a114605a5cb46373") %}
-      {% set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") %}
+      {# set current = get_category_by_id(config, "54490d51a114605a5cb4636d") #}
+      {# set past = get_category_by_id(config, "54490d55a114605a5cb46373") #}
+      {# set shophappenings = get_category_by_id(config, "54495d51a114606f9a495bb9") #}
 
       <!-- live -->
-      {# set current = get_category_by_id(config, "544a71b46786ed00075c9f03") #}
-      {# set past = get_category_by_id(config, "544a71b76786ed00075c9f09") #}
-      {# set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") #}
+      {% set current = get_category_by_id(config, "544a71b46786ed00075c9f03") %}
+      {% set past = get_category_by_id(config, "544a71b76786ed00075c9f09") %}
+      {% set shophappenings = get_category_by_id(config, "544a71be6786ed00075c9f11") %}
 
       {% if(current.succset) %}
       <a class='happening_tag current'>{{current.title}}</a>
@@ -204,7 +175,7 @@
       });
 
       navs.first().addClass('showing').next('ul').fadeIn();
-    })();
+    });
   });
 
 </script>

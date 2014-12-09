@@ -66,12 +66,48 @@ body.home #about_text {font: normal 16px/30px 'Helvetica Neue', Helvetica, arial
 
 /* Happening Page */
 body.happenings .happening {}
+body.happenings .happening h2 {
+  font: bold 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
+}
 body.happenings .happening img {width:100%;margin: 0 3% 3% 0}
 body.happenings .happening p {
   font: normal 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
 }
 
-/* Work Page */
+/* Projects Page */
+
+.projects {
+  position: relative;
+}
+
+.projects h2 {
+  padding: 0 4%;
+  font: bold 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
+}
+
+.projects .project {
+  margin: 5% 0 8%;
+  overflow: auto;
+  clear:both;
+}
+
+.projects .column1 {
+  padding: 0 4%;
+  width: 42%;
+  float:left;
+
+}
+
+.projects .column2 {
+  width: 46%;
+  padding: 0 4% 0 0;
+  float:right;
+  font: normal 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
+}
+
+.project .column1 img {
+  width: 100%;
+}
 
 
 /* Work Page */

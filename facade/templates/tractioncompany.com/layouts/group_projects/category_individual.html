@@ -17,7 +17,7 @@
 </head>
 
 
-<body class='category'>
+<body class='category {{ category.layout }}'>
 
 <div class='page'>
   <div id="header">
@@ -25,36 +25,27 @@
     <h1>Philadelphia Traction Company</h1>
     <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
     </div>
-    <h2>{{category.title}}</h2>
   </div>
 
-  <div id='category_tag' class='horizontal_column'>
-    <div>
-      {{ category.custom_fields }}
-      {% if category.bio %}
-        <a>Biography</a>
-      {% endif %}
-      {% if category.resume %}
-        <a>Resume</a>
-      {% endif %}
-      {% if category.website %}
-        <a>Website</a>
-      {% endif %}
-    </div>
-    {% if category.bio %}
-      <div id='bio' style='display:none;'>{{ category.bio }}</div>
-    {% endif %}
-    <div id='bio' style='display:none;'></div>
-  </div>
 
-  <div class='work_index horizontal_column'>
+  <div class='projects'>
+
+
+  <h2>{{category.title}}</h2>
 
   {% for work in category.succset %}
-    {% for cover in work.cover %}
-      <a class="work block" href='/work/{{category.slug}}/{{work.slug}}'>
-        <img src='{{ cover.href }}?h=300' alt='' />
-      </a>
-    {% endfor %}
+    <div class='project'>
+      <div class='column1'>
+      {% for cover in work.cover %}
+        <a class="work block" href='/work/{{category.slug}}/{{work.slug}}'>
+          <img src='{{ cover.href }}?w=600' alt='' />
+        </a>
+      {% endfor %}
+      </div>
+      <div class='column2'>
+        {{ work.description }}
+      </div>
+    </div>
   {% endfor %}
 
   </div>
@@ -66,9 +57,6 @@
 
 jQuery(document).ready(function() {
 
-  $('#bio_toggle').click(function(){
-    $('#bio').fadeToggle();
-  })
 
 });
 </script>
