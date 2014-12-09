@@ -35,10 +35,10 @@
           <a id="bio_toggle">Biography</a>
         {% endif %}
         {% if field.key == "resume" %}
-          <a>Resume</a>
+          <a href='{{ field.value }}'>Resume</a>
         {% endif %}
         {% if field.key == "website" %}
-          <a>Website</a>
+          <a href='{{ field.value }}'>Website</a>
         {% endif %}
       {% endfor %}
     </div>
