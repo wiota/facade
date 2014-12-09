@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Playground</title>
+  <title>{{ category.title }}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -16,24 +16,19 @@
 
 </head>
 
-{# set variable = "Hello" #}
-{% set b2 = get_body(config) %}
-
-<body class='home'>
-
-
+<body class='category {{ category.layout }}'>
 
   <div id='column1'>
 
-    {% for item in body.succset %}
-      <div class='item'><a href='/category/{{ item.slug }}'>
+    {% for item in category.succset %}
+      <div class='item'>
         {% if not item.cover %}
-          {{item.title}}
+          {{ item.title }}
         {% endif %}
         {% for cover in item.cover %}
           <img src='{{ cover.href }}?w=600'>
         {% endfor %}
-      </a></li>
+      </div>
     {% endfor %}
 
   </div>

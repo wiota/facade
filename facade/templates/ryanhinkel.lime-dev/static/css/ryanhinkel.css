@@ -1,0 +1,38 @@
+.category.house {
+  font-family: "Courier" monospace;
+  font-size: 300%;
+  background-color: #dd6300;
+}
+
+.category.house h2 {
+  margin: 10% 10% 5%;
+}
+
+.category.house .item{
+  margin: 4% 10%;
+}
+
+.category.house a {
+  color: #0056f4;
+}
+
+/* ------------------------------- */
+
+.category.child {
+  font-family: "Helvetica" "Arial" "san-serif";
+  font-size: 350%;
+  background-color: #f4eb00;
+  text-align: right;
+}
+
+
+.category.child h2 {
+  font-weight: normal;
+  margin: 10% 10% 5%;
+}
+
+.category.child .item {
+  margin: 2% 10%;
+}
+
+.category.child a {}
