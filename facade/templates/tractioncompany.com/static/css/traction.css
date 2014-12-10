@@ -60,7 +60,7 @@ body.home .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
 
 body.home .happenings_display {width: 100%;overflow: auto;}
 body.home .happenings_display .display_tag {width: 100%;}
-body.home .happenings_display .display_tag img {width: 100%;margin: 0 3% 3% 0}
+body.home .happenings_display .display_tag img {width: 100%;margin: 0 0 3% 0}
 
 body.home #about_text {font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:none; padding: 0;}
 
@@ -111,11 +111,11 @@ body.happenings .happening p {
 
 
 /* Work Page */
-#category_tag {margin: 0px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
-#category_tag p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
-#category_tag h2 {margin: 18px 0;font-weight: normal;}
-#category_tag h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
-#category_tag a {text-decoration:underline;padding: 0 5px 0 0;}
+#category_attributes {margin: 0px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_attributes p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_attributes h2 {margin: 18px 0;font-weight: normal;}
+#category_attributes h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
+#category_attributes a {text-decoration:underline;padding: 0 5px 0 0;}
 
 /* Index Block */
 .work_index {overflow:hidden;min-width:500px;}
@@ -129,7 +129,7 @@ body.happenings .happening p {
 .work_index .work.block:hover {}
 
 
-.work_show {padding:0 10px 0 30px;margin:0;overflow:hidden;}
+.work_show {padding: 0 4%;margin:0;overflow:hidden;}
 .work_show .block {position:relative;margin:10px 20px 0 0;float:left;}
 .work_show .info {position:absolute; top: 600px; background-color: rgb(255,255,255); width: 410px; }
 .work_show .title {}
