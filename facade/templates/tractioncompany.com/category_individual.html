@@ -44,7 +44,7 @@
     </div>
     {% for field in category.customfields %}
       {% if field.key == "bio" %}
-        <div id='bio' style='display:none;'>{{ field.value }}</div>
+        <div id='bio' style='display:none;'>{{ field.value|nl2br }}</div>
       {% endif %}
     {% endfor %}
   </div>
