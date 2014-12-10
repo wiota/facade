@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from toolbox import tools, template_tools
 from toolbox.emailer import FacadeExceptionEmail
+from toolbox.template_filters import format_nb2br
 import traceback
 
 def create_app(hostname):
@@ -26,6 +27,10 @@ def create_app(hostname):
 
     # Tell jinja to trim blocks
     app.jinja_env.trim_blocks = True
+
+    # Jinja formatting functions
+    app.jinja_env.filters["nb2br"] = format_nb2br
+
     # Expose a function to the template
     app.jinja_env.globals.update(get_body=template_tools.get_body)
     app.jinja_env.globals.update(get_category=template_tools.get_category)
