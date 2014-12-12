@@ -61,7 +61,9 @@
           {% if(item.succset) %}
             <div class='display_tag {{ item.slug }}'>
               {% for happening in item.succset %}
-                <a href='/happening/{{ happening.slug}}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
+                {% if happening.succset[0] %}
+                  <a href='/happening/{{ happening.slug }}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
+                {% endif %}
               {% endfor %}
             </div>
           {% endif %}
