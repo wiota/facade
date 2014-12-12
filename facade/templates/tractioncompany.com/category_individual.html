@@ -42,24 +42,30 @@
         {% endif %}
       {% endfor %}
     </div>
-    {% for field in category.customfields %}
-      {% if field.key == "bio" %}
-        <div id='bio' style='display:none;'>{{ field.value|nl2br }}</div>
-      {% endif %}
-    {% endfor %}
+
   </div>
 
-  <div class='work_index horizontal_column'>
+  <div class='single_column'>
+  {% for field in category.customfields %}
+    {% if field.key == "bio" %}
+      <div id='bio' style='display:none;'>{{ field.value|nl2br|safe }}</div>
+    {% endif %}
+  {% endfor %}
+  </div>
+
+  <div class='work_index single_column'>
 
   {% for work in category.succset %}
     {% for cover in work.cover %}
       <a class="work block" href='/work/{{category.slug}}/{{work.slug}}'>
-        <img src='{{ cover.href }}?h=300' alt='' />
+        <img src='{{ cover.href }}?h=350' alt='' />
       </a>
     {% endfor %}
   {% endfor %}
 
   </div>
+
+
 </div>
 
 
@@ -68,9 +74,154 @@
 
 jQuery(document).ready(function() {
 
+  var imgScat = (function(){
+
+    var cacheParagraphs = function(p){
+      var cache = {};
+      cache.p = [];
+      var start = 0;
+      var end = 0;
+      $(p).each(function(key, el){
+        var $el = $(el);
+        var text = $el.text();
+        end += text.length;
+        cache.p.push({
+          $el: $el,
+          start: start,
+          end: end
+        });
+        start = end;
+        // need to sort?
+      })
+      cache.totalLength = end;
+      return cache;
+    }
+
+    var wordIndexToParagraphObj = function(wordIndex, cache){
+      var paragraphIndex = 0;
+      var paragraph = cache.p[paragraphIndex];
+      while(paragraph && wordIndex > paragraph.end){
+        var paragraph = cache.p[++paragraphIndex];
+      }
+      return paragraph;
+    }
+
+    var findInterval = function(workCount, imgCount){
+      return Math.floor(workCount/imgCount);
+    }
+
+    var insertImageInParagraph = function(img, p, cursor){
+      var before, after;
+      before = p.$el.text().slice(0,cursor);
+      after = p.$el.text().slice(cursor);
+      p.$el.empty().append(before).append(img).append(after);
+    }
+
+    var distribute = function(container, set, interval, align){
+
+      $el = $(container);
+      $set = $(set);
+
+      var length = $el.html().length;
+      var setIndex = 0;
+      var slices = [];
+      var inserts = [];
+      var remaining = [];
+
+      // Slice up images that fit in text
+      while($set[setIndex] && (interval*setIndex)<=length){
+        console.log($set[setIndex]);
+        var start = interval*setIndex;
+        var end = interval*(setIndex+1);
+        if(end > length){end = length}
+        inserts.push($set[setIndex]);
+        slices.push($el.html().slice(start,end));
+        setIndex++;
+      }
+
+      // Stack images that do not
+      while($set[setIndex]){
+        remaining.push($set[setIndex]);
+        setIndex++;
+      }
+
+      // alignment
+      if(align=='alternate' || align=='alternateL'){
+        align = 'left';
+        alternate = true;
+      } else if (align=='alternateR'){
+        align = 'right';
+        alternate = true;
+      } else {
+        alternate = false;
+      }
+
+      $el.empty();
+      $.each(inserts, function(key, insert){
+        console.log(insert);
+        var clone = $(insert).clone();
+        var text = slices[key];
+        $el.append(clone).append(text);
+        // align alternation
+        if(alternate && align=='left'){
+          align = 'right';
+        } else if(alternate && align=='right'){
+          align = 'left';
+        }
+      })
+
+      // $.each(imgSet, function(key, img){
+      //   var element, wordIndex;
+
+      //   wordIndex = key*interval;
+      //   p = wordIndexToParagraphObj(wordIndex, cache);
+      //   cursor = wordIndex - p.start;
+
+      //   imgClone = $(img).clone().addClass(align);
+      //   if(key == 0){
+      //     imgClone.addClass('top');
+      //   }
+      //   insertImageInParagraph(imgClone, p, cursor);
+      //   if(alternate && align=='left'){
+      //     align = 'right';
+      //   } else if(alternate && align=='right'){
+      //     align = 'left';
+      //   }
+      // })
+    }
+
+    var init = function(inst){
+      // distribute(cache, inst.$img, interval, inst.align);
+    }
+
+    var imgScat = function(container, set, distribution, align){
+      var $el = $(container);
+      if(!$el.length){
+        return false;
+      }
+
+      this.originalContent = $el.html();
+      distribute(container, set, distribution, align)
+    }
+
+    return function(container, set, distribution, align){
+      return new imgScat(container, set, distribution, align);
+    }
+  })();
+
+  //var bio = imgScat('#bio', '.work_index a.work', 500, 'alternateL');
+
+
   $('#bio_toggle').click(function(){
-    $('#bio').fadeToggle();
+    if($('#bio').is(":visible")){
+      $('#bio').hide();
+      //$('.work_index').removeClass('left_column').addClass('single_column');
+    } else {
+      $('#bio').show();
+      //$('.work_index').removeClass('single_column').addClass('left_column');
+    }
   })
+
 
 });
 </script>

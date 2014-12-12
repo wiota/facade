@@ -15,6 +15,7 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 
 .left_column {width: 42%; padding: 0 4%; position: relative;}
 .single_column {width: 92%; padding: 0 4%; position: relative;}
+.right_column {width: 46%; padding: 0 4% 0 0; position: relative; float:right;}
 .horizontal_column {width: 92%; padding: 0 4%; position: relative;}
 
 /* Header */
@@ -111,17 +112,24 @@ body.happenings .happening p {
 
 
 /* Work Page */
-#category_attributes {margin: 0px;font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
-#category_attributes p {font: normal 12px/18px 'Helvetica Neue', Helvetica, san-serif;width: 500px;}
+#category_attributes {margin: 0px;font: normal 12px/18px 'Helvetica Neue', 'Helvetica', 'san-serif';}
+#category_attributes p {font: normal 16px/24px 'Helvetica Neue', 'Helvetica', 'san-serif';}
 #category_attributes h2 {margin: 18px 0;font-weight: normal;}
-#category_attributes h2 a {font-size: 10px;font-style:italic;padding: 0 20px;}
-#category_attributes a {text-decoration:underline;padding: 0 5px 0 0;}
+#category_attributes h2 a {font-size: 12px;font-style:italic;padding: 0 20px;}
+#category_attributes a {text-decoration:underline;padding: 0 5px 0 0;cursor:pointer;}
+
+#bio a.left {float: left; margin: 10px 10px 8px 0;}
+#bio a.right {float: right; margin: 10px 0 8px 10px;}
+#bio a.top {margin-top: 0;}
+
+#bio p {margin: 10px 0; fon}
 
 /* Index Block */
-.work_index {overflow:hidden;min-width:500px;}
+.work_index {overflow:hidden;margin: 10px 0;}
 
 /* Work Block */
-.work_index .work.block {margin:10px 20px 0 0;float:left;}
+.work_index .work.block {margin:0 10px 10px 0;float:left;}
+.work_index .work.block img {display: block;}
 .work_index .work.block:hover {outline: none;}
 .work_index .work.block h2 {font: normal 16px/36px 'Helvetica Neue', Helvetica, serif; color: #111;}
 .work_index .work.block .info {font: normal 14px/18px 'Helvetica Neue', Helvetica, serif;color: #333;}
