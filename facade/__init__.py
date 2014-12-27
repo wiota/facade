@@ -16,7 +16,12 @@ def create_app(hostname):
     host = tools.get_host_by_hostname(hostname)
 
     if host is None:
-        # TODO: return an app that gives a better response
+
+        if app.debug:
+
+            @app.route('/info')
+            def info():
+                return "Hostname: %s" % hostname
 
         # This host doesn't exist. Add a ping endpoint for monitoring.
         @app.route('/ping')
