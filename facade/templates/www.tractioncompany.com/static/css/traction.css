@@ -26,7 +26,7 @@ h2 {font: 15px/21px 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 8
 #header h2 {position:absolute;top:2px;  left:4%; right: 0; margin-left: 300px;}
 
 /* Nav */
-#nav {position:fixed; top: 80px; bottom: 0; left: 50%;padding: 0 0 0 4%; width: 48%;}
+#nav {position:absolute; top: 80px; bottom: 0; left: 50%;padding: 0 0 0 4%; width: 48%;}
 #nav h2 {margin: 0px 0 10px;}
 #nav h2 a {text-decoration: none;}
 #nav h2:hover a {background-color: #f3ff8e; text-decoration: underline;}
