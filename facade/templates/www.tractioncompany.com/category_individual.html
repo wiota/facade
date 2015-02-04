@@ -31,13 +31,13 @@
   <div id='category_attributes' class='horizontal_column'>
     <div>
       {% for field in category.customfields %}
-        {% if field.key == "bio" %}
+        {% if field.key == "bio" and field.value %}
           <a id="bio_toggle">Biography</a>
         {% endif %}
-        {% if field.key == "resume" %}
+        {% if field.key == "resume" and field.value %}
           <a href='{{ field.value }}' target='_blank'>Resume</a>
         {% endif %}
-        {% if field.key == "website" %}
+        {% if field.key == "website" and field.value %}
           <a href='{{ field.value }}' target='_blank'>Website</a>
         {% endif %}
       {% endfor %}
