@@ -60,7 +60,7 @@ def create_app(hostname):
         @app.errorhandler(Exception)
         def catch_all(exception):
             tb = traceback.format_exc()
-            FacadeExceptionEmail(exception, tb).send()
+            FacadeExceptionEmail(exception, tb, host).send()
 
     app.logger.debug("App created for %s" % (host))
 
