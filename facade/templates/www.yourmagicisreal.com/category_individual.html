@@ -37,7 +37,7 @@
 
 
 </head>
-<body class='projects'>
+<body class='simulacra'>
 
 
 
@@ -45,8 +45,8 @@
 
     <div id='nav'>
       <a>Simulacra</a>
-      <a href='projects.html'>Projects</a>
-      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+      <a href='/category/projects'>Projects</a>
+      <a href='/'>AA&nbsp;XXX</a>
     </div>
 
 
@@ -55,36 +55,36 @@
     <a class='display_close'>close<span>X</span></a>
 
     <div class='column2 subnav'>
-    {% for project in category.succset %}
-      {% if project.succset|length > 1 %}
+    {% for work in category.succset %}
+      {% if work.succset|length > 1 %}
         {% set class = ['left', 'center', 'right'] | random() | string() %}
-        <a class='{{class}} show' rel='link_{{project.id}}'>{{project.title}}</a>
+        <a class='{{class}} show' rel='link_{{work.id}}'>{{work.title}}</a>
       {% endif %}
     {% endfor %}
     </div>
 
     <div class='column1'>
 
-      {% for project in category.succset %}
-        {% if project.succset|length > 1 %}
+      {% for work in category.succset %}
+        {% if work.succset|length > 1 %}
 
-        <div id='display_{{project.id}}' class='project_block high openable'>
-          <a class='show' rel='link_{{project.id}}'>
-            {% for cover in project.cover %}
+        <div id='display_{{work.id}}' class='work high openable'>
+          <a class='show' rel='link_{{work.id}}'>
+            {% for cover in work.cover %}
               <img src='{{cover.href}}' alt='' />
             {% endfor %}
           </a>
           <div class='additional'>
-            {% for media in project.succset %}
+            {% for media in work.succset %}
             <img src='{{media.href}}' alt='' />
             {% endfor %}
 
-            {% if project.title %}
-              <h2>{{project.title}}</h2>
+            {% if work.title %}
+              <h2>{{work.title}}</h2>
             {% endif %}
 
-            {% if project.description %}
-              <pre class='description'>{{project.description}}</pre>
+            {% if work.description %}
+              <div class='description'>{{work.description|nl2br|safe}}</div>
             {% endif %}
 
 
@@ -92,11 +92,11 @@
         </div>
 
 
-        {% elif project.succset %}
+        {% elif work.succset %}
 
-        <div class='project_block low'>
+        <div class='work low'>
           <a class=''>
-            <img src='{{project.succset[0].href}}' alt='' />
+            <img src='{{work.succset[0].href}}' alt='' />
           </a>
         </div>
 

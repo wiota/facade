@@ -14,6 +14,11 @@ h1 {
   z-index: 20;
 }
 
+.description {
+  font-family: 'Inconsolata' Arial, Helvetica, 'san-serif';
+  font-weight: 400;
+}
+
 
 #nav {
   position:fixed;
@@ -48,7 +53,7 @@ h1 {
   padding-top: 9%;
   height:24%;
   background-color: #f5ea3d;
-  color: #00aae6;
+  color: #ffffff;
   text-decoration: none;
   cursor: pointer;
   }
@@ -72,20 +77,72 @@ h1 {
   -o-transform: rotate(-45deg);
 }
 
+/* Projects ---------------------------------------------------------- */
 
-/* PROJECTS --------------------------------------------------------- */
-
+.projects #nav {
+  top: auto;
+  bottom: 2%;
+}
 
 .projects #nav a {
-  background-color: #ff0000;
+  background-color: #00aae6;
   color: #fff;
 }
 .projects #nav a:hover {
   background-color:#fff;
+  color: #00aae6;
+}
+
+.projects .title {
+  display:none;
+  z-index: 19;
+  position:absolute;
+  top: 200%;
+  left: 0px;
+  right: 0;
+  background-color: rgba(160,244,244, .8);
+  padding: 40% 0 40%;
+  width: 80%;
+  margin: -40% 10% 0;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: all .4s ease-out;
+  -moz-transition: all .4s ease-out;
+  -ms-transition: all .4s ease-out;
+  -o-transition: all .4s ease-out;
+  transition: all .4s ease-out;
+
+}
+
+.projects .column1 {position: relative;}
+
+.projects img {max-width: 60%; float:left; margin: 2px 2px 2px -30%; position:relative;}
+
+.projects .gone {display:none;}
+
+.projects .behavoir .document {font-size: 130%; position:relative;line-height: 1.5}
+
+.projects .phil_box, .hide_box {border-radius: 50%; height: 40px; width: 40px; background: #f5ea3d;}
+.projects .phil_box b.label_above {position:relative;top: -20px;color: #000; font-size: 12px;}
+
+.projects .dragger {position:absolute; top:-20px; left: -40px;}
+.projects .sizer {position:absolute; top:-20px; right: 40px;}
+.projects .hider {position:absolute; top:0; left: 0;}
+
+
+/* Simulacra --------------------------------------------------------- */
+
+
+.simulacra #nav a {
+  background-color: #ff0000;
+  color: #fff;
+}
+.simulacra #nav a:hover {
+  background-color:#fff;
   color: #ff0000;
 }
 
-.projects .title_circle {
+.simulacra .title_circle {
   z-index: 19;
   position:absolute;
   top: 200%;
@@ -107,7 +164,7 @@ h1 {
 
 
 
-.projects .title_circle h1 {
+.simulacra .title_circle h1 {
   position: absolute;
   top: 50%;
   width: 100%;
@@ -117,7 +174,7 @@ h1 {
   margin: -20px 0 0 4px;
 }
 
-.projects h2 {
+.simulacra h2 {
   color:#ff0000;
   font-size: 30px;
   text-align: left;
@@ -131,7 +188,7 @@ h1 {
   font-weight: 200;
   }
 
-.projects .subnav {
+.simulacra .subnav {
   pointer-events:none;
   position:fixed;
   top:  0;
@@ -141,7 +198,7 @@ h1 {
   z-index: 11;
 }
 
-.projects .subnav a{
+.simulacra .subnav a{
   pointer-events:auto;
   font-family: 'Sequi';
   font-weight: 200;
@@ -152,16 +209,16 @@ h1 {
   text-align: center;
   cursor: pointer;
 }
-  .projects .subnav a:hover {
+  .simulacra .subnav a:hover {
     color: #5bce52;
   }
 
 
-.projects .subnav a.left {text-align: left;}
-.projects .subnav a.center {text-align: center;}
-.projects .subnav a.right {text-align: right;}
+.simulacra .subnav a.left {text-align: left;}
+.simulacra .subnav a.center {text-align: center;}
+.simulacra .subnav a.right {text-align: right;}
 
-.projects .display_close {
+.simulacra .display_close {
   cursor: pointer;
   display:none;
   position:fixed;
@@ -173,57 +230,57 @@ h1 {
   font-weight: 600;
   color:#f4827e;
 }
-  .projects .display_close:hover {
+  .simulacra .display_close:hover {
 
     color: #5bce52;
   }
-.projects .display_close span {
+.simulacra .display_close span {
   font-size: 200px;
 }
 
 
 
-.projects .page {margin: 30% 0 30% 0%;overflow: hidden;}
-.projects .column1 {z-index: 5;}
+.simulacra .page {margin: 30% 0 30% 0%;overflow: hidden;}
+.simulacra .column1 {z-index: 5;}
 
-.project_block {margin:10% 2%;}
+.simulacra .work {margin:10% 2%;}
 
-.project_block a {display:block;}
-.project_block img {width: 100%;display:block;}
+.simulacra .work a {display:block;}
+.simulacra .work img {width: 100%;display:block;}
 
-.project_block .show {
+.simulacra .work .show {
   cursor: pointer;
 }
 
-.project_block .additional {
+.simulacra .work .additional {
   display:none;
   overflow: scroll;
 }
-.project_block .additional img {
+.simulacra .work .additional img {
   float: right;
   width: 60%;
   margin: 2% 0 0 2%;
 }
 
-.project_block .addition .description {
+.simulacra .work .addition .description {
 }
 
 
-.projects .column1.single .project_block {opacity: 0;}
-.projects .column1.single .project_block.open {opacity: 1;}
+.simulacra .column1.single .work {opacity: 0;}
+.simulacra .column1.single .work.open {opacity: 1;}
 
-.projects .column1.single .project_block.open .show {display:none;}
-.projects .column1.single .project_block.open .additional {display:block;}
-.projects .column1.single .project_block.open.high {}
+.simulacra .column1.single .work.open .show {display:none;}
+.simulacra .column1.single .work.open .additional {display:block;}
+.simulacra .column1.single .work.open.high {}
 
 
 @media (min-width: 480px) {
-  .projects .project_block {max-width: 800px;float:right;}
-  .projects .project_block.high {width:47%; margin: 8% 2% 0 0;}
-  .projects .project_block.low {display:block;width:22.5%; margin: 8% 2% 0 0;}
+  .simulacra .work {max-width: 800px;float:right;}
+  .simulacra .work.high {width:47%; margin: 8% 2% 0 0;}
+  .simulacra .work.low {display:block;width:22.5%; margin: 8% 2% 0 0;}
 
 
-  .projects .title_circle {
+  .simulacra .title_circle {
     top: 50%;
     padding: 25% 0 25%;
     width: 50%;

@@ -54,7 +54,7 @@
       $('.display_close').fadeOut();
       $('.subnav').fadeIn();
       $('.column1').removeClass('single');
-      $('.project_block').removeClass('open');
+      $('.work').removeClass('open');
 
     }
 

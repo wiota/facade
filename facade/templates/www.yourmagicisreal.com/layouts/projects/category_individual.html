@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ category.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/sitewide.css">
+
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+  <script type="text/javascript" src="/static/js/title_slide.js"></script>
+
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+    var top = 5;
+    var left = 40;
+    var right = 20;
+    var column = 40;
+
+    function inspect(obj){
+      s = '';
+      for(prop in obj){
+        s += prop + "\n";
+      }
+      alert(s);
+    }
+
+    function draw_column(){
+      $('.projects .column1').css({
+        'width':column+'%',
+        'margin': top + '%' + right + '%' + top + '%' + left + '%'
+      });
+    }
+
+    function move_column(l){
+      left = l;
+      right = 100 - (left + column);
+      draw_column();
+    }
+
+    function size_column(r){
+      column = (r - left)
+      right = 100 - (left + column);
+      draw_column();
+    }
+
+    function add_dragger(){
+      var dragger = $('<a class="dragger phil_box"></a>').appendTo($('.projects .column1'))
+      dragger.mousedown(function(e){
+        var w = $(document).width();
+        var o = -e.offsetX;
+
+        $(document).mousemove(function(e){
+          l = e.pageX + o;
+          move_column((l/w)*100);
+          dragger.html('<b class="label_above">'+Math.ceil((l/w)*100)+'%</b>')
+        })
+
+        $(document).mouseup(function(e){
+          dragger.html('');
+          $(document).unbind('mousemove');
+          $(document).unbind('mouseup');
+        })
+        return false;
+      })
+    }
+
+    function add_sizer(){
+      var sizer = $('<a class="sizer phil_box"></a>').appendTo($('.projects .column1'))
+      sizer.mousedown(function(e){
+
+        var w = $(document).width();
+        var o = -e.offsetX + sizer.width();
+
+        $(document).mousemove(function(e){
+          r = e.pageX + o;
+          size_column((r/w)*100);
+          sizer.html('<b class="label_above">'+Math.ceil((r/w)*100)+'%</b>')
+        })
+
+        $(document).mouseup(function(e){
+          sizer.html('');
+          $(document).unbind('mousemove');
+          $(document).unbind('mouseup');
+        })
+
+        return false;
+      })
+    }
+
+    function add_hider(){
+      var sizer = $('<a class="hider hide_box"></a>').appendTo($('body'))
+      sizer.click(function(e){
+        $('.phil_box').fadeToggle();
+        $(this).show();
+        return false;
+      })
+    }
+
+    add_dragger();
+    add_sizer();
+    //add_hider();
+    draw_column();
+    //$('.phil_box').fadeToggle();
+
+  })
+  </script>
+
+  <style type="text/css">
+  </style>
+
+
+
+</head>
+<body class='projects'>
+
+
+
+  <div class='page'>
+
+    <div id='nav'>
+      <a href='/category/simulacra'>Simulacra</a>
+      <a>Projects</a>
+      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+    </div>
+
+
+    <div class='title'><h1>{{ category.title }}</h1></div>
+
+
+    <div class='column2 subnav'>
+    {% for project in category %}
+      {% if project.succset|length > 1 %}
+        {% set class = ['left', 'right'] | random() | string() %}
+        <a class='{{class}} show' rel='link_{{project.id}}'>{{project.title}}</a>
+      {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class='column1'>
+
+      {% for project in category.succset %}
+        {% if project.description %}
+
+        <div id='display_{{project.id}}' class='project_block high openable'>
+          <div class='project'>
+            {% for media in project.succset %}
+            <img src='{{media.href}}' alt='' />
+            {% endfor %}
+
+            {% if project.title %}
+              <h2>{{project.title}}</h2>
+            {% endif %}
+
+            {% if project.description %}
+              <div class='description'>{{project.description|nl2br|safe}}</div>
+            {% endif %}
+
+
+          </div>
+        </div>
+
+
+        {% elif project.succset %}
+
+        <div class='project_block low'>
+          <a class=''>
+            <img src='{{project.succset[0].href}}' alt='' />
+          </a>
+        </div>
+
+        {% endif %}
+
+
+      {% endfor %}
+
+
+
+    </div>
+  </div>
+
+</body>
+</html>
