@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "primary/base.html" %}
 {% block content %}
     <h3 class="title">{{ work.title }}</h3>
     <p class="description">
@@ -9,8 +9,8 @@
     {% endif %}
     </p>
     <div class="row">
-        {% if media %}
-            {% for medium in media %}
+        {% if work.succset %}
+            {% for medium in work.succset %}
             <div class="thumbnail">
                 <img src="{{ medium.href }}?w=800"/>
             </div>
