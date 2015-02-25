@@ -7,7 +7,7 @@ import traceback
 
 def create_app(hostname):
     static_folder = "./templates/%s/static/" % (hostname)
-    template_folder = "./templates/%s/" % (hostname)
+    template_folder = "./templates/%s/layouts/" % (hostname)
     app = Flask(__name__, static_url_path="/static", static_folder=static_folder, template_folder=template_folder)
     app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
