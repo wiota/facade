@@ -30,27 +30,25 @@
 
   <div id='category_attributes' class='horizontal_column'>
     <div>
-      {% for field in category.customfields %}
-        {% if field.key == "bio" and field.value %}
+
+      {% if category.bio %}
           <a id="bio_toggle">Biography</a>
-        {% endif %}
-        {% if field.key == "resume" and field.value %}
-          <a href='{{ field.value }}' target='_blank'>Resume</a>
-        {% endif %}
-        {% if field.key == "website" and field.value %}
-          <a href='{{ field.value }}' target='_blank'>Website</a>
-        {% endif %}
-      {% endfor %}
+      {% endif %}
+      {% if category.resume %}
+        <a href='{{ category.resume }}' target='_blank'>Resume</a>
+      {% endif %}
+      {% if category.website %}
+        <a href='{{ category.website }}' target='_blank'>Website</a>
+      {% endif %}
+
     </div>
 
   </div>
 
   <div class='single_column'>
-  {% for field in category.customfields %}
-    {% if field.key == "bio" %}
-      <div id='bio' style='display:none;'>{{ field.value|nl2br|safe }}</div>
+    {% if category.bio %}
+      <div id='bio' style='display:none;'>{{ category.bio|nl2br|safe }}</div>
     {% endif %}
-  {% endfor %}
   </div>
 
   <div class='work_index single_column'>
