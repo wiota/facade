@@ -71,10 +71,8 @@ def vertex_page(vertex_type, slug):
     # if not vertex or vertex.vertex_type != vertex_type
     #   return abort(404)
     #
-    if vertex.layout:
-        return render_template(vertex.layout+'/'+vertex_type+'.html', slug=slug, vertex=vertex)
-    else:
-        return render_template(vertex_type+'.html', slug=slug, vertex=vertex)
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/'+vertex_type+'.html', vertex=vertex)
 '''
 
 
@@ -118,10 +116,9 @@ def vertex_predecessor_page(vertex_type, predecessor, slug):
     # layout fallback
     # layout = vertex.layout or 'default'
     #
-    if vertex.layout:
-        return render_template(layout+'/'+vertex_type+'.html', slug=slug, vertex=vertex)
-    else:
-        return render_template(vertex_type+'.html', slug=slug, vertex=vertex)
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/'+vertex_type+'.html', vertex=vertex, predecessor=predecessor)
+
 '''
 
 
