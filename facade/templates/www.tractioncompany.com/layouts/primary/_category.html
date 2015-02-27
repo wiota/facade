@@ -1,0 +1,5 @@
+{% for cover in item.cover %}
+  <a class="category block" href='/work/{{category.slug}}/{{item.slug}}'>
+    <img src='{{ cover.href }}?h=350' alt='' />
+  </a>
+{% endfor %}

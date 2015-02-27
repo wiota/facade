@@ -53,12 +53,8 @@
 
   <div class='work_index single_column'>
 
-  {% for work in category.succset %}
-    {% for cover in work.cover %}
-      <a class="work block" href='/work/{{category.slug}}/{{work.slug}}'>
-        <img src='{{ cover.href }}?h=350' alt='' />
-      </a>
-    {% endfor %}
+  {% for item in category.succset %}
+    {% include "primary/_"+item.vertex_type+".html" %}
   {% endfor %}
 
   </div>
