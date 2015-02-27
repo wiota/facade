@@ -30,15 +30,28 @@ def image(image_name):
 
 @mod.route('/id/<id>')
 def by_id(id):
-    vertex = Vertex.by_id(id, host=app.config['HOST'])
+    try:
+        vertex = Vertex.by_id(id, host=app.config['HOST'])
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
     layout = (vertex.layout or "primary")
-    if vertex._cls == 'Vertex.Work':
-        return render_template(layout+'work.html', work=vertex, media=vertex.succset)
-    elif vertex._cls == 'Vertex.Category':
-        return render_template(layout+'category.html', category=vertex, media=vertex.succset)
-    return make_404(request.path)
+    vtype = (vertex.vertex_type or "vertex")
+    return render_template(layout+'/'+vertex.vertex_type+'.html', vertex=vertex)
 
 
+@mod.route('/id/<predecessor_slug>/<id>')
+def by_predecessor_id(predecessor_slug, id):
+    # should we validate the predecessor? NO
+    try:
+        vertex = Vertex.by_id(id, host=app.config['HOST'])
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    predecessor = get_vertex_from_slug(app.config['HOST'], predecessor_slug)
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/'+vertex.vertex_type+'.html', vertex=vertex, predecessor=predecessor)
 
 @mod.route('/work/<slug>')
 def work_individual(slug):
@@ -98,7 +111,7 @@ def work_individual_old(categoryslug, slug):
     try:
         predecessor = get_vertex_from_slug(app.config['HOST'], categoryslug)
     except Vertex.DoesNotExist:
-        return abort(404)
+        return make_404(request.path)
 
     layout = (vertex.layout or "primary")
     return render_template(layout+'/work.html', work=vertex, category=predecessor)
@@ -108,6 +121,9 @@ def work_individual_old(categoryslug, slug):
 def vertex_predecessor_page(vertex_type, predecessor, slug):
     predecessor = get_vertex_from_slug(app.config['HOST'], predecessor)
     vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    #
+    # should we validate the predecessor? I don't want to,
+    # but graph-path url will ensure it anyway.
     #
     # 404
     # if not vertex or predecessor or vertex.vertex_type != vertex_type
