@@ -5,9 +5,9 @@ body {background: #fefefe; margin:0;padding: 0;}
 a, a img, img {border-style:none; color: #000;}
 
 /* Typography */
-body {font: 14px/22px 'Helvetica Neue', Helvetica, Arial, san-serif; }
+body {font: 14px/23px 'Helvetica Neue', Helvetica, Arial, san-serif; }
 @media only screen and (max-width: 600px) {
-  body {font: 16px/25px 'Helvetica Neue', Helvetica, Arial, san-serif;}
+  body {font: 16px/27px 'Helvetica Neue', Helvetica, Arial, san-serif;}
 
 }
 p {font-size: 100%; font-weight: 200;}
@@ -91,7 +91,8 @@ body.home .happenings_display .display_tag iframe {position:absolute; top:0; lef
 /* Happening Page */
 body.happenings .happening {}
 body.happenings .happening h2 {
-  font: bold 18px/26px 'Helvetica Neue', Helvetica, arial san-serif;
+  font: bold 150%/150% 'Helvetica Neue', Helvetica, arial san-serif;
+  margin: 8% 0 3%;
 }
 body.happenings .happening img {width:100%;margin: 0 3% 3% 0}
 body.happenings .happening p {

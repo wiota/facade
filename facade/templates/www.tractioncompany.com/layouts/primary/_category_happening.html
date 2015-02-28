@@ -1,0 +1,17 @@
+{% if item.succset %}
+  {% if item.cover %}
+    {% for cover in item.cover %}
+      <a class='block happening' href='/happening/{{ item.slug }}'>
+        <img src='{{ cover.href }}?h=350' alt='' />
+      </a>
+    {% endfor %}
+  {% elif item.succset[0] %}
+    <a class='block happening' href='/happening/{{ item.slug }}'>
+      <img src='{{ item.succset[0].href }}?h=350' alt='' />
+    </a>
+  {% else %}
+    <a class="happening block link" href='/happening/{{ item.slug }}'>
+      {{ item.title }}
+    </a>
+  {% endif %}
+{% endif %}

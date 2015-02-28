@@ -32,9 +32,9 @@
 
     <div class='happenings_menu'>
 
-      {% for item in happenings.succset %}
-        {% if(item.succset) %}
-          <a class='happening_tag {{ item.slug }}'>{{ item.title }}</a>
+      {% for vertex in happenings.succset %}
+        {% if vertex.succset %}
+          <a class='happening_tag {{ vertex.slug }}'>{{ vertex.title }}</a>
         {% endif %}
       {% endfor %}
 
@@ -42,17 +42,17 @@
 
     <div class='happenings_display'>
 
-        {% for item in happenings.succset %}
-          {% if(item.succset) %}
-            <div class='display_tag {{ item.slug }}'>
-              {% for happening in item.succset %}
-                {% if happening.succset[0] %}
-                  <a href='/happening/{{ happening.slug }}'><img src='{{ happening.succset[0].href }}' alt='' /></a>
-                {% endif %}
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endfor %}
+      {% for category in happenings.succset %}
+        {% if category.succset and category.vertex_type == "category" %}
+          <div class='display_tag {{ category.slug }}'>
+            {% for item in category.succset %}
+              {% if item.vertex_type != "work" %}
+                {% include "primary/_"+item.vertex_type+".html" %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
 
     </div>
   </div>
@@ -62,8 +62,8 @@
     {% set first = body.succset[0] %}
     <h2><a>{{first.title}}</a></h2>
     <ul>
-    {% for item in first.succset %}
-      <li class='category'><a href='/category/{{ item.slug }}'>{{ item.title }}</a></li>
+    {% for vertex in first.succset %}
+      <li class='category'><a href='/category/{{ vertex.slug }}'>{{ vertex.title }}</a></li>
     {% endfor %}
     </ul>
 
