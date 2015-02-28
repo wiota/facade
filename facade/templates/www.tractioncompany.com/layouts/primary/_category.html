@@ -1,5 +1,13 @@
-{% for cover in item.cover %}
-  <a class="category block" href='/work/{{category.slug}}/{{item.slug}}'>
-    <img src='{{ cover.href }}?h=350' alt='' />
-  </a>
-{% endfor %}
+{% if item.succset %}
+  {% if item.cover %}
+    {% for cover in item.cover %}
+      <a class="category block" href='/work/{{category.slug}}/{{item.slug}}'>
+        <img src='{{ cover.href }}?h=350' alt='' />
+      </a>
+    {% endfor %}
+  {% else %}
+    <a class="category block link" href='/work/{{category.slug}}/{{item.slug}}'>
+      {{ item.title }}
+    </a>
+  {% endif %}
+{% endif %}

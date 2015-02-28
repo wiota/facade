@@ -29,8 +29,6 @@
   </div>
 
   <div id='category_attributes' class='horizontal_column'>
-    <div>
-
       {% if category.bio %}
           <a id="bio_toggle">Biography</a>
       {% endif %}
@@ -40,9 +38,6 @@
       {% if category.website %}
         <a href='{{ category.website }}' target='_blank'>Website</a>
       {% endif %}
-
-    </div>
-
   </div>
 
   <div class='single_column'>
@@ -51,7 +46,7 @@
     {% endif %}
   </div>
 
-  <div class='work_index single_column'>
+  <div class='index single_column_left'>
 
   {% for item in category.succset %}
     {% include "primary/_"+item.vertex_type+".html" %}

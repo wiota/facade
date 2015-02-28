@@ -19,27 +19,12 @@
 <body class='home'>
 
 <div class='page'>
+
   <div id="header">
     <div id="nameplate_div">
       <h1>Philadelphia Traction Company</h1>
       <a id="nameplate" href="/"><img src='/static/img/tractioncompany.png' width='258' height='18' alt='Philadelphia Traction Company' /></a>
     </div>
-  </div>
-
-  <div id='nav' class=''>
-
-    {% set first = body.succset[0] %}
-    <h2><a>{{first.title}}</a></h2>
-    <ul>
-    {% for item in first.succset %}
-      <li class='category'><a href='/category/{{ item.slug }}'>{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-
-    {% for rest in body.succset[1:] %}
-    <h2><a href='/category/{{rest.slug}}'>{{rest.title}}</a></h2>
-    {% endfor %}
-
   </div>
 
   {% set happenings = get_happenings(config) %}
@@ -72,29 +57,49 @@
     </div>
   </div>
 
+  <div id='nav' class='right_column'>
+
+    {% set first = body.succset[0] %}
+    <h2><a>{{first.title}}</a></h2>
+    <ul>
+    {% for item in first.succset %}
+      <li class='category'><a href='/category/{{ item.slug }}'>{{ item.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    {% for rest in body.succset[1:] %}
+    <h2><a href='/category/{{rest.slug}}'>{{rest.title}}</a></h2>
+    {% endfor %}
+  </div>
+
   <div class='about left_column'>
 
-
     <div id='about_text'>
-      <h2>About the shop:</h2>
-      <p style='font-weight: bold'>Mission:</p>
-
-      <p><em>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
-
-      <p><em>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
-
-      <p><em>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
+      <h2>Shop Mission:</h2>
 
 
-      <p><b>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </p>
+      <p>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
 
-      <p> Join Traction Company on <a href ='https://www.facebook.com/TractionCompany'> <u>Facebook</u></a>
+      <p>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
 
-      <p>Contact Traction Company via <b> <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a> </b></p>
+      <p>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
 
+      <p><em>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </em></p>
     </div>
   </div>
+
+  <div class='footer single_column'>
+
+    <h2>Contact Traction Company via</h2>
+    <p>
+      <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a>
+      <a href='https://instagram.com/tractioncompany'>Instagram</a>
+      <a href ='https://www.facebook.com/TractionCompany'>Facebook</a>
+    </p>
+  </div>
+
 </div>
+
 
 <script type='text/javascript'>
 
