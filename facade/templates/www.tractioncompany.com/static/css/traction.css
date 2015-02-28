@@ -78,12 +78,15 @@ body.home .happenings {}
 
 body.home .happenings_menu {font-style:italic;}
 body.home .happenings_menu .showing {background-color: #f3ff8e;border-bottom: 1px dashed #e2003d;}
-body.home .happenings_menu a {display:inline-block;margin: 1em 1em 1em 0;}
+body.home .happenings_menu a {display:inline-block;cursor: pointer;margin: 1em 1em 1em 0;}
 
 body.home .happenings_display {width: 100%;overflow: auto;}
 body.home .happenings_display .display_tag {width: 100%;}
-body.home .happenings_display .display_tag img {width: 100%;margin: 0 0 3% 0}
-
+body.home .happenings_display .display_tag a,
+body.home .happenings_display .display_tag div {margin: 0 0 3% 0; display:block;}
+body.home .happenings_display .display_tag img {width: 100%;display:block;}
+body.home .happenings_display .display_tag .video {position:relative; padding-bottom: 56%; }
+body.home .happenings_display .display_tag iframe {position:absolute; top:0; left: 0; width: 100%; height: 100%;}
 
 /* Happening Page */
 body.happenings .happening {}
@@ -116,7 +119,7 @@ body.happenings .happening p {
 
 
 /* Work Page */
-#category_attributes {margin: 5% 0 0;font: normal 100%/100% 'Helvetica Neue', 'Helvetica', 'san-serif';}
+#category_attributes {margin: 2% 0 0;font: normal 100%/100% 'Helvetica Neue', 'Helvetica', 'san-serif';}
 #category_attributes p {font: normal 100%/100% 'Helvetica Neue', 'Helvetica', 'san-serif';}
 #category_attributes h2 {}
 #category_attributes h2 a {}
