@@ -20,6 +20,7 @@ body {
   color: #48a7d0;
   font-size: 125%;
   line-height: 150%;
+  display:block;
 }
 
 @media only screen and (max-width: 1400px) {
@@ -42,7 +43,7 @@ body {
 
 @media only screen and (max-width: 600px) {
   #column1 {
-    font-size: 110%;
+    font-size: 100%;
     line-height: 150%;
     width: 90%;
     margin: 5%;
