@@ -12,7 +12,13 @@ def create_app(hostname):
     app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
 
-    # Get the owner of the hostname
+    # Get the host of the hostname
+    # We have a circular problem
+    # Ideally, we want to set the template folder
+    # with host.template. But that requires a DB
+    # call which is initialized with the app as a
+    # parameter. And the app needs the template
+    # folder as a parameter to be created.
     host = tools.get_host_by_hostname(hostname)
 
     if host is None:
