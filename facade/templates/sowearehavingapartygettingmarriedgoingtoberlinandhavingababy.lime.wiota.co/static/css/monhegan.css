@@ -1,12 +1,54 @@
-#column1 {
-  width: 60%;
-  margin: 10% 20%;
+
+body {
+  font-size: 20px;
+  line-height: 30px;
   font-family: 'Gentium Book Basic', serif;
   color: #000;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+}
+
+
+
+#column1 {
+  font-size: 100%;
+  line-height: 150%;
+  width: 30%;
+  margin: 10% 35%;
+}
+
+#column1 a {
+  color: #48a7d0;
+  font-size: 125%;
+  line-height: 150%;
+}
+
+@media only screen and (max-width: 1400px) {
+  #column1 {
+    font-size: 90%;
+    line-height: 150%;
+    width: 40%;
+    margin: 10% 30%;
   }
+}
+
+@media only screen and (max-width: 900px) {
+  #column1 {
+    font-size: 90%;
+    line-height: 150%;
+    width: 60%;
+    margin: 10% 20%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #column1 {
+    font-size: 110%;
+    line-height: 150%;
+    width: 90%;
+    margin: 5%;
+  }
+
+}
 
 #column1 img {
   width:100%;
