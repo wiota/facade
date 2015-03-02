@@ -1,3 +1,0 @@
-<a class="photo block" href='/id/{{category.slug}}/{{item.id}}'>
-  <img src='{{ item.href }}?h=350' alt='' />
-</a>

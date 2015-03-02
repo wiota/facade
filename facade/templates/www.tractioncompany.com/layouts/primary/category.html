@@ -50,7 +50,7 @@
   <div class='index single_column_left'>
 
   {% for item in category.succset %}
-    {% include "primary/_category_"+item.vertex_type+".html" %}
+    {% include "primary/_"+item.vertex_type+".html" %}
   {% endfor %}
 
   </div>

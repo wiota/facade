@@ -10,7 +10,7 @@ body {font: 14px/23px 'Helvetica Neue', Helvetica, Arial, san-serif; }
   body {font: 16px/27px 'Helvetica Neue', Helvetica, Arial, san-serif;}
 
 }
-p {font-size: 100%; font-weight: 200;}
+p {font-size: 100%; font-weight: 400; margin: 1.3em 0;}
 h2 {font: 114%/114% 'Helvetica Neue', Helvetica, Arial, san-serif;font-weight: 800;margin:8% 0 0;}
 em {font: 150%/150% 'Helvetica Neue', Helvetica, Arial, san-serif;font-style: italic;}
 
@@ -109,14 +109,15 @@ body.happenings .happening p {
 
 .group_projects .project {margin: 5% 0 8%;overflow: auto;clear:both;}
 
-  .group_projects .column1 {padding: 0 4%;width: 42%;float:left;  }
-  .group_projects .column2 {width: 46%;padding: 0 4% 0 0;float:right;font: normal 128%/148% 'Helvetica Neue', Helvetica, arial san-serif;}
-  @media only screen and (max-width: 600px) {
+  .group_projects .column1 {padding: 0 4%;width: 42%;float:left;}
+  .group_projects .column2 {width: 46%;padding: 0 4% 0 0;float:right;font: normal 128%/150% 'Helvetica Neue', Helvetica, arial san-serif;}
+@media only screen and (max-width: 600px) {
+  .group_projects .project {margin: 5% 0 20%;overflow: auto;clear:both;}
     .group_projects .column1 {padding: 0 2%; width: 96%;}
-    .group_projects .column2 {width: 96%; padding: 0 2%;font: normal 116%/116% 'Helvetica Neue', Helvetica, arial san-serif;}
-  }
+    .group_projects .column2 {width: 96%; padding: 0 2%;font: normal 116%/150% 'Helvetica Neue', Helvetica, arial san-serif;}
+}
 
-  .group_projects .column1 img {width: 100%;}
+  .group_projects .column1 img {width: 100%; display:block; margin: 0 0 5%;}
 
 
 /* Work Page */
@@ -161,4 +162,5 @@ body.happenings .happening p {
 
 .footer {margin: 0 0 10%;}
 .footer a {display:block; text-decoration: underline;}
+.footer h2 {margin: 4% 0 0;}
 
