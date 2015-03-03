@@ -142,5 +142,5 @@ def vertex_predecessor_page(vertex_type, predecessor, slug):
 def custom_page(slug):
     cp = app.config['HOST'].custom_from_slug(slug)
     if cp is not None:
-        return render_template("%s.html" % (cp.slug), cp=cp)
+        return render_template("primary/%s.html" % (cp.slug), cp=cp)
     return make_404(request.path)
