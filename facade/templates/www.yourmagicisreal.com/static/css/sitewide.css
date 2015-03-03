@@ -210,7 +210,8 @@ h1 {
   cursor: pointer;
 }
   .simulacra .subnav a:hover {
-    color: #5bce52;
+    color: #ffffff;
+    font-weight: bold;
   }
 
 
