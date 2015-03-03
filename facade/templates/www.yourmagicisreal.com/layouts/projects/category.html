@@ -13,97 +13,129 @@
   <link rel="stylesheet" href="/static/css/sitewide.css">
 
 
-  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
   <script type="text/javascript" src="/static/js/title_slide.js"></script>
 
 
   <script type='text/javascript'>
+
+    var columns = (function(){
+      var top = 5;
+      var left = 40;
+      var right = 20;
+      var column = 40;
+
+      function init(){
+        this.add_dragger();
+        this.add_sizer();
+        this.draw_column();
+      }
+
+      init.prototype.draw_column = function(){
+        $('.projects .column1').css({
+          'width':column+'%',
+          'margin': top + '%' + right + '%' + top + '%' + left + '%'
+        });
+      }
+
+      init.prototype.move_column = function(l){
+        left = l;
+        right = 100 - (left + column);
+        this.draw_column();
+      }
+
+      init.prototype.size_column = function(r){
+        column = (r - left)
+        right = 100 - (left + column);
+        this.draw_column();
+      }
+
+      init.prototype.add_dragger = function(){
+        var dragger = $('<a class="dragger phil_box"></a>').appendTo($('.projects .column1'))
+        var t = this;
+        dragger.mousedown(function(e){
+          var w = $(document).width();
+          var o = -e.offsetX;
+
+          $(document).mousemove(function(e){
+            l = e.pageX + o;
+            t.move_column((l/w)*100);
+            dragger.html('<b class="label_above">'+Math.ceil((l/w)*100)+'%</b>')
+          })
+
+          $(document).mouseup(function(e){
+            dragger.html('');
+            $(document).unbind('mousemove');
+            $(document).unbind('mouseup');
+          })
+          return false;
+        })
+      }
+
+      init.prototype.add_sizer = function(){
+        var sizer = $('<a class="sizer phil_box"></a>').appendTo($('.projects .column1'))
+        var t = this;
+        sizer.mousedown(function(e){
+
+          var w = $(document).width();
+          var o = -e.offsetX + sizer.width();
+
+          $(document).mousemove(function(e){
+            r = e.pageX + o;
+            t.size_column((r/w)*100);
+            sizer.html('<b class="label_above">'+Math.ceil((r/w)*100)+'%</b>')
+          })
+
+          $(document).mouseup(function(e){
+            sizer.html('');
+            $(document).unbind('mousemove');
+            $(document).unbind('mouseup');
+          })
+
+          return false;
+        })
+      }
+
+      init.prototype.add_hider = function(){
+        var sizer = $('<a class="hider hide_box"></a>').appendTo($('body'))
+        sizer.click(function(e){
+          $('.phil_box').fadeToggle();
+          $(this).show();
+          return false;
+        })
+      }
+
+      return new init();
+    })
+
+    var imgClickClass = (function(selector){
+      var baseCss = {}
+
+      function init(selector){
+        $(selector).on('click', console.log);
+      }
+
+      init.prototype.show = function(img){
+
+      }
+
+      init.prototype.hide = function(img){
+
+      }
+
+      return new init(selector);
+    })
+
     $(document).ready(function(){
-    var top = 5;
-    var left = 40;
-    var right = 20;
-    var column = 40;
 
-    function draw_column(){
-      $('.projects .column1').css({
-        'width':column+'%',
-        'margin': top + '%' + right + '%' + top + '%' + left + '%'
-      });
-    }
+      columns();
+      imgClickClass('.project img');
 
-    function move_column(l){
-      left = l;
-      right = 100 - (left + column);
-      draw_column();
-    }
+    })
 
-    function size_column(r){
-      column = (r - left)
-      right = 100 - (left + column);
-      draw_column();
-    }
 
-    function add_dragger(){
-      var dragger = $('<a class="dragger phil_box"></a>').appendTo($('.projects .column1'))
-      dragger.mousedown(function(e){
-        var w = $(document).width();
-        var o = -e.offsetX;
 
-        $(document).mousemove(function(e){
-          l = e.pageX + o;
-          move_column((l/w)*100);
-          dragger.html('<b class="label_above">'+Math.ceil((l/w)*100)+'%</b>')
-        })
-
-        $(document).mouseup(function(e){
-          dragger.html('');
-          $(document).unbind('mousemove');
-          $(document).unbind('mouseup');
-        })
-        return false;
-      })
-    }
-
-    function add_sizer(){
-      var sizer = $('<a class="sizer phil_box"></a>').appendTo($('.projects .column1'))
-      sizer.mousedown(function(e){
-
-        var w = $(document).width();
-        var o = -e.offsetX + sizer.width();
-
-        $(document).mousemove(function(e){
-          r = e.pageX + o;
-          size_column((r/w)*100);
-          sizer.html('<b class="label_above">'+Math.ceil((r/w)*100)+'%</b>')
-        })
-
-        $(document).mouseup(function(e){
-          sizer.html('');
-          $(document).unbind('mousemove');
-          $(document).unbind('mouseup');
-        })
-
-        return false;
-      })
-    }
-
-    function add_hider(){
-      var sizer = $('<a class="hider hide_box"></a>').appendTo($('body'))
-      sizer.click(function(e){
-        $('.phil_box').fadeToggle();
-        $(this).show();
-        return false;
-      })
-    }
-
-    add_dragger();
-    add_sizer();
-    //add_hider();
-    draw_column();
-    //$('.phil_box').fadeToggle();
-
-  })
   </script>
 
   <style type="text/css">
