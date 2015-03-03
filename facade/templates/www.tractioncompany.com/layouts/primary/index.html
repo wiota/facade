@@ -33,7 +33,7 @@
     <div class='happenings_menu'>
 
       {% for vertex in happenings.succset %}
-        {% if vertex.succset %}
+        {% if vertex.succset and vertex.vertex_type == "category" %}
           <a class='happening_tag {{ vertex.slug }}'>{{ vertex.title }}</a>
         {% endif %}
       {% endfor %}
