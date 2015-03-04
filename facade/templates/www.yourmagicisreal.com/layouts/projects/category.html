@@ -21,51 +21,74 @@
   <script type='text/javascript'>
 
     var columns = (function(){
+
+      // Private
+      // get these from original css
       var top = 5;
       var left = 40;
       var right = 20;
       var column = 40;
 
-      function init(){
-        this.add_dragger();
-        this.add_sizer();
-        this.draw_column();
-      }
-
-      init.prototype.draw_column = function(){
+      var draw_column = function(){
         $('.projects .column1').css({
           'width':column+'%',
           'margin': top + '%' + right + '%' + top + '%' + left + '%'
         });
       }
 
-      init.prototype.move_column = function(l){
+      var move_column = function(l){
         left = l;
         right = 100 - (left + column);
-        this.draw_column();
+        draw_column();
       }
 
-      init.prototype.size_column = function(r){
+      var size_column_left = function(l){
+        left = l;
+        column = 100 - (left + right);
+        draw_column();
+      }
+
+      var size_column = function(r){
         column = (r - left)
         right = 100 - (left + column);
-        this.draw_column();
+        draw_column();
       }
 
-      init.prototype.add_dragger = function(){
-        var dragger = $('<a class="dragger phil_box"></a>').appendTo($('.projects .column1'))
-        var t = this;
-        dragger.mousedown(function(e){
+      var add_pill_el = function(cls, place){
+        return dragger = $('<a class="'+cls+' phil_box"></a>').appendTo($(place))
+      }
+
+      var add_pill = function(side, cls, column, fn){
+        var pill = add_pill_el(cls, column);
+        pill.mousedown(function(e){
+
+          if(e.which!=1){
+            // if not primary mouse button
+            return true;
+          }
+
+          // what is difference between where we clicked in the element
+          // and the center of the element
           var w = $(document).width();
-          var o = -e.offsetX;
+          var elClick = e.offsetX;
+          var elPos = $(e.target).position().left;
+          var elWid = $(column).width();
+
+          if(side=='left'){
+            var o = elClick+elPos
+          } else if (side=='right'){
+            var o = elClick+elPos-elWid;
+          }
 
           $(document).mousemove(function(e){
-            l = e.pageX + o;
-            t.move_column((l/w)*100);
-            dragger.html('<b class="label_above">'+Math.ceil((l/w)*100)+'%</b>')
+            l = e.pageX - o;
+            var amnt = (l/w)*100;
+            fn(amnt);
+            pill.html('<b class="label_above no_select">'+Math.ceil(amnt)+'%</b>')
           })
 
           $(document).mouseup(function(e){
-            dragger.html('');
+            pill.html('');
             $(document).unbind('mousemove');
             $(document).unbind('mouseup');
           })
@@ -73,29 +96,16 @@
         })
       }
 
-      init.prototype.add_sizer = function(){
-        var sizer = $('<a class="sizer phil_box"></a>').appendTo($('.projects .column1'))
-        var t = this;
-        sizer.mousedown(function(e){
+      // Public
 
-          var w = $(document).width();
-          var o = -e.offsetX + sizer.width();
-
-          $(document).mousemove(function(e){
-            r = e.pageX + o;
-            t.size_column((r/w)*100);
-            sizer.html('<b class="label_above">'+Math.ceil((r/w)*100)+'%</b>')
-          })
-
-          $(document).mouseup(function(e){
-            sizer.html('');
-            $(document).unbind('mousemove');
-            $(document).unbind('mouseup');
-          })
-
-          return false;
-        })
+      function init(){
+        //this.add_dragger();
+        //this.add_sizer();
+        add_pill('left','dragger', '.projects .column1', size_column_left);
+        add_pill('right','sizer', '.projects .column1', size_column);
+        draw_column();
       }
+
 
       init.prototype.add_hider = function(){
         var sizer = $('<a class="hider hide_box"></a>').appendTo($('body'))
@@ -110,28 +120,26 @@
     })
 
     var imgClickClass = (function(selector){
-      var baseCss = {}
+      var baseCss = {};
+      var $images = null;
 
       function init(selector){
-        $(selector).on('click', console.log);
+        var t = this;
+        $images = $(selector).on("click", function(){
+          t.toggleShow($(this));
+        });
       }
 
-      init.prototype.show = function(img){
-
-      }
-
-      init.prototype.hide = function(img){
-
+      init.prototype.toggleShow = function(img){
+        img.toggleClass('show');
       }
 
       return new init(selector);
     })
 
     $(document).ready(function(){
-
       columns();
       imgClickClass('.project img');
-
     })
 
 

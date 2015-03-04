@@ -116,8 +116,8 @@ h1 {
 
 .projects .column1 {position: relative;}
 
-.projects img {max-width: 60%; float:left; margin: 2px 2px 2px -30%; position:relative;}
-.projects img.show {max-width: 130%; float:left; margin: 2px 2px 2px -30%; position:relative;}
+.projects img {width: 60%; float:left; margin: 2px 2px 2px -30%; position:relative;}
+.projects img.show {width: 130%; float:none; margin: 2px 2px 2px -30%; position:relative;}
 
 .projects .gone {display:none;}
 
@@ -126,8 +126,8 @@ h1 {
 .projects .phil_box, .hide_box {border-radius: 50%; height: 50px; width: 50px; background: #f5ea3d;}
 .projects .phil_box b.label_above {position:relative; text-align: center; display:block; padding: 16px 0;color: #000; font-size: 20px; font-family: 'helvetica', 'arial', 'san-serif'; color: #fff;}
 
-.projects .dragger {position:absolute; top:-20px; left: -40px;}
-.projects .sizer {position:absolute; top:-20px; right: 40px;}
+.projects .dragger {position:absolute; top:-25px; left: -25px;}
+.projects .sizer {position:absolute; top:-25px; right: -25px;}
 .projects .hider {position:absolute; top:0; left: 0;}
 
 
