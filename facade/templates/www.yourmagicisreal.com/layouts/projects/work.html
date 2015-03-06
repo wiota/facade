@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ work.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/sitewide.css">
+
+
+  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+  <script type="text/javascript" src="/static/js/column_slide.js"></script>
+  <script type="text/javascript" src="/static/js/class_toggle.js"></script>
+
+
+  <script type='text/javascript'>
+
+    $(document).ready(function(){
+      columnSlide(5, 40, 20);
+      classToggle('show','.project img');
+    })
+
+  </script>
+
+  <style type="text/css">
+  </style>
+
+
+
+</head>
+<body class='projects'>
+
+
+
+  <div class='page'>
+
+    <div id='nav'>
+      <a href='/category/simulacra'>Simulacra</a>
+      <a>Projects</a>
+      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+    </div>
+
+
+    <div class='title'><h1>{{ work.title }}</h1></div>
+
+    <div class='column1'>
+
+      {% if work.description and work.succset and work.vertex_type == 'work' %}
+
+      <div id='display_{{work.id}}' class='project full'>
+        <div class='project'>
+          {% for media in work.succset %}
+            <img src='{{media.href}}?w=1000' alt='' />
+          {% endfor %}
+
+          {% if work.title %}
+            <h2>{{work.title}}</h2>
+          {% endif %}
+
+          <div class='description'>{{work.description|nl2br|safe}}</div>
+
+        </div>
+      </div>
+
+
+      {% elif work.succset and work.vertex_type == 'work' %}
+
+      <div class='project flash'>
+        {% for media in work.succset %}
+          <img src='{{media.href}}' alt='' />
+        {% endfor %}
+      </div>
+
+      {% endif %}
+
+
+    </div>
+  </div>
+
+</body>
+</html>
