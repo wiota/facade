@@ -14,11 +14,11 @@
 
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
-  <script type="text/javascript" src="/static/js/pauser.js"></script>
+  <script type="text/javascript" src="/static/js/rapidfire.js"></script>
 
   <script type='text/javascript'>
     $(document).ready(function(){
-      var a = new pauser('.aaxxx.image', 50);
+      var a = new rapidfire('.frame', '.aaxxx.image','.frame', 50, true);
     // parse images
     })
   </script>
@@ -41,7 +41,7 @@
         <img class='' src="/static/shapes/triangle_base.svg" id="shape" alt="">
         <h1 class=''>AAXXX</h1>
       </div>
-      <b class='speed_display rotate'></b>
+      <!--<b class='speed_display rotate'></b>-->
     </div>
 
     <div class='images'>

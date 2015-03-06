@@ -17,13 +17,15 @@
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
   <script type="text/javascript" src="/static/js/column_slide.js"></script>
   <script type="text/javascript" src="/static/js/class_toggle.js"></script>
+  <script type="text/javascript" src="/static/js/waterfall.js"></script>
 
 
   <script type='text/javascript'>
 
     $(document).ready(function(){
-      columnSlide(5, 40, 20);
+      columnSlide('.column1', 8, 40, 20);
       classToggle('show','.project img');
+      new waterfall('.project.waterfall','.waterfall_item', '.column1', 100, false);
     })
 
   </script>
@@ -40,47 +42,56 @@
 
   <div class='page'>
 
+    <!-- waterfall interface -->
+    <div class="speed_bar"></div>
+
     <div id='nav'>
       <a href='/category/simulacra'>Simulacra</a>
       <a>Projects</a>
-      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+      <a href='/'>AA&nbsp;XXX</a>
     </div>
 
-
-    <div class='title'><h1>{{ work.title }}</h1></div>
-
-    <div class='column1'>
-
-      {% if work.description and work.succset and work.vertex_type == 'work' %}
-
-      <div id='display_{{work.id}}' class='project full'>
-        <div class='project'>
-          {% for media in work.succset %}
-            <img src='{{media.href}}?w=1000' alt='' />
-          {% endfor %}
-
-          {% if work.title %}
-            <h2>{{work.title}}</h2>
-          {% endif %}
-
-          <div class='description'>{{work.description|nl2br|safe}}</div>
-
-        </div>
-      </div>
+    {% include "projects/_category_subnav.html" %}
 
 
-      {% elif work.succset and work.vertex_type == 'work' %}
+    {% if work.description and work.succset and work.vertex_type == 'work' %}
 
-      <div class='project flash'>
+    <div class='column1 full'>
+      <div class='project full'>
+
         {% for media in work.succset %}
-          <img src='{{media.href}}' alt='' />
+          <img src='{{media.href}}?w=1000' alt='' />
         {% endfor %}
+
+        {% if work.title %}
+          <h2 class='title'>{{work.title}}</h2>
+        {% endif %}
+
+        <div class='description'>{{work.description|nl2br|safe}}</div>
+
       </div>
-
-      {% endif %}
-
-
     </div>
+
+    {% elif work.succset and work.vertex_type == 'work' %}
+
+    <div class='column1 waterfall'>
+      <!-- waterfall interface -->
+      <div class="waterfall_load"><div class="waterfall_load_bar"></div></div>
+      <div class="speed_text"></div>
+
+      <div class='project waterfall'>
+
+        {% for media in work.succset %}
+          <div class="waterfall_item"><img src='{{media.href}}?w=200' alt='' /></div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+    {% endif %}
+
+
+
   </div>
 
 </body>

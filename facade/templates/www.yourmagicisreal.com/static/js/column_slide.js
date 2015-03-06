@@ -1,6 +1,8 @@
-var columnSlide = (function(t,l,r){
+var columnSlide = (function(column, t,l,r){
 
   // Private
+  var $column = $(column);
+
   // get these from original css
   var top = t;
   var left = l;
@@ -8,7 +10,7 @@ var columnSlide = (function(t,l,r){
   var column = 100 - (l+r);
 
   var draw_column = function(){
-    $('.projects .column1').css({
+    $column.css({
       'width':column+'%',
       'margin': top + '%' + right + '%' + top + '%' + left + '%'
     });
@@ -79,8 +81,8 @@ var columnSlide = (function(t,l,r){
   function init(){
     //this.add_dragger();
     //this.add_sizer();
-    add_pill('left','dragger', '.projects .column1', size_column_left);
-    add_pill('right','sizer', '.projects .column1', size_column);
+    add_pill('left','dragger', $column, size_column_left);
+    add_pill('right','sizer', $column, size_column);
     draw_column();
   }
 

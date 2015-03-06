@@ -22,7 +22,8 @@
   <script type='text/javascript'>
 
     $(document).ready(function(){
-      columnSlide(5, 40, 20);
+
+      columnSlide('.column1', 8, 40, 20);
       classToggle('show','.project img');
     })
 
@@ -43,58 +44,20 @@
     <div id='nav'>
       <a href='/category/simulacra'>Simulacra</a>
       <a>Projects</a>
-      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+      <a href='/'>AA&nbsp;XXX</a>
     </div>
 
+    {% include "projects/_category_subnav.html" %}
 
-    <div class='title'><h1>{{ category.title }}</h1></div>
+  </div>
 
-
-    <div class='column2 subnav'>
+  <div class='column1 index'>
     {% for project in category.succset %}
       {% if project.succset and project.vertex_type == 'work' %}
-        <a class='project_link' rel='link_{{project.id}}'>{{project.title}}</a>
+        <a class='project_link' href='/work/{{category.slug}}/{{project.slug}}'><img src='{{project.succset[0].href}}?w=500' alt='' /></a>
+
       {% endif %}
     {% endfor %}
-    </div>
-
-    <div class='column1'>
-
-      {% for project in category.succset %}
-        {% if project.description and project.vertex_type == 'work' %}
-
-        <div id='display_{{project.id}}' class='project full'>
-          <div class='project'>
-            {% for media in project.succset %}
-            <img src='{{media.href}}' alt='' />
-            {% endfor %}
-
-            {% if project.title %}
-              <h2>{{project.title}}</h2>
-            {% endif %}
-
-            <div class='description'>{{project.description|nl2br|safe}}</div>
-
-          </div>
-        </div>
-
-
-        {% elif project.succset and project.vertex_type == 'work' %}
-
-        <div class='project flash'>
-          {% for media in project.succset %}
-            <img src='{{media.href}}' alt='' />
-          {% endfor %}
-        </div>
-
-        {% endif %}
-
-
-      {% endfor %}
-
-
-
-    </div>
   </div>
 
 </body>

@@ -100,7 +100,8 @@ def happening_individual(slug):
     return render_template(layout+'/happening.html', slug=slug, happening=vertex)
 
 
-# TODO: Leave this in for posterity for now, but remove
+# This is incredibly important. A suitable
+# replacement is required before removal
 @mod.route('/work/<categoryslug>/<slug>')
 def work_individual_old(categoryslug, slug):
     try:
