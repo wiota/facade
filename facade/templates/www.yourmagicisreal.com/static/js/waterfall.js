@@ -1,270 +1,337 @@
-(function(frame, items, trigger, speed, center){
+(function(){
 
-  var waterfall = this.waterfall = function(){
-    this.init.apply(this, arguments);
+  // Air elements
+
+  add_air_elements = function(){
+    var airId;
+    var t = this;
+    var remaining = this.trail;
+
+    airId = setInterval(function(){
+      if(remaining<=0){
+        console.log('airfall');
+        t.clean_queue();
+        clearInterval(airId);
+      } else {
+        t.add_air_element();
+        remaining--;
+        console.log('still airing out')
+      }
+    }, 50);
+
   }
 
-  _.extend(waterfall.prototype, {
+  add_air_element = function(){
+    var air_element = $('<div></div>');
+    var padding_bottom = (Math.floor(Math.random()*30)+15);
+    air_element.css({'padding-bottom':padding_bottom+"%",'float':'right'})
+    air_element.addClass(this.item_class);
+    air_element.prependTo(this.frame);
+    this.items.unshift(air_element);
+    this.queue_element(air_element);
+  }
 
-    init: function(frame, items, trigger, speed, trail){
-      // items
-      this.items = $(items);
-      this.item_class = this.items.first().attr('class');
-      this.frame = $(frame);
-      this.trigger = $(trigger);
-      this.current_image = 0;
-      this.center = center || false;
-      this.loaded = 0;
-      this.loop = 0;
-      this.LENGTH = this.items.length;
+  // stopwatch --------------------------------------
 
-      this.queue = [];
-      this.trail = trail || 20;
+  message_display = function(message){
+    this.speed_text.text(message);
+  }
 
-      // flip variables
-      this.speed = speed;
-      this.speed_control_ratio=2;
-      this.timer_start = 0;
-      this.timer_end = 0;
-      this.timer = null;
+  speed_display = function(milliseconds){
+    var seconds = Math.floor(milliseconds/100)/10;
+    this.message_display(this.speed_message+seconds+this.speed_units);
+    return seconds;
+  }
 
-      // speed bar indicator
-      this.speed_bar = null;
-      this.speed_bar_timer = null;
-      this.speed_message = '';
-      this.speed_units = '';
-      this.speed_bar_speed = 3;
+  // speed set --------------------------------------
 
-      //this.setup_interface();
-      this.setup_display();
-      this.init_images();
-    },
+  var speed_bar
+  // speed bar indicator
+    this.speed_bar_timer = null;
+    this.speed_message = '';
+    this.speed_units = '';
+    this.speed_bar_speed = 3;
 
-    init_images: function(){
-      var items = this.items;
-      var t = this;
-      var timestart = new Date(); // Cache buster of sorts
+    //this.setup_interface();
+    this.setup_display();
 
-      this.items = []
-      this.set_loading_bar(0);
+  setup_interface = function(){
+    var t = this;
 
-      _.each(items, function(item){
-        var $i = $(item);
-        $i.remove();
+    $(this.trigger).on('touchstart', function(e){
+      t.pause();
+      e.preventDefault();
+      return false;
+    })
 
-        $i.find('img').load(function(){
-          var index;
+    $(this.trigger).on('touchend', function(e){
+      e.preventDefault();
+      t.resume();
+      return false;
+    })
 
-          $i.prependTo(t.frame);
-          t.items.unshift($i);
-          t.queue_element($i);
-
-          index = ++t.loaded;
-          t.set_loading_bar(index*100/t.LENGTH);
-          if(index === t.LENGTH){
-            if(new Date() - timestart<=1000){
-              t.start_cycle();
-            }
-            //t.add_air_elements();
-            t.clean_queue();
-            t.setup_interface();
-            t.message_display(' ');
-          }
-        });
-      })
-
-    },
-
-    add_air_elements: function(){
-      var airId;
-      var t = this;
-      var remaining = this.trail;
-
-      airId = setInterval(function(){
-        if(remaining<=0){
-          console.log('airfall');
-          t.clean_queue();
-          clearInterval(airId);
-        } else {
-          t.add_air_element();
-          remaining--;
-          console.log('still airing out')
-        }
-      }, 50);
-
-    },
-
-    add_air_element: function(){
-      var air_element = $('<div></div>');
-      var padding_bottom = (Math.floor(Math.random()*30)+15);
-      air_element.css({'padding-bottom':padding_bottom+"%",'float':'right'})
-      air_element.addClass(this.item_class);
-      air_element.prependTo(this.frame);
-      this.items.unshift(air_element);
-      this.queue_element(air_element);
-    },
-
-    queue_element: function($el){
-      if(!$el.show){
-        return false;
+    $(this.trigger).on('mousedown', function(e){
+      if(e.which!=1){
+        // if not primary mouse button
+        return true;
       }
-      this.queue.unshift($el);
-      $el.show();
-      if(this.queue.length > this.trail){
-        this.dequeue_element()
+      e.preventDefault();
+      t.pause();
+      //return false;
+    })
+    $(this.trigger).on('mouseup', function(e){
+      e.preventDefault();
+      t.resume();
+      //return false;
+    })
+  },
+
+  setup_display = function(){
+    this.speed_bar = $('.speed_bar');
+    this.speed_bar.css({
+      'display':'block',
+      'position':'absolute',
+      'left':'0',
+      'top':'0',
+      'bottom':'0'
+    })
+
+    this.speed_text = $('.speed_text');
+
+    var css = {
+      'position':'absolute',
+      'top': 0,
+      'left': 0,
+      'right': 0,
+      'z-index':3
       }
-    },
+  },
 
-    dequeue_element: function(){
-      if(this.queue.length > 0){
-        this.queue.pop().hide();
-      }
-    },
+  remove_speed_bar = function(){
+    clearInterval(this.speed_bar_timer)
+    this.speed_bar.css({'width':'0px'})
+  },
 
-    clean_queue: function(){
-      var cleanId;
-      var t = this;
-      var remaining = t.queue.length;
-      console.log("cleaning "+ remaining);
-      // clean queue on a timer
-      cleanId = setInterval(function(){
-        if(remaining<=0){
-          console.log('cleaned');
-          clearInterval(cleanId);
-        } else {
-          t.dequeue_element();
-          remaining--;
-          console.log('still cleaning')
-        }
-      }, this.speed);
-    },
+  init_new_timer = function(interval){
+    var t = this;
 
-    setup_interface: function(){
-      var t = this;
+    t.speed_display(10);
 
-      $(this.trigger).on('touchstart', function(e){
-        t.pause();
-        e.preventDefault();
-        return false;
-      })
+    this.speed_bar_timer = setInterval(function(){
+      var w = t.speed_bar.width()+t.speed_bar_speed;
+      t.speed_bar.css({'width':w+'px'})
+      var seconds = t.speed_display((new Date() - t.timer_start)/t.speed_control_ratio);
 
-      $(this.trigger).on('touchend', function(e){
-        e.preventDefault();
+      if(seconds >= 3){
         t.resume();
-        return false;
-      })
-
-      $(this.trigger).on('mousedown', function(e){
-        if(e.which!=1){
-          // if not primary mouse button
-          return true;
-        }
-        e.preventDefault();
-        t.pause();
-        //return false;
-      })
-      $(this.trigger).on('mouseup', function(e){
-        e.preventDefault();
-        t.resume();
-        //return false;
-      })
-    },
-
-    setup_display: function(){
-      this.speed_bar = $('.speed_bar');
-      this.speed_bar.css({
-        'display':'block',
-        'position':'absolute',
-        'left':'0',
-        'top':'0',
-        'bottom':'0'
-      })
-
-      this.speed_text = $('.speed_text');
-
-      var css = {
-        'position':'absolute',
-        'top': 0,
-        'left': 0,
-        'right': 0,
-        'z-index':3
       }
+    },10)
 
-      this.loading = $('.waterfall_load');
-      this.loading_bar = $('.waterfall_load_bar');
-    },
+  }
 
-    init_new_timer: function(interval){
-      var t = this;
+  pause = function(){
+    clearInterval(this.timer);
+    this.clean_queue()
+    this.timer_start = new Date();
+    this.init_new_timer();
+  }
 
-      t.speed_display(10);
+  resume = function(){
+    if(!this.timer_start){
+      return false;
+    }
+    this.timer_end = new Date();
+    this.speed = (this.timer_end - this.timer_start)/this.speed_control_ratio;
+    this.timer_start = null;
+    this.start_cycle();
+    this.remove_speed_bar();
+  }
 
-      this.speed_bar_timer = setInterval(function(){
-        var w = t.speed_bar.width()+t.speed_bar_speed;
-        t.speed_bar.css({'width':w+'px'})
-        var seconds = t.speed_display((new Date() - t.timer_start)/t.speed_control_ratio);
+});
 
-        if(seconds >= 3){
-          t.resume();
-        }
-      },10)
+// --------------------------------------------------------
 
-    },
+var waterfall = function (container){
+  // requires jquery, underscore
 
-    set_loading_bar: function(percent){
-      this.loading_bar.width(percent+"%");
-    },
+  // Private ----------------------------------------------
+  var container = $(container);
+  var items = container.children();
 
-    remove_speed_bar: function(){
-      clearInterval(this.speed_bar_timer)
-      this.speed_bar.css({'width':'0px'})
-    },
+  // variables - possibly set upon init
+  var speed = 100;
+  var fall_length = 10;
+  var scrub_position = -1; // before start
 
-    speed_display: function(milliseconds){
-      var seconds = Math.floor(milliseconds/100)/10;
-      this.message_display(this.speed_message+seconds+this.speed_units);
-      return seconds;
-    },
+  // counts
+  var item_count = items.length;
+  var frame_count = item_count + fall_length;
 
-    message_display: function(message){
-      this.speed_text.text(message);
-    },
+  // caching
+  var cache = {}
+  cache.showing = [];
 
-    pause: function(){
-      clearInterval(this.timer);
-      this.clean_queue()
-      this.timer_start = new Date();
-      this.init_new_timer();
-    },
+  var item_class = items.first().attr('class');
 
-    resume: function(){
-      if(!this.timer_start){
-        return false;
+  var timer = null;
+
+  // img loading
+  var loaded_count = 0;
+  var load_start_time = null;
+  var play_as_loaded = true;
+
+  // Private functions --------------------------------------
+
+  var init_images = function(){
+    stash = items;
+    items = [];
+    //this.set_loading_bar(0);
+
+    start_load();
+    for (var _i=0; _i<stash.length; _i++) {
+      $el = $(stash[_i]);
+      $el.remove();
+      $el.hide();
+      append_on_load($el);
+    };
+  }
+
+  var append_on_load = function($el){
+    $el.find('img').load(function(){
+      var loaded_count = items.push($el);
+      $el.prependTo(container); // attach in reverse order
+      if(play_as_loaded){
+        next();
       }
-      this.timer_end = new Date();
-      this.speed = (this.timer_end - this.timer_start)/this.speed_control_ratio;
-      this.timer_start = null;
-      this.start_cycle();
-      this.remove_speed_bar();
-    },
+      /*
+      if(check_index(scrub_position, loaded_count)){
+        $el.show();
+        cache.showing.push(loaded_count);
+      }
+      */
+      if(loaded_count === item_count){
+        end_load();
+        if(play_as_loaded){
+          start();
+        }
+      }
+    });
+  }
 
-    start_cycle: function(){
-      this.current_image = this.items.length-1;
-      this.clean_queue();
-      clearInterval(this.timer)
-      this.timer = setInterval(this.step.bind(this), this.speed);
-    },
+  var start_load = function(){
+    load_start_time = new Date(); // Cache buster of sorts
+  }
 
-    step: function(){
-      this.queue_element(this.items[this.current_image]);
-      this.current_image--;
-      if(this.current_image <= 0){
-        this.clean_queue();
-        clearInterval(this.timer);
+  var end_load = function(){
+    console.log(new Date() - load_start_time);
+  }
+
+  var check_index = function(timecode, index){
+    if(index > (timecode-fall_length) && index <= timecode){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
+  var generate_show_list = function(timecode){
+    showlist = [];
+    for (var i = timecode-fall_length+1; i <= timecode; i++){
+      if(i>=0 && i<item_count){
+        showlist.push(i);
       }
     }
+    return showlist;
+  }
 
-  })
+  var hide_by_index = function(i){
+    items[i].hide();
+  }
 
-})();
+  var show_by_index = function(i){
+    if(items[i]){
+      items[i].show();
+    } else {
+      cache.showing = _.without(cache.showing, i)
+    }
+  }
 
+  var render = function(list){
+    // underscore dependancy
+    var to_show = _.difference(list, cache.showing);
+    var to_hide = _.difference(cache.showing, list);
+    cache.showing = list;
+    _.each(to_hide, hide_by_index);
+    _.each(to_show, show_by_index);
+  }
+
+  var scrub = function(timecode){
+    scrub_position = timecode;
+    if(!load_start_time){
+      return false;
+    }
+    var list = generate_show_list(timecode);
+    render(list);
+  }
+
+  // Public ----------------------------------------------
+
+  function init(){
+    init_images();
+
+  }
+
+  init.prototype.set_speed = function(s){
+    speed = s<50 ? 50 : s;
+  }
+
+  var start = init.prototype.start = function(){
+    timer = setInterval(next, speed);
+  }
+
+  var stop = init.prototype.stop = function(){
+    play_as_loaded = false;
+    clearInterval(timer);
+  }
+
+  var next = init.prototype.next = function(){
+    scrub_position++;
+    if(scrub_position >= frame_count){
+      scrub_position = -1;
+      stop();
+    }
+    scrub(scrub_position);
+  }
+
+  var prev = init.prototype.previous = function(){
+    scrub_position--;
+    if(scrub_position < 0){
+      scrub_position = -1;
+      stop();
+    }
+    scrub(scrub_position);
+  }
+
+  init.prototype.scrub = function(timecode){
+    stop();
+    scrub(timecode);
+  }
+
+  init.prototype.scrub_percent = function(percent){
+    stop();
+    number = percent >= 100 ? frame_count-1 : Math.floor(percent*frame_count/100);
+    return scrub(number);
+  }
+
+  init.prototype.playhead = function(){
+    return scrub_position;
+  }
+
+  init.prototype.playhead_percent = function(){
+    return scrub_position/frame_count*100;
+  }
+
+
+  return new init();
+
+}

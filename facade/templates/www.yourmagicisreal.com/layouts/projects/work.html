@@ -18,6 +18,7 @@
   <script type="text/javascript" src="/static/js/column_slide.js"></script>
   <script type="text/javascript" src="/static/js/class_toggle.js"></script>
   <script type="text/javascript" src="/static/js/waterfall.js"></script>
+  <script type="text/javascript" src="/static/js/scrub_bar.js"></script>
 
 
   <script type='text/javascript'>
@@ -25,7 +26,12 @@
     $(document).ready(function(){
       columnSlide('.column1', 8, 40, 20);
       classToggle('show','.project img');
-      new waterfall('.project.waterfall','.waterfall_item', '.column1', 100, false);
+
+      var w = waterfall('.project.waterfall');
+      var b = scrub_bar('.waterfall_load', {
+        onTrack: w.scrub_percent
+      });
+
     })
 
   </script>
@@ -75,14 +81,16 @@
     {% elif work.succset and work.vertex_type == 'work' %}
 
     <div class='column1 waterfall'>
-      <!-- waterfall interface -->
+      <!-- scrub bar -->
       <div class="waterfall_load"><div class="waterfall_load_bar"></div></div>
       <div class="speed_text"></div>
 
       <div class='project waterfall'>
 
         {% for media in work.succset %}
-          <div class="waterfall_item"><img src='{{media.href}}?w=200' alt='' /></div>
+          <div class="waterfall_item">
+            <img src='{{media.href}}?w=200' alt='' />
+          </div>
         {% endfor %}
 
       </div>

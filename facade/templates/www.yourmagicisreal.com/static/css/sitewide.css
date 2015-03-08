@@ -209,8 +209,8 @@ h2 {
   -o-transform: rotate(30deg);
 }
 
-.projects .waterfall_item {width: 50%; float:left; margin: 0 0 10px 0%; position:relative;}
-.projects .waterfall_item img {width: 100%;}
+.projects .waterfall_item {width: 50%; float:left; margin: 0; position:relative;}
+.projects .waterfall_item img {width: 100%;display: block;}
 
 .projects .waterfall h2 {
   margin: 10px 0;
