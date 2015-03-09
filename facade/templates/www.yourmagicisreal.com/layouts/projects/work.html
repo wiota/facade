@@ -15,6 +15,10 @@
 
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+
+  <script type="text/javascript" src="/static/js/deface.js"></script>
+  <script type="text/javascript" src="/static/js/stopwatch.js"></script>
+
   <script type="text/javascript" src="/static/js/column_slide.js"></script>
   <script type="text/javascript" src="/static/js/class_toggle.js"></script>
   <script type="text/javascript" src="/static/js/waterfall.js"></script>
@@ -32,7 +36,11 @@
         onTrack: w.scrub_percent
       });
 
+      sw = DEFACE.stopwatch('.stopwatch');
+
     })
+
+
 
   </script>
 
@@ -47,6 +55,8 @@
 
 
   <div class='page'>
+
+    <div class='stopwatch'></div>
 
     <!-- waterfall interface -->
     <div class="speed_bar"></div>
