@@ -18,6 +18,7 @@
     return fn;
   }
 
+  // Events
   var events = {
     // The trigger event must be augmented separately because it requires a
     // new Event to prevent unexpected triggering of a method (and possibly
@@ -37,6 +38,30 @@
       return this;
     };
   });
+
+  // bind polyfill - bind used heavily with event handlers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function(oThis) {
+      if (typeof this !== 'function') {
+        throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+      }
+
+      var aArgs   = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP    = function() {},
+          fBound  = function() {
+            return fToBind.apply(this instanceof fNOP
+                   ? this
+                   : oThis,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
 
 
 })(this);
