@@ -49,16 +49,19 @@
     var instance = this;
     $el.find('img').load(function(){
       var loaded_count = instance._items.push($el);
+      var el_index = loaded_count-1;
+
       $el.prependTo(instance.container); // attach in reverse order
+      $el.append("<div class='order'>"+(el_index)+"</div>")
       if(instance._play_as_loaded){
         instance.next();
       }
-      /*
-      if(_check_index(scrub_position, loaded_count)){
+
+      if(instance._check_index(el_index)){
+        console.log('in');
         $el.show();
-        cache.showing.push(loaded_count);
       }
-      */
+
       if(loaded_count === instance._item_count){
         instance._end_load();
         if(instance._play_as_loaded){
@@ -66,6 +69,11 @@
         }
       }
     });
+  }
+
+  waterfall.prototype._show_single_image = function(index){
+    this.stop();
+    this.render(index);
   }
 
   waterfall.prototype._start_load = function(){
@@ -77,8 +85,10 @@
     console.log(new Date() - this._load_start_time);
   }
 
-  waterfall.prototype._check_index = function(timecode, index){
-    if(index > (timecode-this._fall_length) && index <= timecode){
+  waterfall.prototype._check_index = function(index){
+    start = this._scrub_position;
+    end = start - this._fall_length;
+    if(index <= start && index > end){
       return true;
     } else{
       return false;
@@ -96,15 +106,14 @@
   }
 
   waterfall.prototype._hide_by_index = function(i){
-    this._items[i].hide();
+    if(this._items[i]){
+      this._items[i].hide();
+    }
   }
 
   waterfall.prototype._show_by_index = function(i){
     if(this._items[i]){
       this._items[i].show();
-    } else {
-      // remove
-      this._showing = _.without(cache.showing, i)
     }
   }
 
@@ -113,6 +122,10 @@
     var to_show = _.difference(list, this._showing);
     var to_hide = _.difference(this._showing, list);
     this._showing = list;
+    console.log('----');
+    console.log(to_hide);
+    console.log(to_show);
+    console.log('----');
     _.each(to_hide, this._hide_by_index, this);
     _.each(to_show, this._show_by_index, this);
   }
