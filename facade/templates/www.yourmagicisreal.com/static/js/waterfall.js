@@ -4,7 +4,6 @@
   // requires jquery, underscore
   var waterfall = DEFACE.create('waterfall');
 
-  // Private ----------------------------------------------
   waterfall.prototype.init = function(container, speed, len){
     this.container = $(container);
     this._items = this.container.children();
@@ -31,9 +30,6 @@
 
     this._init_images();
   }
-
-
-  // Private functions --------------------------------------
 
   waterfall.prototype._init_images = function(){
     var stash = this._items;
@@ -129,8 +125,6 @@
     var list = this._generate_show_list(timecode);
     this.render(list);
   }
-
-  // Public ----------------------------------------------
 
   waterfall.prototype.set_speed = function(s){
     this._speed = s<50 ? 50 : s;
