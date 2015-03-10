@@ -1,33 +1,30 @@
-var scrub_bar = function(container, options){
+(function(container, options){
   // requires jquery
+  var scrub_bar = DEFACE.create('scrub_bar');
 
-  // Private ----------------------------------------------
+  scrub_bar.prototype.init = function(container){
 
-  var container = $(container);
-  var bar = container.children().first();
+    this.container = $(container);
+    this._bar = this.container.children().first();
 
-  // cached
-  var width = container.width()
-
-  // options
-  options = options || {}
+    // cached
+    this._width = this.container.width();
+    this._setup_interface();
+  }
 
   // interface --------------------------
 
-  var setup_interface = function(){
-    container.on('touchstart', function(e){
+  scrub_bar.prototype._setup_interface = function(){
+    var instance = this;
+    this.container.on('touchstart', function(e){})
 
-    })
+    this.container.on('touchend', function(e){})
 
-    container.on('touchend', function(e){
-
-    })
-
-    container.on('mousedown', function(e){
+    this.container.on('mousedown', function(e){
       if(e.which!=1){ // if not primary mouse button
         return false;
       }
-      start_track(e);
+      instance._start_track(e);
       e.preventDefault();
       return false;
     })
@@ -36,7 +33,7 @@ var scrub_bar = function(container, options){
 
   // how can I break off this mouse tracking code?
 
-  var clamp = function(min, val, max){
+  scrub_bar.prototype._clamp = function(min, val, max){
     if(val<=min){
       return min;
     } else if (val>=max){
@@ -46,41 +43,29 @@ var scrub_bar = function(container, options){
     }
   }
 
-  var start_track = function(e){
+  scrub_bar.prototype._start_track = function(evt){
+    $(window).on('mousemove.scrub_bar', this._track.bind(this));
+    $(window).on('mouseup.scrub_bar', this._stop_track.bind(this));
+    this._track(evt);
     console.log('start');
-    $(window).on('mousemove',track)
-    $(window).on('mouseup', stop_track)
-    track(e);
   }
 
-  var track = function(e){
-    var percent = (e.pageX - container.offset().left)/width*100;
-    set(clamp(0,percent,100));
-    if(options.onTrack){
-      options.onTrack(percent);
-    }
+  scrub_bar.prototype._track = function(evt){
+    var x_ratio = (evt.pageX - this.container.offset().left)/this._width;
+    var percent = this._clamp(0,x_ratio,1) * 100;
+    this.set(percent);
+    this.trigger('track', percent);
   }
 
-  var stop_track = function(e){
+  scrub_bar.prototype._stop_track = function(evt){
+    $(window).off('mousemove.scrub_bar');
+    $(window).off('mouseup.scrub_bar');
     console.log('stop');
-    $(window).off('mousemove',track)
-    $(window).off('mouseup',stop_track)
   }
 
-  var set = function(percent){
-    bar.width(percent+"%");
+  scrub_bar.prototype.set = function(percent){
+    this._bar.width(percent+"%");
+    return percent;
   }
 
-  // Public -----------------------------------------------
-
-  var init = function(){
-    setup_interface();
-  }
-
-  init.prototype.set = function(percent){
-    set(percent)
-  }
-
-  return new init();
-
-}
+})()
