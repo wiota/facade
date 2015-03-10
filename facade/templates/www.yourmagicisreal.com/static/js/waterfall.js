@@ -1,337 +1,188 @@
-(function(){
-
-  // Air elements
-
-  add_air_elements = function(){
-    var airId;
-    var t = this;
-    var remaining = this.trail;
-
-    airId = setInterval(function(){
-      if(remaining<=0){
-        console.log('airfall');
-        t.clean_queue();
-        clearInterval(airId);
-      } else {
-        t.add_air_element();
-        remaining--;
-        console.log('still airing out')
-      }
-    }, 50);
-
-  }
-
-  add_air_element = function(){
-    var air_element = $('<div></div>');
-    var padding_bottom = (Math.floor(Math.random()*30)+15);
-    air_element.css({'padding-bottom':padding_bottom+"%",'float':'right'})
-    air_element.addClass(this.item_class);
-    air_element.prependTo(this.frame);
-    this.items.unshift(air_element);
-    this.queue_element(air_element);
-  }
-
-  // stopwatch --------------------------------------
-
-  message_display = function(message){
-    this.speed_text.text(message);
-  }
-
-  speed_display = function(milliseconds){
-    var seconds = Math.floor(milliseconds/100)/10;
-    this.message_display(this.speed_message+seconds+this.speed_units);
-    return seconds;
-  }
-
-  // speed set --------------------------------------
-
-  var speed_bar
-  // speed bar indicator
-    this.speed_bar_timer = null;
-    this.speed_message = '';
-    this.speed_units = '';
-    this.speed_bar_speed = 3;
-
-    //this.setup_interface();
-    this.setup_display();
-
-  setup_interface = function(){
-    var t = this;
-
-    $(this.trigger).on('touchstart', function(e){
-      t.pause();
-      e.preventDefault();
-      return false;
-    })
-
-    $(this.trigger).on('touchend', function(e){
-      e.preventDefault();
-      t.resume();
-      return false;
-    })
-
-    $(this.trigger).on('mousedown', function(e){
-      if(e.which!=1){
-        // if not primary mouse button
-        return true;
-      }
-      e.preventDefault();
-      t.pause();
-      //return false;
-    })
-    $(this.trigger).on('mouseup', function(e){
-      e.preventDefault();
-      t.resume();
-      //return false;
-    })
-  },
-
-  setup_display = function(){
-    this.speed_bar = $('.speed_bar');
-    this.speed_bar.css({
-      'display':'block',
-      'position':'absolute',
-      'left':'0',
-      'top':'0',
-      'bottom':'0'
-    })
-
-    this.speed_text = $('.speed_text');
-
-    var css = {
-      'position':'absolute',
-      'top': 0,
-      'left': 0,
-      'right': 0,
-      'z-index':3
-      }
-  },
-
-  remove_speed_bar = function(){
-    clearInterval(this.speed_bar_timer)
-    this.speed_bar.css({'width':'0px'})
-  },
-
-  init_new_timer = function(interval){
-    var t = this;
-
-    t.speed_display(10);
-
-    this.speed_bar_timer = setInterval(function(){
-      var w = t.speed_bar.width()+t.speed_bar_speed;
-      t.speed_bar.css({'width':w+'px'})
-      var seconds = t.speed_display((new Date() - t.timer_start)/t.speed_control_ratio);
-
-      if(seconds >= 3){
-        t.resume();
-      }
-    },10)
-
-  }
-
-  pause = function(){
-    clearInterval(this.timer);
-    this.clean_queue()
-    this.timer_start = new Date();
-    this.init_new_timer();
-  }
-
-  resume = function(){
-    if(!this.timer_start){
-      return false;
-    }
-    this.timer_end = new Date();
-    this.speed = (this.timer_end - this.timer_start)/this.speed_control_ratio;
-    this.timer_start = null;
-    this.start_cycle();
-    this.remove_speed_bar();
-  }
-
-});
-
 // --------------------------------------------------------
 
-var waterfall = function (container){
+(function (){
   // requires jquery, underscore
+  var waterfall = DEFACE.create('waterfall');
 
   // Private ----------------------------------------------
-  var container = $(container);
-  var items = container.children();
+  waterfall.prototype.init = function(container, speed, len){
+    this.container = $(container);
+    this._items = this.container.children();
 
-  // variables - possibly set upon init
-  var speed = 100;
-  var fall_length = 10;
-  var scrub_position = -1; // before start
+    this._speed = speed || 100;
+    this._fall_length = len || 10;
+    this._scrub_position = -1; // before start
 
-  // counts
-  var item_count = items.length;
-  var frame_count = item_count + fall_length;
+    // counts
+    this._item_count = this._items.length;
+    this._frame_count = this._item_count + this._fall_length;
 
-  // caching
-  var cache = {}
-  cache.showing = [];
+    // cache showing
+    this._showing = [];
 
-  var item_class = items.first().attr('class');
+    this._item_class = this._items.first().attr('class');
 
-  var timer = null;
+    this._timer = null;
 
-  // img loading
-  var loaded_count = 0;
-  var load_start_time = null;
-  var play_as_loaded = true;
+    // img loading
+    this._loaded = false;
+    this._load_start_time = null;
+    this._play_as_loaded = true;
+
+    this._init_images();
+  }
+
 
   // Private functions --------------------------------------
 
-  var init_images = function(){
-    stash = items;
-    items = [];
+  waterfall.prototype._init_images = function(){
+    var stash = this._items;
+    this._items = [];
     //this.set_loading_bar(0);
 
-    start_load();
-    for (var _i=0; _i<stash.length; _i++) {
+    this._start_load();
+    for (var _i=0, _len=stash.length; _i<_len; _i++) {
       $el = $(stash[_i]);
       $el.remove();
       $el.hide();
-      append_on_load($el);
+      this._append_on_load($el);
     };
   }
 
-  var append_on_load = function($el){
+  waterfall.prototype._append_on_load = function($el){
+    var instance = this;
     $el.find('img').load(function(){
-      var loaded_count = items.push($el);
-      $el.prependTo(container); // attach in reverse order
-      if(play_as_loaded){
-        next();
+      var loaded_count = instance._items.push($el);
+      $el.prependTo(instance.container); // attach in reverse order
+      if(instance._play_as_loaded){
+        instance.next();
       }
       /*
-      if(check_index(scrub_position, loaded_count)){
+      if(_check_index(scrub_position, loaded_count)){
         $el.show();
         cache.showing.push(loaded_count);
       }
       */
-      if(loaded_count === item_count){
-        end_load();
-        if(play_as_loaded){
-          start();
+      if(loaded_count === instance._item_count){
+        instance._end_load();
+        if(instance._play_as_loaded){
+          instance.start();
         }
       }
     });
   }
 
-  var start_load = function(){
-    load_start_time = new Date(); // Cache buster of sorts
+  waterfall.prototype._start_load = function(){
+    this._load_start_time = new Date(); // Cache buster of sorts
   }
 
-  var end_load = function(){
-    console.log(new Date() - load_start_time);
+  waterfall.prototype._end_load = function(){
+    this._loaded = true;
+    console.log(new Date() - this._load_start_time);
   }
 
-  var check_index = function(timecode, index){
-    if(index > (timecode-fall_length) && index <= timecode){
+  waterfall.prototype._check_index = function(timecode, index){
+    if(index > (timecode-this._fall_length) && index <= timecode){
       return true;
     } else{
       return false;
     }
   }
 
-  var generate_show_list = function(timecode){
+  waterfall.prototype._generate_show_list = function(timecode){
     showlist = [];
-    for (var i = timecode-fall_length+1; i <= timecode; i++){
-      if(i>=0 && i<item_count){
+    for (var i = timecode-this._fall_length+1; i <= timecode; i++){
+      if(i>=0 && i<this._item_count){
         showlist.push(i);
       }
     }
     return showlist;
   }
 
-  var hide_by_index = function(i){
-    items[i].hide();
+  waterfall.prototype._hide_by_index = function(i){
+    this._items[i].hide();
   }
 
-  var show_by_index = function(i){
-    if(items[i]){
-      items[i].show();
+  waterfall.prototype._show_by_index = function(i){
+    if(this._items[i]){
+      this._items[i].show();
     } else {
-      cache.showing = _.without(cache.showing, i)
+      // remove
+      this._showing = _.without(cache.showing, i)
     }
   }
 
-  var render = function(list){
+  waterfall.prototype.render = function(list){
     // underscore dependancy
-    var to_show = _.difference(list, cache.showing);
-    var to_hide = _.difference(cache.showing, list);
-    cache.showing = list;
-    _.each(to_hide, hide_by_index);
-    _.each(to_show, show_by_index);
+    var to_show = _.difference(list, this._showing);
+    var to_hide = _.difference(this._showing, list);
+    this._showing = list;
+    _.each(to_hide, this._hide_by_index, this);
+    _.each(to_show, this._show_by_index, this);
   }
 
-  var scrub = function(timecode){
-    scrub_position = timecode;
-    if(!load_start_time){
+  waterfall.prototype._scrub = function(timecode){
+    this._scrub_position = timecode;
+    if(!this._load_start_time){
       return false;
     }
-    var list = generate_show_list(timecode);
-    render(list);
+    var list = this._generate_show_list(timecode);
+    this.render(list);
   }
 
   // Public ----------------------------------------------
 
-  function init(){
-    init_images();
-
+  waterfall.prototype.set_speed = function(s){
+    this._speed = s<50 ? 50 : s;
   }
 
-  init.prototype.set_speed = function(s){
-    speed = s<50 ? 50 : s;
+  waterfall.prototype.start = function(){
+    var instance = this;
+    this._timer = setInterval(function(){
+      instance.next();
+    }, this._speed);
   }
 
-  var start = init.prototype.start = function(){
-    timer = setInterval(next, speed);
+  waterfall.prototype.stop = function(){
+    this._play_as_loaded = false;
+    clearInterval(this._timer);
   }
 
-  var stop = init.prototype.stop = function(){
-    play_as_loaded = false;
-    clearInterval(timer);
-  }
-
-  var next = init.prototype.next = function(){
-    scrub_position++;
-    if(scrub_position >= frame_count){
-      scrub_position = -1;
-      stop();
+  waterfall.prototype.next = function(){
+    this._scrub_position++;
+    if(this._scrub_position >= this._frame_count){
+      this._scrub_position = -1;
+      this.stop();
     }
-    scrub(scrub_position);
+    this._scrub(this._scrub_position);
   }
 
-  var prev = init.prototype.previous = function(){
-    scrub_position--;
-    if(scrub_position < 0){
-      scrub_position = -1;
-      stop();
+  waterfall.prototype.previous = function(){
+    this._scrub_position--;
+    if(this._scrub_position < 0){
+      this._scrub_position = -1;
+      this.stop();
     }
-    scrub(scrub_position);
+    this._scrub(this._scrub_position);
   }
 
-  init.prototype.scrub = function(timecode){
-    stop();
-    scrub(timecode);
+  waterfall.prototype.scrub = function(timecode){
+    this.stop();
+    this._scrub(timecode);
   }
 
-  init.prototype.scrub_percent = function(percent){
-    stop();
-    number = percent >= 100 ? frame_count-1 : Math.floor(percent*frame_count/100);
-    return scrub(number);
+  waterfall.prototype.scrub_percent = function(percent){
+    this.stop();
+    var timecode = percent >= 100 ? this._frame_count-1 : Math.floor(percent*this._frame_count/100);
+    return this._scrub(timecode);
   }
 
-  init.prototype.playhead = function(){
-    return scrub_position;
+  waterfall.prototype.playhead = function(){
+    return this._scrub_position;
   }
 
-  init.prototype.playhead_percent = function(){
-    return scrub_position/frame_count*100;
+  waterfall.prototype.playhead_percent = function(){
+    return this._scrub_position/this._frame_count*100;
   }
 
-
-  return new init();
-
-}
+})()
