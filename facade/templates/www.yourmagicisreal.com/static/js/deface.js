@@ -1,16 +1,16 @@
 (function(root){
   var DEFACE = root.DEFACE = {}
 
-  DEFACE.create = function(name, fn){
+  DEFACE.create = function(name){
     if(this[name]){
       throw "Duplicate plug-in";
     }
 
     var fn = function(){}
+    $.extend(fn.prototype, events);
 
     this[name] = function(){
       var inst = new fn();
-      $.extend(fn.prototype, events);
       inst.init.apply(inst, arguments);
       return inst;
     };
