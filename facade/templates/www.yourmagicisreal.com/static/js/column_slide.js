@@ -1,45 +1,55 @@
-var columnSlide = (function(column, t,l,r){
+(function (){
+  // requires jquery, underscore
+  var column_slide = DEFACE.create('column_slide');
+
+  column_slide.prototype.init = function(column, t,l,r){
+    this.$column = $(column);
+
+    // get these from original css
+    this.top = t;
+    this.left = l;
+    this.right = r;
+    this.column = 100 - (l+r);
+
+    this.add_handle('left','dragger', this.$column, this.size_column_left.bind(this));
+    this.add_handle('right','sizer', this.$column, this.size_column.bind(this));
+    this.draw_column();
+  }
 
   // Private
-  var $column = $(column);
 
-  // get these from original css
-  var top = t;
-  var left = l;
-  var right = r;
-  var column = 100 - (l+r);
 
-  var draw_column = function(){
-    $column.css({
-      'width':column+'%',
-      'margin': top + '%' + right + '%' + top + '%' + left + '%'
+  column_slide.prototype.draw_column = function(){
+    this.$column.css({
+      'width':this.column+'%',
+      'margin': this.top + '%' + this.right + '%' + this.top + '%' + this.left + '%'
     });
   }
 
-  var move_column = function(l){
-    left = l;
-    right = 100 - (left + column);
-    draw_column();
+  column_slide.prototype.move_column = function(l){
+    this.left = l;
+    this.right = 100 - (this.left + this.column);
+    this.draw_column();
   }
 
-  var size_column_left = function(l){
-    left = l;
-    column = 100 - (left + right);
-    draw_column();
+  column_slide.prototype.size_column_left = function(l){
+    this.left = l;
+    this.column = 100 - (this.left + this.right);
+    this.draw_column();
   }
 
-  var size_column = function(r){
-    column = (r - left)
-    right = 100 - (left + column);
-    draw_column();
+  column_slide.prototype.size_column = function(r){
+    this.column = (r - this.left)
+    this.right = 100 - (this.left + this.column);
+    this.draw_column();
   }
 
-  var add_pill_el = function(cls, place){
-    return dragger = $('<a class="'+cls+' phil_box"></a>').appendTo($(place))
+  column_slide.prototype.add_handle_el = function(cls, place){
+    return dragger = $('<a class="'+cls+' handle"></a>').appendTo($(place))
   }
 
-  var add_pill = function(side, cls, column, fn){
-    var pill = add_pill_el(cls, column);
+  column_slide.prototype.add_handle = function(side, cls, column, fn){
+    var pill = this.add_handle_el(cls, column);
     pill.mousedown(function(e){
 
       if(e.which!=1){
@@ -47,8 +57,6 @@ var columnSlide = (function(column, t,l,r){
         return true;
       }
 
-      // what is difference between where we clicked in the element
-      // and the center of the element
       var w = $(document).width();
       var elClick = e.offsetX;
       var elPos = $(e.target).position().left;
@@ -60,41 +68,20 @@ var columnSlide = (function(column, t,l,r){
         var o = elClick+elPos-elWid;
       }
 
-      $(document).mousemove(function(e){
+      $(document).on('mousemove.column_slide', function(e){
         l = e.pageX - o;
         var amnt = (l/w)*100;
         fn(amnt);
         pill.html('<b class="label_above no_select">'+Math.ceil(amnt)+'%</b>')
       })
 
-      $(document).mouseup(function(e){
+      $(document).on('mouseup.column_slide',function(e){
         pill.html('');
-        $(document).unbind('mousemove');
-        $(document).unbind('mouseup');
+        $(document).off('mousemove.column_slide');
+        $(document).off('mouseup.column_slide');
       })
       return false;
     })
   }
 
-  // Public
-
-  function init(){
-    //this.add_dragger();
-    //this.add_sizer();
-    add_pill('left','dragger', $column, size_column_left);
-    add_pill('right','sizer', $column, size_column);
-    draw_column();
-  }
-
-
-  init.prototype.add_hider = function(){
-    var sizer = $('<a class="hider hide_box"></a>').appendTo($('body'))
-    sizer.click(function(e){
-      $('.phil_box').fadeToggle();
-      $(this).show();
-      return false;
-    })
-  }
-
-  return new init();
-})
+})();
