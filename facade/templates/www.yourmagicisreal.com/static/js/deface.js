@@ -11,7 +11,9 @@
 
     this[name] = function(){
       var inst = new fn();
-      inst.init.apply(inst, arguments);
+      if(inst.init){
+        inst.init.apply(inst, arguments);
+      }
       return inst;
     };
 
