@@ -37,38 +37,64 @@
     //this.set_loading_bar(0);
 
     this._start_load();
-    for (var _i=0, _len=stash.length; _i<_len; _i++) {
+    var complete = [];
+
+    var _len = stash.length;
+
+    for (var _i=0; _i<_len; _i++) {
       $el = $(stash[_i]);
+      $el.addClass('hide');
       $el.remove();
-      $el.hide();
-      this._append_on_load($el);
+
+      // parse based on complete
+      var img = $el.find('img');
+
+      if(img[0].complete){
+        complete.push($el);
+      } else {
+        img.one('load', this._load_handler.bind(this, $el));
+      }
+
     };
+
+    if(complete.length === _len){
+      console.log('autostart ' + complete.length);
+      this.stop();
+      $.each(complete, this.trigger_load.bind(this));
+      this.rewind();
+      this.start();
+    } else {
+      $.each(complete, this.trigger_load.bind(this))
+    }
   }
 
-  waterfall.prototype._append_on_load = function($el){
-    var instance = this;
-    $el.find('img').load(function(){
-      var loaded_count = instance._items.push($el);
-      var el_index = loaded_count-1;
+  waterfall.prototype.trigger_load = function(index, $el){
+    this._load_handler($el);
+  }
 
-      $el.prependTo(instance.container); // attach in reverse order
-      $el.append("<div class='order'>"+(el_index)+"</div>")
-      if(instance._play_as_loaded){
-        instance.next();
-      }
+  waterfall.prototype._load_handler = function($el){
+    var loaded_count = this._items.push($el);
+    var el_index = loaded_count-1;
 
-      if(instance._check_index(el_index)){
-        console.log('in');
-        $el.show();
-      }
+    // progress
+    var progress = loaded_count/(this._item_count+this._fall_length)*100;
+    this.trigger('load_progress', progress);
 
-      if(loaded_count === instance._item_count){
-        instance._end_load();
-        if(instance._play_as_loaded){
-          instance.start();
-        }
-      }
-    });
+    // for testing
+    //$el.append("<div class='order'>"+(el_index)+"</div>")
+    $el.prependTo(this.container); // attach in reverse order
+
+    if(this._play_as_loaded){
+      this.next();
+    }
+
+    if(this._check_index(el_index)){
+      this._show_by_index(el_index);
+    }
+
+    if(loaded_count === this._item_count){
+      this._end_load();
+    }
   }
 
   waterfall.prototype._show_single_image = function(index){
@@ -76,13 +102,18 @@
     this.render(index);
   }
 
-  waterfall.prototype._start_load = function(){
-    this._load_start_time = new Date(); // Cache buster of sorts
-  }
+  waterfall.prototype._start_load = function(){}
 
   waterfall.prototype._end_load = function(){
+    console.log('end load');
+    console.log(this._play_as_loaded);
+
     this._loaded = true;
-    console.log(new Date() - this._load_start_time);
+    if(this._play_as_loaded){
+      this.start();
+    }
+    this.trigger('load_progress', 100);
+    this.trigger('load');
   }
 
   waterfall.prototype._check_index = function(index){
@@ -107,13 +138,13 @@
 
   waterfall.prototype._hide_by_index = function(i){
     if(this._items[i]){
-      this._items[i].hide();
+      this._items[i].addClass('hide');
     }
   }
 
   waterfall.prototype._show_by_index = function(i){
     if(this._items[i]){
-      this._items[i].show();
+      this._items[i].removeClass('hide');
     }
   }
 
@@ -122,21 +153,15 @@
     var to_show = _.difference(list, this._showing);
     var to_hide = _.difference(this._showing, list);
     this._showing = list;
-    console.log('----');
-    console.log(to_hide);
-    console.log(to_show);
-    console.log('----');
     _.each(to_hide, this._hide_by_index, this);
     _.each(to_show, this._show_by_index, this);
   }
 
   waterfall.prototype._scrub = function(timecode){
-    this._scrub_position = timecode;
-    if(!this._load_start_time){
-      return false;
-    }
     var list = this._generate_show_list(timecode);
+    this._scrub_position = timecode;
     this.render(list);
+    this.trigger('scrub', this.playhead_percent())
   }
 
   waterfall.prototype.set_speed = function(s){
@@ -145,21 +170,32 @@
 
   waterfall.prototype.start = function(){
     var instance = this;
-    this._timer = setInterval(function(){
-      instance.next();
-    }, this._speed);
+    clearInterval(this._timer);
+    if(!this._loaded){
+      this._play_as_loaded = true;
+    } else {
+      this._timer = setInterval(function(){
+        instance.next();
+      }, this._speed);
+    }
+    this.trigger('start');
   }
 
   waterfall.prototype.stop = function(){
     this._play_as_loaded = false;
     clearInterval(this._timer);
+    this.trigger('stop');
+  }
+
+  waterfall.prototype.rewind = function(){
+    this.stop();
+    this._scrub(-1);
   }
 
   waterfall.prototype.next = function(){
     this._scrub_position++;
     if(this._scrub_position >= this._frame_count){
-      this._scrub_position = -1;
-      this.stop();
+      this.rewind();
     }
     this._scrub(this._scrub_position);
   }
@@ -190,6 +226,10 @@
 
   waterfall.prototype.playhead_percent = function(){
     return this._scrub_position/this._frame_count*100;
+  }
+
+  waterfall.prototype.complete = function(){
+    return this._loaded;
   }
 
 })()
