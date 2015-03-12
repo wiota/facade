@@ -28,15 +28,49 @@
   <script type='text/javascript'>
 
     $(document).ready(function(){
-      columnSlide('.column1', 8, 40, 20);
-      classToggle('show','.project img');
 
-      var w = waterfall('.project.waterfall');
-      var b = scrub_bar('.waterfall_load', {
-        onTrack: w.scrub_percent
-      });
+      classToggle('show','.project.full img');
 
-      sw = DEFACE.stopwatch('.stopwatch');
+      // should specify column init in css
+      DEFACE.column_slide('.column1', 8, 40, 20);
+      w = DEFACE.waterfall('.project.waterfall');
+      b = DEFACE.scrub_bar('.waterfall_load', '.scrub_bar', '.range_bar');
+      p = $('.play').hide();
+
+
+      w.on('load_progress', function(evt, percent){
+        b.set_range(0, percent);
+      })
+
+      // in case images are cached and load is called before handler is attached
+      if(w.complete()){
+        b.set_range(0, 100);
+      }
+
+      w.on('load', function(){
+        p.show();
+      })
+
+      w.on('start', function(){
+        p.hide();
+      })
+
+      w.on('stop', function(){
+        p.show();
+      })
+
+      w.on('scrub', function(evt, percent){
+        b.set(percent);
+      })
+
+      b.on('track', function(evt, percent){
+        w.scrub_percent(percent);
+      })
+
+      p.on('click', function(evt){
+        w.start();
+      })
+
 
     })
 
@@ -91,9 +125,11 @@
     {% elif work.succset and work.vertex_type == 'work' %}
 
     <div class='column1 waterfall'>
+
       <!-- scrub bar -->
-      <div class="waterfall_load"><div class="waterfall_load_bar"></div></div>
-      <div class="speed_text"></div>
+      <div class="waterfall_load"><div class="range_bar"></div><div class="scrub_bar"></div></div>
+
+      <div class='play'><img src="/static/shapes/triangle_base_20.svg" id="shape" alt=""></div>
 
       <div class='project waterfall'>
 
@@ -104,6 +140,7 @@
         {% endfor %}
 
       </div>
+
     </div>
 
     {% endif %}

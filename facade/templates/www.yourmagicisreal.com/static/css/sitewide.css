@@ -167,17 +167,17 @@ h2 {
 
 .projects .column1 {position: relative;}
 
-.projects .phil_box {border-radius: 50%; cursor: ew-resize;display:block;position:absolute;}
-.projects .phil_box .label_above {position:relative; text-align: center; display:block; font-family: 'helvetica', 'arial', 'san-serif';}
+.projects .handle {border-radius: 50%; cursor: ew-resize;display:block;position:absolute;}
+.projects .handle .label_above {position:relative; text-align: center; display:block; font-family: 'helvetica', 'arial', 'san-serif';}
 
 
 .projects .index {text-align: right;}
 .projects .index img {width: 50%;}
 
-.projects .index .phil_box {height: 50px; width: 50px; background: #f5ea3d;}
-.projects .index .phil_box .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
-.projects .index .dragger {position:absolute; top:-25px; left: -25px;}
-.projects .index .sizer {position:absolute; top:-25px; right: -25px;}
+.projects .index .handle {height: 50px; width: 50px; background: #f5ea3d;}
+.projects .index .handle .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
+.projects .index .dragger {top:-25px; left: -25px;}
+.projects .index .sizer {top:-25px; right: -25px;}
 
 /* full ------------------------------ */
 
@@ -185,8 +185,8 @@ h2 {
 .projects .full img.show {width: 130%; float:none; margin: 2px 2px 2px -30%; position:relative;}
 
 
-.projects .full .phil_box {height: 50px; width: 50px; background: #f5ea3d;}
-.projects .full .phil_box .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
+.projects .full .handle {height: 50px; width: 50px; background: #f5ea3d;}
+.projects .full .handle .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
 .projects .full .dragger {top:-25px; left: -25px;}
 .projects .full .sizer {top:-25px; right: -25px;}
 
@@ -195,6 +195,7 @@ h2 {
 .projects .waterfall {
   z-index: 16;
   cursor: pointer;
+  position: relative;
 }
 
 .projects .speed_text {
@@ -209,8 +210,33 @@ h2 {
   -o-transform: rotate(30deg);
 }
 
-.projects .waterfall_item {width: 50%; float:left; margin: 0; position:relative;}
+.projects .waterfall .play {
+  position:absolute;
+  margin: 0% 0% 0 0%;
+  width: 20%;
+  right: -20%;
+  z-index: 100;
+  transition: all .5s;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+
+.projects .waterfall .play:hover {
+  transform: scale(1.2) rotate(90deg);
+  -webkit-transform: scale(1.2) rotate(90deg);
+  -moz-transform: scale(1.2) rotate(90deg);
+  -ms-transform: scale(1.2) rotate(90deg);
+  -o-transform: scale(1.2) rotate(90deg);
+}
+
+.projects .waterfall_item {opacity: 1;width: 50%; float:left; margin: 0; position:relative;}
+.projects .waterfall_item.hide {display:none;}
 .projects .waterfall_item img {width: 100%;display: block;}
+.projects .waterfall_item.show {width: 100%;}
+.projects .waterfall_item .order {display:none;position:absolute; top:0; font-size: 40px;font-weight: bold;color: #fff;}
 
 .projects .waterfall h2 {
   margin: 10px 0;
@@ -223,14 +249,19 @@ h2 {
   z-index: 48;
 }
 
-.projects .waterfall_load {margin: 0 0 7px; background-color: #ff97ca;}
-.projects .waterfall_load_bar {height: 30px; width: 0;background-color: #f5ea3d;}
+.projects .waterfall_load {height: 30px; margin: 0 0 7px; background-color: #ff97ca;}
+.projects .waterfall_load .scrub_bar {position:absolute; height: 30px; width: 0;background-color: #f5ea3d; transition: all .2s;}
+.projects .waterfall_load .range_bar {position:absolute; height: 30px; width: 0;background-color: #ffffff; transition: all .2s;}
 
 
-.projects .waterfall .phil_box {height: 30px;width:30px;background-color: #ff97ca;}
-.projects .waterfall .phil_box .label_above {padding: 8px 0; font-size: 16px; color: #fff;}
+.projects .waterfall .handle {height: 30px;width:30px;background-color: #ff97ca; transition: all .5s;}
+.projects .waterfall .handle .label_above {padding: 8px 0; font-size: 16px; color: #fff;}
 .projects .waterfall .dragger {top: 0; left: -15px;}
 .projects .waterfall .sizer {top: 0; right: -15px;}
+
+.projects .waterfall .handle:hover {height: 50px; width: 50px; background: #f5ea3d;}
+.projects .waterfall .dragger:hover {top:-12.5px; left: -25px;}
+.projects .waterfall .sizer:hover {top:-12.5px; right: -25px;}
 
 /* Simulacra --------------------------------------------------------- */
 
