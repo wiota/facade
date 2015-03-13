@@ -14,12 +14,24 @@
 
   <script type="text/javascript" src="/static/js/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
-  <script type="text/javascript" src="/static/js/rapidfire.js"></script>
+  <script type="text/javascript" src="/static/js/deface.js"></script>
+  <script type="text/javascript" src="/static/js/waterfall.js"></script>
+  <script type="text/javascript" src="/static/js/stopwatch.js"></script>
+  <script type="text/javascript" src="/static/js/speed_bar.js"></script>
 
   <script type='text/javascript'>
     $(document).ready(function(){
-      var a = new rapidfire('.frame', '.aaxxx.image','.frame', 50, true);
-    // parse images
+      w = DEFACE.waterfall('.images', 50, 1);
+      sw = DEFACE.speed_bar('.frame', '.speed_bar','.speed_text');
+
+      sw.on('pause', w.stop.bind(w));
+      sw.on('resume', function(evt, speed){
+        console.log(speed);
+        w.set_speed(speed);
+        w.rewind();
+        w.start();
+      });
+
     })
   </script>
 
@@ -41,14 +53,19 @@
         <img class='' src="/static/shapes/triangle_base.svg" id="shape" alt="">
         <h1 class=''>AAXXX</h1>
       </div>
-      <!--<b class='speed_display rotate'></b>-->
+      <div class='speed_bar'></div>
+      <b class='speed_text rotate'></b>
     </div>
 
     <div class='images'>
-      {% for work in get_category(config, "aaxxx").succset %}
-        {% for cover in work.cover %}
-          <div class='aaxxx image'><img src='{{ cover.href }}?w=700' /></div>
-        {% endfor %}
+      {% for vertex in get_category(config, "aaxxx").succset %}
+        {% if vertex.vertex_type == 'work' %}
+          {% for cover in vertex.cover %}
+            <div class='aaxxx image'><img src='{{ cover.href }}?w=700' /></div>
+          {% endfor %}
+        {% elif vertex.vertex_type == 'photo' %}
+          <div class='aaxxx image'><img src='{{ vertex.href }}?w=700' /></div>
+        {% endif %}
       {% endfor %}
     </div>
 
