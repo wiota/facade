@@ -61,9 +61,7 @@
     var t = this;
     var milliseconds = 10;
     this._timer = setInterval(function(){
-      var add = t._speed_bar_speed;
-      console.log(add);
-      var w = t.$speed_bar.width() + add;
+      var w = t.$speed_bar.width() + t._speed_bar_speed;
       t.$speed_bar.css({'width':w+'px'})
     },milliseconds)
   }
