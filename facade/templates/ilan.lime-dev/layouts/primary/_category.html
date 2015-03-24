@@ -1,9 +1,9 @@
-<div class='item'><a href='/vertex/{{ item.slug }}'>
+<div class='item'><a style="color: #{{ item.color }}" href='/vertex/{{ item.slug }}'>
 
   {% for cover in item.cover %}
     <img src='{{ cover.href }}?h=200'>
   {% endfor %}
 
-  {% include "primative/_"+item.vertex_type+".html" %}
+  {{ item.title }}
 
 </a></div>

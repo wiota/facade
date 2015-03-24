@@ -21,11 +21,12 @@
   <div id='column1'>
 
     <div class='predList'>
+      This {{ vertex.vertex_type }} exists in all these places:<br>
       {% for item in vertex.predset %}
         {% if(item.vertex_type == 'body') %}
           <a class='predecessor' href='/'>{{ item.title }}</a>
         {% else %}
-          <a class='predecessor' href='/vertex/{{ item.slug }}'>{{ item.title }}</a>
+          <a class='predecessor' style="color: #{{ item.color }}" href='/vertex/{{ item.slug }}'>{{ item.title }}</a>
         {% endif %}
       {% endfor %}
     </div>
@@ -47,9 +48,14 @@
 
 
   $(document).ready(function(){
-    $('.pred').on('click', function(){
-      $('.predList').toggleClass('show');
+    var predList = $('.predList');
+    var pred = $('.pred');
+
+    pred.on('click', function(){
+      pred.toggleClass('show')
+      predList.toggleClass('show');
     })
+
   });
 
 </script>

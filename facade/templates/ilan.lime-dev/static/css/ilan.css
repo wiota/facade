@@ -24,6 +24,8 @@ p {
 }
 
 #column1 {
+  overflow: hidden;
+  position: relative;
   margin: 8% 20%;
 }
 
@@ -35,9 +37,21 @@ p {
 
 /* Predset */
 
+.pred {
+  font-size: 50px;
+  height: 32px;
+  width: 32px;
+  text-indent: -999px;
+  overflow: hidden;
+  background-image: url("/static/img/up.gif");
+}
+
+.pred.show {
+  background-image: url("/static/img/down.gif");
+}
+
 .predList {
   height: 0;
-  visibility: hidden;
   opacity: 0;
   overflow: hidden;
   -moz-transition: all .5s;
@@ -46,7 +60,7 @@ p {
 }
 
 .predList.show {
-  height: auto;
+  height: 100px;
   visibility: visible;
   opacity: 1;
 }
