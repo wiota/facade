@@ -102,6 +102,17 @@ def exhibition_individual(slug):
     return render_template(layout+'/exhibition.html', slug=slug, category=vertex)
 
 
+@mod.route('/vertex/<slug>')
+def vertex_page(slug):
+    try:
+        vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/vertex.html', vertex=vertex)
+
+
 '''
 @mod.route('/<vertex_type>/<slug>')
 def vertex_page(vertex_type, slug):

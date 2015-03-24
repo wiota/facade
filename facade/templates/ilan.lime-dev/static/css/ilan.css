@@ -1,0 +1,66 @@
+body {
+  font-size: 14px;
+  font-family: 'Playfair Display', serif;
+}
+
+a {
+  color: #333;
+}
+
+a:visited {
+  color: #666;
+}
+
+a:hover {
+  color: #33f;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+p {
+  font-size: 14px;
+}
+
+#column1 {
+  margin: 8% 20%;
+}
+
+/* Summary */
+
+.header .title {
+  font-size: 22px;
+}
+
+/* Predset */
+
+.predList {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.predList.show {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+.predecessor {
+
+}
+
+/* Succset */
+
+.item {
+  margin: 5% 0;
+}
+
+.title {
+  font-size: 18px;
+}

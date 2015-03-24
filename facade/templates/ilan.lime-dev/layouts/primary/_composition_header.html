@@ -1,0 +1,9 @@
+<div class='header'>
+
+  {% for cover in item.cover %}
+    <img src='{{ cover.href }}?h=200'>
+  {% endfor %}
+
+  {% include "primative/_"+item.vertex_type+".html" %}
+
+</div>
