@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ category.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+
+
+  <link href="/static/css/monhegan.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+
+
+</head>
+
+<body class='category {{ category.layout }}'>
+
+  <div id='column1'>
+
+    {% for vertex in category.succset %}
+      <div class='item'>
+
+        {% if vertex.vertex_type == "work" %}
+          {% include "primary/_work.html" %}
+        {% elif vertex.vertex_type == "photo" %}
+          {% include "primary/_photo.html" %}
+        {% elif vertex.vertex_type == "event" %}
+          {% include "primary/_event.html" %}
+        {% elif vertex.vertex_type == "exhibition" %}
+          {% include "primary/_exhibition.html" %}
+        {# elif vertex.vertex_type == "whatever" and vertex.layout#}
+          {# include vertex.layout + "/_whatever.html" #}
+        {% endif %}
+
+
+
+
+
+      </div>
+    {% endfor %}
+
+  </div>
+
+  <div id='column2'>
+
+  </div>
+
+</div>
+
+<script type='text/javascript'>
+
+
+  $(document).ready(function(){
+
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+<div class='block event'>
+{{ vertex.title }}
+
+{% if vertex.cover %}
+  {% for cover in vertex.cover %}
+  <img src='{{ cover.href }}?w=200'>
+  {% endfor %}
+{% endif %}
+</div>

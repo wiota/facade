@@ -53,6 +53,7 @@ def by_predecessor_id(predecessor_slug, id):
     layout = (vertex.layout or "primary")
     return render_template(layout+'/'+vertex.vertex_type+'.html', vertex=vertex, predecessor=predecessor)
 
+
 @mod.route('/work/<slug>')
 def work_individual(slug):
     try:
@@ -77,6 +78,31 @@ def category_individual(slug):
     return render_template(layout+'/category.html', slug=slug, category=vertex)
 
 '''
+Temporary girl and exhibition endpoint for demo purposes
+'''
+@mod.route('/girl/<slug>')
+def girl_individual(slug):
+    try:
+        vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/girl.html', slug=slug, category=vertex)
+
+
+@mod.route('/exhibition/<slug>')
+def exhibition_individual(slug):
+    try:
+        vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/exhibition.html', slug=slug, category=vertex)
+
+
+'''
 @mod.route('/<vertex_type>/<slug>')
 def vertex_page(vertex_type, slug):
     vertex = get_vertex_from_slug(app.config['HOST'], slug)
@@ -87,7 +113,6 @@ def vertex_page(vertex_type, slug):
     layout = (vertex.layout or "primary")
     return render_template(layout+'/'+vertex_type+'.html', vertex=vertex)
 '''
-
 
 @mod.route('/happening/<slug>')
 def happening_individual(slug):
