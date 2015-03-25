@@ -38,16 +38,27 @@ p {
 /* Predset */
 
 .pred {
-  font-size: 50px;
+  -moz-transition: all .5s;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  background-color: #fff;
+  display:block;
   height: 32px;
   width: 32px;
-  text-indent: -999px;
-  overflow: hidden;
-  background-image: url("/static/img/up.gif");
+  margin: 12px 0;
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.pred img {
+  max-width: 100%;
 }
 
 .pred.show {
-  background-image: url("/static/img/down.gif");
+  -moz-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .predList {

@@ -21,7 +21,9 @@
   <div id='column1'>
 
     <div class='predList'>
-      This {{ vertex.vertex_type }} exists in all these places:<br>
+
+      {{ vertex.title }} is part of:<br>
+
       {% for item in vertex.predset %}
         {% if(item.vertex_type == 'body') %}
           <a class='predecessor' href='/'>{{ item.title }}</a>
@@ -30,7 +32,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    <a class='pred'>Up</a>
+    <a class='pred'><img src="/static/img/up.svg"></a>
 
     {% set item = vertex %}
     {% include "primary/_"+item.vertex_type+"_header.html" %}
