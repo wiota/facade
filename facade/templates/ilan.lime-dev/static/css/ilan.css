@@ -1,6 +1,7 @@
 body {
   font-size: 14px;
   font-family: 'Playfair Display', serif;
+  margin: 0;
 }
 
 a {
@@ -26,13 +27,23 @@ p {
 #column1 {
   overflow: hidden;
   position: relative;
-  margin: 8% 20%;
+  margin: 8% 0 8% 10%;
+  width: 45%;
+  float:left;
+}
+
+#column2 {
+  overflow: hidden;
+  position: relative;
+  margin: 8% 10%;
+  width: 25%;
+  float:left;
 }
 
 /* Summary */
 
 .header .title {
-  font-size: 22px;
+  font-size: 32px;
 }
 
 /* Predset */
@@ -88,4 +99,13 @@ p {
 
 .title {
   font-size: 18px;
+}
+
+/* Types */
+.composer {
+  color: #000;
+}
+
+.composer i {
+  font-size: 11px;
 }

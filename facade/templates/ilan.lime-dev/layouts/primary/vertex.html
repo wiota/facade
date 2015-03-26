@@ -20,7 +20,23 @@
 
   <div id='column1'>
 
-    <div class='predList'>
+    {% set item = vertex %}
+    {% include "primary/_"+item.vertex_type+"_header.html" %}
+
+
+    {% for item in vertex.succset %}
+      {% include "primary/_"+item.vertex_type+".html" %}
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<div id='column2'>
+
+  <a class='pred show'><img src="/static/img/up.svg"></a>
+
+  <div class='predList show'>
 
       {{ vertex.title }} is part of:<br>
 
@@ -31,16 +47,7 @@
           <a class='predecessor' style="color: #{{ item.color }}" href='/vertex/{{ item.slug }}'>{{ item.title }}</a>
         {% endif %}
       {% endfor %}
-    </div>
-    <a class='pred'><img src="/static/img/up.svg"></a>
 
-    {% set item = vertex %}
-    {% include "primary/_"+item.vertex_type+"_header.html" %}
-
-
-    {% for item in vertex.succset %}
-      {% include "primary/_"+item.vertex_type+".html" %}
-    {% endfor %}
 
   </div>
 
