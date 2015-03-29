@@ -20,18 +20,15 @@
 
   <div id='column1'>
 
-  <h2>Child Layout</h2>
+  <h2>{{ category.title }}</h2>
 
   {% for item in category.succset %}
     <div class='item'>
-      <a href='/category/{{ item.slug }}'>
-        {% if not item.cover %}
-          {{ item.title }}
-        {% endif %}
-        {% for cover in item.cover %}
-          <img src='{{ cover.href }}?w=600'>
-        {% endfor %}
-      </a>
+      {% for cover in item.cover %}
+        <a href='/category/{{ item.slug }}'><img src='{{ cover.href }}?w=300'></a>
+      {% endfor %}
+      <a href='/category/{{ item.slug }}'>{{ item.title }}</a>
+
       <div class='description'>{{ item.description }}</div>
     </div>
   {% endfor %}

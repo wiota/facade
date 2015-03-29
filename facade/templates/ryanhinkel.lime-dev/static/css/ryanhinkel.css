@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+}
+
+/* ------------------------------- */
+
 .category.house {
   font-family: "Courier" monospace;
   font-size: 300%;
@@ -20,7 +26,7 @@
 
 .category.child {
   font-family: "Helvetica" "Arial" "san-serif";
-  font-size: 350%;
+  font-size: 200%;
   background-color: #f4eb00;
   text-align: right;
 }
@@ -32,7 +38,23 @@
 }
 
 .category.child .item {
-  margin: 2% 10%;
+  margin: 2% 0 2% 10%;
+  width: 35%;
+  float:left;
 }
 
-.category.child a {}
+.category.child .item img {
+  display: block;
+  width: 100%;
+}
+
+.category.child a {
+  display: block;
+  margin: 5% 0;
+  font-size: 100%;
+  color: #000;
+}
+
+.category.child .description {
+  font-size: 75%;
+}
