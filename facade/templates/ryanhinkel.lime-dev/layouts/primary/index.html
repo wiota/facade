@@ -19,7 +19,7 @@
 {# set variable = "Hello" #}
 {% set b2 = get_body(config) %}
 
-<body class='home'>
+<body class='home primary'>
 
 
 
@@ -33,7 +33,7 @@
         {% for cover in item.cover %}
           <img src='{{ cover.href }}?w=600'>
         {% endfor %}
-      </a></li>
+      </a></div>
     {% endfor %}
 
   </div>

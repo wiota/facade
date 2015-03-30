@@ -1,8 +1,43 @@
 body {
+  font-family: "Helvetica", "Arial", "san-serif";
   margin: 0;
 }
 
-/* ------------------------------- */
+a {
+  color: #30c6cf;
+}
+
+/* Primary layout ------------------------------- */
+
+.primary .item {
+  margin: 3%;
+  clear:both;
+  overflow: auto;
+}
+
+.primary .item .photo {
+  float:left;
+  width: 50%;
+  margin-left: 10%;
+}
+
+.primary .item .photo img {
+  width: 100%;
+}
+
+.primary .item .predecessors {
+  float:left;
+  width: 30%;
+  margin: 0;
+  padding-left: 5%;
+}
+
+.primary .item .predecessors li {
+  list-style-type: none;
+  display:inline-block;
+}
+
+/* House layout ------------------------------- */
 
 .category.house {
   font-family: "Courier" monospace;

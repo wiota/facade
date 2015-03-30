@@ -16,20 +16,29 @@
 
 </head>
 
-<body class='category {{ category.layout }}'>
+<body class='category primary'>
 
   <div id='column1'>
 
     {% for item in category.succset %}
-      <div class='item'>
-        {% if not item.cover %}
-          {{ item.title }}
-        {% endif %}
-        {% for cover in item.cover %}
-          <img src='{{ cover.href }}?w=600'>
+    <div class='item'>
+
+      {% if item.vertex_type == 'photo' %}
+        {% include "primary/_photo.html" %}
+        <ul class='predecessors'>(
+        {% for pred in item.predset %}
+          {% if pred.vertex_type == 'category' %}
+            <li><a href="/category/{{ pred.slug }}">{{ pred.title }}</a></li>
+          {% endif %}
         {% endfor %}
-      </div>
+        )
+        </ul>
+      {% endif %}
+
+
+    </div>
     {% endfor %}
+
 
   </div>
 
