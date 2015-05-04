@@ -7,7 +7,7 @@ import newrelic.agent
 if __name__ == '__main__' :
     app = Flask(__name__)
     app.debug = os.environ.get('FLASK_DEBUG') == 'True'
-    app.wsgi_app = Landlord(create_app)
+    app.wsgi_app = Landlord(create_app, subdomains=['www', 'static'])
     newrelic.agent.initialize('newrelic.ini')
     port = int(os.environ.get('PORT', 5000))
     app.run(host="0.0.0.0", port=port, use_reloader=True)
