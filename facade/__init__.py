@@ -1,16 +1,31 @@
 import os
-from flask import Flask
+from flask import Flask, safe_join, send_file
+from werkzeug.exceptions import NotFound
 from toolbox import tools, template_tools
 from toolbox.emailer import FacadeExceptionEmail
 from toolbox.template_filters import format_nl2br
 import traceback
 
 def create_app(hostname):
-    static_folder = "./templates/%s/static/" % (hostname)
     template_folder = "./templates/%s/layouts/" % (hostname)
-    app = Flask(__name__, static_url_path="/static", static_folder=static_folder, template_folder=template_folder)
+    app = Flask(__name__, static_folder=None, template_folder=template_folder)
     app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
+    app.config["SERVER_NAME"] = "%s:5000" % (hostname)
+
+    def static(filename):
+        static_folder = "templates/%s/static/" % (hostname)
+        filename = safe_join(static_folder, filename)
+        if not os.path.isabs(filename):
+            filename = os.path.join(app.root_path, filename)
+        if not os.path.isfile(filename):
+            raise NotFound()
+        return send_file(filename)
+
+    app.add_url_rule('/<path:filename>',
+                     endpoint='static',
+                     subdomain='static',
+                     view_func=static)
 
     # Get the host of the hostname
     # We have a circular problem
@@ -68,6 +83,6 @@ def create_app(hostname):
             tb = traceback.format_exc()
             FacadeExceptionEmail(exception, tb, host).send()
 
-    app.logger.debug("App created for %s" % (host))
+    app.logger.debug("App created for %s" % (host.hostname))
 
     return app
