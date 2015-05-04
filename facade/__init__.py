@@ -9,9 +9,15 @@ import traceback
 def create_app(hostname):
     template_folder = "./templates/%s/layouts/" % (hostname)
     app = Flask(__name__, static_folder=None, template_folder=template_folder)
-    app.debug = os.environ.get('FLASK_DEBUG', False)
     db = tools.initialize_db(app)
-    app.config["SERVER_NAME"] = "%s:5000" % (hostname)
+
+    dev = os.environ.get('DEVEL', 'FALSE').upper() == 'TRUE'
+    app.debug = dev
+
+    # This is required for subdomains to work
+    app.config["SERVER_NAME"] = hostname
+    if dev:
+        app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
 
     def static(filename):
         static_folder = "templates/%s/static/" % (hostname)
