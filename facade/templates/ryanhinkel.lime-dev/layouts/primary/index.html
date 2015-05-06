@@ -16,9 +16,6 @@
 
 </head>
 
-{# set variable = "Hello" #}
-{% set b2 = get_body(config) %}
-
 <body class='home primary'>
 
 
@@ -31,7 +28,7 @@
           {{item.title}}
         {% endif %}
         {% for cover in item.cover %}
-          <img src='{{ cover.href }}?w=600'>
+          <img src='{{ cover.href }}?w=700'>
         {% endfor %}
       </a></div>
     {% endfor %}
