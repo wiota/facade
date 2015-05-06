@@ -6,20 +6,20 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico')}}" />
 
-  <link rel="stylesheet" href="/static/css/normalize.css">
-  <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/sitewide.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sitewide.css')}}">
 
 
-  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/underscore-min.1.5.2.js')}}"></script>
 
-  <script type="text/javascript" src="/static/js/deface.js"></script>
-  <script type="text/javascript" src="/static/js/waterfall.js"></script>
-  <script type="text/javascript" src="/static/js/column_slide.js"></script>
-  <script type="text/javascript" src="/static/js/class_toggle.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/deface.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/waterfall.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/column_slide.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/class_toggle.js')}}"></script>
 
 
   <script type='text/javascript'>
