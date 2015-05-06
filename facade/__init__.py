@@ -1,5 +1,6 @@
 import os
 from flask import Flask, safe_join, send_file
+from flask.ext.cors import cross_origin
 from werkzeug.exceptions import NotFound
 from toolbox import tools, template_tools
 from toolbox.emailer import FacadeExceptionEmail
@@ -19,6 +20,8 @@ def create_app(hostname):
     if dev:
         app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
 
+    @app.route('/<path:filename>', subdomain='static')
+    @cross_origin()
     def static(filename):
         static_folder = "templates/%s/static/" % (hostname)
         filename = safe_join(static_folder, filename)
@@ -27,11 +30,6 @@ def create_app(hostname):
         if not os.path.isfile(filename):
             raise NotFound()
         return send_file(filename)
-
-    app.add_url_rule('/<path:filename>',
-                     endpoint='static',
-                     subdomain='static',
-                     view_func=static)
 
     # Get the host of the hostname
     # We have a circular problem
