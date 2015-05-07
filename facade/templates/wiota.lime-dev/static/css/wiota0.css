@@ -55,7 +55,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #1f6490;
+  background: #ffffff;
   font-size: 20px;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
   line-height: 30px;
@@ -109,17 +109,6 @@ hr {
   }
 }
 
-@media (max-width: 450px) {
-  .column {
-    padding: 0% 0%;
-  }
-  .circle, .arch {
-    left: 0%;
-    right: 0%;
-    padding: 0 0 100% 0;
-  }
-}
-
 .arch {
   z-index:102;
 
@@ -153,13 +142,13 @@ hr {
   text-transform: lowercase;
   text-align: center;
   color: #fff;
-  background-color: rgba(31, 100, 144, 0.9);
+  background-color: rgba(0,0,0, 0.9);
   overflow: hidden;
   position: relative;
   z-index: 110;
 }
   .company_title h1 {
-    font: 700 160px/1.4 "cardo";
+    font: 400 160px/1.4 "cardo";
     margin: 0;
   }
   .contact {
@@ -228,13 +217,6 @@ hr {
     }
   }
 
-  @media (max-width: 450px) {
-    .shape_back {
-      padding: 10% 0% 90%;
-      width: 100%;
-    }
-  }
-
   .pyramid .text h2 {
     color: #fff;
     font: 700 40px/1.4 "cardo";
@@ -273,11 +255,6 @@ hr {
     .pyramid .text {font-size: 14px;}
   }
 
-  @media (max-width: 450px) {
-    .pyramid .text h2 {font-size: 20px;}
-   .pyramid .text {font-size: 10px;}
-  }
-
 .wedo {
   position:relative;
   z-index: 103;
@@ -289,7 +266,6 @@ hr {
   font-size: 24px;
   line-height: 1.4;
   background-color: rgba(255, 255, 255, 0.8);
-  background-image: url('https://s3.amazonaws.com/wiota/wiotaco/4grid_light.png');
 }
   .wedo hr {
     border-bottom: 5px dotted #1f6490;
