@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{ category.title }}</title>
+  <title>{{ vertex.title }}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,12 +19,20 @@
 
 </head>
 
-<body class='category {{ category.layout }}'>
+<body class='vertex {{ vertex.layout }}'>
+
+  <div class='info'>
+    <a>Representation: {{ representation }}.html</a>
+    <a>Vertex Type: {{ vertex.vertex_type }}</a>
+    <a>Predecessor Type: {{ predecessor.vertex_type }}</a>
+  </div>
 
   <div id='column1'>
 
-    {% for vertex in category.succset %}
+    {% for vertex in vertex.succset %}
       <div class='item'>
+
+        <div>&lt;{{ vertex.vertex_type }}&gt;</div>
 
         {% if vertex.vertex_type == "work" %}
           {% include "primary/_work.html" %}

@@ -28,6 +28,7 @@ def image(image_name):
     return retrieve_image(image_name, app.config['HOST'].bucketname)
 
 
+# THIS ENDPOINT RENDERS THE HTML BASED ON VERTEX TYPE ATTRIBUTE
 @mod.route('/id/<id>')
 def by_id(id):
     try:
@@ -40,6 +41,7 @@ def by_id(id):
     return render_template(layout+'/'+vertex.vertex_type+'.html', vertex=vertex)
 
 
+# THIS ENDPOINT RENDERS THE HTML BASED ON VERTEX TYPE ATTRIBUTE
 @mod.route('/id/<predecessor_slug>/<id>')
 def by_predecessor_id(predecessor_slug, id):
     # should we validate the predecessor? NO
@@ -54,6 +56,7 @@ def by_predecessor_id(predecessor_slug, id):
     return render_template(layout+'/'+vertex.vertex_type+'.html', vertex=vertex, predecessor=predecessor)
 
 
+# TEMPLATE VARIABLES "WORK" AND "MEDIA" NEED TO MIGRATE BEFORE REMOVING THIS ENDPOINT
 @mod.route('/work/<slug>')
 def work_individual(slug):
     try:
@@ -67,6 +70,7 @@ def work_individual(slug):
     return render_template(layout+'/work.html', slug=slug, work=vertex, media=vertex.succset)
 
 
+# TEMPLATE VARIABLE "CATEGORY" NEEDS TO MIGRATE BEFORE REMOVING THIS ENDPOINT
 @mod.route('/category/<slug>')
 def category_individual(slug):
     try:
@@ -77,29 +81,6 @@ def category_individual(slug):
     layout = (vertex.layout or "primary")
     return render_template(layout+'/category.html', slug=slug, category=vertex)
 
-'''
-Temporary girl and exhibition endpoint for demo purposes
-'''
-@mod.route('/girl/<slug>')
-def girl_individual(slug):
-    try:
-        vertex = get_vertex_from_slug(app.config['HOST'], slug)
-    except Vertex.DoesNotExist:
-        return make_404(request.path)
-
-    layout = (vertex.layout or "primary")
-    return render_template(layout+'/girl.html', slug=slug, category=vertex)
-
-
-@mod.route('/exhibition/<slug>')
-def exhibition_individual(slug):
-    try:
-        vertex = get_vertex_from_slug(app.config['HOST'], slug)
-    except Vertex.DoesNotExist:
-        return make_404(request.path)
-
-    layout = (vertex.layout or "primary")
-    return render_template(layout+'/exhibition.html', slug=slug, category=vertex)
 
 
 @mod.route('/vertex/<slug>')
@@ -113,18 +94,19 @@ def vertex_page(slug):
     return render_template(layout+'/vertex.html', vertex=vertex)
 
 
-'''
-@mod.route('/<vertex_type>/<slug>')
-def vertex_page(vertex_type, slug):
-    vertex = get_vertex_from_slug(app.config['HOST'], slug)
-    #
-    # if not vertex or vertex.vertex_type != vertex_type
-    #   return abort(404)
-    #
-    layout = (vertex.layout or "primary")
-    return render_template(layout+'/'+vertex_type+'.html', vertex=vertex)
-'''
 
+@mod.route('/<representation>/<slug>')
+def vertex_page(representation, slug):
+    try:
+        vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/'+representation+'.html', vertex=vertex, representation=representation)
+
+
+# TEMPLATE VARIABLE "HAPPENING" NEEDS TO MIGRATE BEFORE REMOVING THIS ENDPOINT
 @mod.route('/happening/<slug>')
 def happening_individual(slug):
     try:
@@ -138,6 +120,7 @@ def happening_individual(slug):
 
 # This is incredibly important. A suitable
 # replacement is required before removal
+# TEMPLATE VARIABLE "WORK" NEEDS TO MIGRATE BEFORE REMOVING THIS ENDPOINT
 @mod.route('/work/<categoryslug>/<slug>')
 def work_individual_old(categoryslug, slug):
     try:
@@ -153,26 +136,24 @@ def work_individual_old(categoryslug, slug):
     layout = (vertex.layout or "primary")
     return render_template(layout+'/work.html', work=vertex, category=predecessor)
 
-'''
-@mod.route('/<vertex_type>/<predecessor>/<slug>')
-def vertex_predecessor_page(vertex_type, predecessor, slug):
-    predecessor = get_vertex_from_slug(app.config['HOST'], predecessor)
-    vertex = get_vertex_from_slug(app.config['HOST'], slug)
-    #
-    # should we validate the predecessor? I don't want to,
-    # but graph-path url will ensure it anyway.
-    #
-    # 404
-    # if not vertex or predecessor or vertex.vertex_type != vertex_type
-    #   return abort(404)
-    #
-    # layout fallback
-    # layout = vertex.layout or 'default'
-    #
-    layout = (vertex.layout or "primary")
-    return render_template(layout+'/'+vertex_type+'.html', vertex=vertex, predecessor=predecessor)
 
-'''
+@mod.route('/<representation>/<predecessor>/<slug>')
+def vertex_predecessor_page(representation, predecessor, slug):
+    try:
+        vertex = get_vertex_from_slug(app.config['HOST'], slug)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    try:
+        predecessor = get_vertex_from_slug(app.config['HOST'], predecessor)
+    except Vertex.DoesNotExist:
+        return make_404(request.path)
+
+    # should we validate the predecessor? I don't want to,
+    # but graph-path url will ensure it.
+
+    layout = (vertex.layout or "primary")
+    return render_template(layout+'/'+representation+'.html', vertex=vertex, predecessor=predecessor, representation=representation)
 
 
 @mod.route('/<slug>/')

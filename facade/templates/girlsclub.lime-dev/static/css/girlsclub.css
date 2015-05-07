@@ -6,7 +6,18 @@ body {
   font-weight: 400;
 }
 
+.info {
+  position:fixed;
+  top:0;
+  right:0;
+  padding: 10px;
+  font-size: 11px;
+  text-align: right;
+}
 
+.info a {
+  display:block;
+}
 
 #column1 {
   font-size: 100%;
