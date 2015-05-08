@@ -78,7 +78,7 @@ def create_app(hostname):
     from facade.views import frontend
     frontend.db = db
     frontend.config = app.config
-    app.register_blueprint(frontend.mod)
+    app.register_blueprint(frontend.mod, subdomain="www")
 
     # Set the error handler/mailer
     if not app.debug:
