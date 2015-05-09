@@ -1,5 +1,3 @@
-
-
 /* Global Reset
 ------------------------------------------------------------------------------*/
 /* http://meyerweb.com/eric/tools/css/reset/
@@ -49,7 +47,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* Wiota */
+/* Wiota  ------------------------------------------------------------------ */
 
 body, html {
   height: 100%;
@@ -76,7 +74,7 @@ hr {
 }
 
 
-/* Column */
+/* Columns ----------------------------------------------------------------- */
 
 .column {
   position: relative;
@@ -86,32 +84,41 @@ hr {
   overflow-x: hidden;
 }
 
-.circle, .arch {
+#column0 {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+#column1 {
   position: fixed;
-  top: 0%;
+  padding: 0;
+  top: 0;
   left: 20%;
   right: 20%;
-
-  height: 0;
-  padding: 0 0 60% 0;
-  background-color: #e8eaec;
-
 }
+
+
 
 @media (max-width: 650px) {
   .column {
     padding: 0% 5%;
   }
-  .circle, .arch {
+  #column1 {
     left: 5%;
     right: 5%;
     padding: 0 0 90% 0;
   }
 }
 
-.arch {
-  z-index:102;
+/* Shapes --------------------------------------------------------------- */
 
+.arch {
+  background-color: rgba(0,0,0,.1);
+  height:0;
+  width: 100%;
+  padding-bottom: 100%;
   -webkit-border-bottom-left-radius: 50%;
   -webkit-border-bottom-right-radius: 50%;
   -moz-border-radius-bottomleft: 50%;
@@ -119,13 +126,8 @@ hr {
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
 }
-  .arch hr {
-    position:absolute;
-    top:49%;
-    }
 
 .circle {
-  z-index:102;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -145,7 +147,6 @@ hr {
   background-color: rgba(0,0,0, 0.9);
   overflow: hidden;
   position: relative;
-  z-index: 110;
 }
   .company_title h1 {
     font: 400 160px/1.4 "cardo";
@@ -180,35 +181,17 @@ hr {
 .pyramid {
   position:relative;
   color: #fff;
-  width: 90%;
-  padding: 40% 5% 0;
+  width: 100%;
+  padding: 0;
   margin: 10% 0;
-  z-index: 110;
   /* background-color: rgba(31, 100, 144, 0.5); */
 }
 
-  .pyramid .shape,
-  .shape_back {
+  .pyramid .shape {
     height: 0;
     width: 100%;
     padding: 0 0 111.111% 0;
   }
-  .pyramid .shape {
-    z-index: 10;
-    position:absolute;
-    top:0;
-    left:0;
-  }
-
-  .shape_back {
-    position:absolute;
-    padding: 10% 33.33333% 90%;
-    width: 60%;
-    left:0;
-    right:0;
-    z-index: 101;
-  }
-
 
   @media (max-width: 650px) {
     .shape_back {
@@ -225,14 +208,16 @@ hr {
     margin: 0 0 0 0;
     text-align: center;
     text-indent: 0px;
-    z-index: 100;
   }
 
   .pyramid .text {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    padding-top:40%;
     font: 400 25px/1.4 "helvetica neue";
-    position:relative;
     text-align: center;
-    z-index: 11;
   }
 
   @media (max-width: 4000px) {
@@ -257,18 +242,18 @@ hr {
 
 .wedo {
   position:relative;
-  z-index: 103;
   color: #0b2231;
   width: 80%;
   height: 0;
   padding: 10% 10% 90%;
-  margin: 0% 0;
+  margin: 0 0;
   font-size: 24px;
   line-height: 1.4;
   background-color: rgba(255, 255, 255, 0.8);
 }
   .wedo hr {
-    border-bottom: 5px dotted #1f6490;
+    width: 15px;
+    border-bottom: 5px dotted #ddd;
   }
 
   .wedo h2 {
@@ -278,7 +263,6 @@ hr {
     margin: 0 0 20% 0;
     text-align: center;
     text-indent: 0px;
-    z-index: 100;
   }
 
   .wedo h2 .wemake {
@@ -328,18 +312,15 @@ hr {
     padding: 0 0 100%;
     left:0;
     right:0;
-    z-index: 103;
   }
 
 .quote_box {
     background-color: #e8eaec;
     padding: 0 0 100%;
-    z-index: 103;
   }
 
 .quote_arch {
   position:relative;
-  z-index: 200;
   margin: -90% 0% 0;
   padding: 0 0 100%;
   height: 0;
@@ -354,7 +335,6 @@ hr {
 
 .quote {
   position:relative;
-  z-index: 200;
   margin: 0;
   padding: 50% 0% 0%;
   background-color: #1f6490;
@@ -362,7 +342,6 @@ hr {
 
 .quote_text {
   position:relative;
-  z-index: 201;
   margin: -125% 25% 0;
   padding: 0% 0% 75%;
 }
@@ -374,7 +353,7 @@ hr {
     margin: 0 0 20px 0;
     text-align: left;
     text-indent: 0px;
-    z-index: 100;
+
     /* text-shadow: 1px 1px #000; */
   }
 
@@ -386,7 +365,6 @@ hr {
     margin: 0 0 20px 0;
     text-align: left;
     text-indent: 0px;
-    z-index: 100;
 
   }
     .quote h3 em {
@@ -415,7 +393,7 @@ hr {
     display:none;
     position:absolute;
     padding: 5%;
-    z-index: 0;}
+  }
   .quote .open_quote {
     top: -20%;
     left: -35%;}
