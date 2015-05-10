@@ -245,11 +245,15 @@ hr {
   color: #0b2231;
   width: 80%;
   height: 0;
-  padding: 10% 10% 90%;
-  margin: 0 0;
+  margin: 10% 10% 90%;
+  padding: 0 0 80%;
   font-size: 24px;
-  line-height: 1.4;
-  background-color: rgba(255, 255, 255, 0.8);
+  line-height: 2.4;
+  text-align: justify;
+  background-color: rgba(255, 255, 255, 1);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
 }
   .wedo hr {
     width: 15px;
@@ -258,7 +262,7 @@ hr {
 
   .wedo h2 {
     color: #0b2231;
-    font: 700 100px/1.4 "cardo";
+    font: 700 120px/1.4 "cardo";
     font-style: normal;
     margin: 0 0 20% 0;
     text-align: center;
@@ -268,43 +272,43 @@ hr {
   .wedo h2 .wemake {
     color: #000;
     display:block;
-    font: 400 30px/1.4 "cardo";
+    font: 400 30px/1.8 "cardo";
     font-style: italic;
     text-transform: lowercase;
   }
 
     @media (max-width: 4000px) {
-      .wedo h2 {font-size: 100px;}
+      .wedo h2 {font-size: 120px;}
       .wedo h2 .wemake {font-size: 30px;}
-      .wedo {font-size: 24px;}
+      .wedo {font-size: 32px;}
     }
 
     @media (max-width: 1200px) {
-      .wedo h2 {font-size: 80px;}
+      .wedo h2 {font-size: 10px;}
       .wedo h2 .wemake {font-size: 24px;}
-      .wedo {font-size: 20px;}
+      .wedo {font-size: 28px;}
     }
 
     @media (max-width: 1000px) {
-      .wedo h2 {font-size: 60px;}
+      .wedo h2 {font-size: 80px;}
       .wedo h2 .wemake {font-size: 20px;}
-      .wedo {font-size: 18px;}
+      .wedo {font-size: 24px;}
     }
 
     @media (max-width: 850px) {
-      .wedo h2 {font-size: 40px;}
+      .wedo h2 {font-size: 60px;}
       .wedo h2 .wemake {font-size: 16px;}
-      .wedo {font-size: 16px;}
+      .wedo {font-size: 20px;}
     }
 
     @media (max-width: 720px) {
-      .wedo h2 {font-size: 40px; margin: 0 0 10% 0;}
+      .wedo h2 {font-size: 50px; margin: 0 0 10% 0;}
     }
 
     @media (max-width: 450px) {
       .wedo h2 {font-size: 20px; margin: 0 0 5% 0;}
       .wedo h2 .wemake {font-size: 12px;}
-      .wedo {font-size: 12px;}
+      .wedo {font-size: 16px;}
     }
 
 .quote_triangle {
