@@ -284,7 +284,7 @@ hr {
     }
 
     @media (max-width: 1200px) {
-      .wedo h2 {font-size: 10px;}
+      .wedo h2 {font-size: 100px;}
       .wedo h2 .wemake {font-size: 24px;}
       .wedo {font-size: 28px;}
     }
