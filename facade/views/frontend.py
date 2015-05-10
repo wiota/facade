@@ -20,7 +20,8 @@ def static_from_root():
 @mod.route('/')
 def index():
     body = get_body(app.config['HOST'])
-    return render_template('primary/index.html', body=body);
+    layout = (body.layout or "primary")
+    return render_template(layout+'/index.html', body=body)
 
 
 @mod.route('/image/<image_name>')
