@@ -116,6 +116,10 @@
 
         <div class='column dynamic' id='column6'> <!-- Left Main -->
 
+          {% if not body %}
+          {% set body = vertex %}
+          {% endif %}
+
           <div class='successors text'>
           {% for item in body.succset %}
             <div class='item'>
