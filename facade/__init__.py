@@ -1,7 +1,5 @@
 import os
-from flask import Flask, safe_join, send_file
-from flask.ext.cors import cross_origin
-from werkzeug.exceptions import NotFound
+from flask import Flask
 from toolbox import tools, template_tools
 from toolbox.emailer import FacadeExceptionEmail
 from toolbox.template_filters import format_nl2br
@@ -20,33 +18,10 @@ def create_app(hostname):
     if dev:
         app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
 
-    @app.route('/<path:filename>', subdomain='static')
-    @cross_origin()
-    def static(filename):
-        static_folder = "templates/%s/static/" % (hostname)
-        filename = safe_join(static_folder, filename)
-        if not os.path.isabs(filename):
-            filename = os.path.join(app.root_path, filename)
-        if not os.path.isfile(filename):
-            raise NotFound()
-        return send_file(filename)
-
-    # Get the host of the hostname
-    # We have a circular problem
-    # Ideally, we want to set the template folder
-    # with host.template. But that requires a DB
-    # call which is initialized with the app as a
-    # parameter. And the app needs the template
-    # folder as a parameter to be created.
     host = tools.get_host_by_hostname(hostname)
+    app.config['HOST'] = host
 
-    if host is None:
-
-        if app.debug:
-
-            @app.route('/info')
-            def info():
-                return "Hostname: %s" % hostname
+    if not host:
 
         # This host doesn't exist. Add a ping endpoint for monitoring.
         @app.route('/ping')
@@ -69,16 +44,13 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_happenings=template_tools.get_happenings)
     app.jinja_env.globals.update(get_tag=template_tools.get_tag)
 
-    # Make it a full-fledged tenant app
-    app.config['COMMON_FOLDER'] = 'common'
-    app.config['DIRECTORY_INDEX'] = 'index.html'
-    app.config['HOST'] = host
-
     # Register the frontend blueprint
     from facade.views import frontend
-    frontend.db = db
-    frontend.config = app.config
     app.register_blueprint(frontend.mod, subdomain="www")
+
+    # Register the static blueprint
+    from facade.views import static
+    app.register_blueprint(static.mod, subdomain="static")
 
     # Set the error handler/mailer
     if not app.debug:
