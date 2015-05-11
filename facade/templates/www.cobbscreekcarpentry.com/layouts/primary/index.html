@@ -10,7 +10,7 @@
                         {% if work.cover %}
                             <img src="{{ work.cover[0].href }}?w=735&h=735&function=resize_to_fill"/>
                         {% else %}
-                            <img src="{{ url_for('static', filename='img/missing.jpg')}}"/>
+                            <img src="{{ url_for('static.static', filename='img/missing.jpg')}}"/>
                         {% endif %}
                         <div class="caption">
                             <p>{{ work.title }}</p>

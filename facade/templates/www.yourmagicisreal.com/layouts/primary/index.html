@@ -6,18 +6,18 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.ico')}}" />
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css')}}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css')}}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/sitewide.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/normalize.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/fonts.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
 
-  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/underscore-min.1.5.2.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/deface.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/waterfall.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/stopwatch.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static', filename='js/speed_bar.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/deface.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/waterfall.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/stopwatch.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/speed_bar.js')}}"></script>
 
   <script type='text/javascript'>
     $(document).ready(function(){
@@ -50,7 +50,7 @@
 
     <div class='frame'>
       <div class='title_triangle rotate'>
-        <img class='' src="{{ url_for('static', filename='shapes/triangle_base.svg')}}" id="shape" alt="">
+        <img class='' src="{{ url_for('static.static', filename='shapes/triangle_base.svg')}}" id="shape" alt="">
         <h1 class=''>AAXXX</h1>
       </div>
       <div class='speed_bar'></div>
