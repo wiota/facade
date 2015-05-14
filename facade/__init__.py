@@ -59,6 +59,10 @@ def create_app(hostname):
     from facade.views import static
     app.register_blueprint(static.mod, subdomain="static")
 
+    # Register the naked domain blueprint
+    from facade.views import naked
+    app.register_blueprint(naked.mod)
+
     # Set the error handler/mailer
     if not app.debug:
         @app.errorhandler(Exception)
