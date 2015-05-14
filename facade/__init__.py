@@ -51,9 +51,9 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_happenings=template_tools.get_happenings)
     app.jinja_env.globals.update(get_tag=template_tools.get_tag)
 
-    # Register the frontend blueprint
-    from facade.views import frontend
-    app.register_blueprint(frontend.mod, subdomain="www")
+    # Register the www blueprint
+    from facade.views import www
+    app.register_blueprint(www.mod, subdomain="www")
 
     # Register the static blueprint
     from facade.views import static

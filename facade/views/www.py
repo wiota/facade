@@ -5,7 +5,7 @@ from flask import request
 from toolbox.tools import get_body, get_vertex_from_slug, get_work_from_slug, get_category_from_slug, get_happenings_apex, get_happening_from_slug, retrieve_image
 from toolbox.models import *
 
-mod = Blueprint('frontend', __name__)
+mod = Blueprint('www', __name__)
 
 def make_404(path):
     # app.logger.warning('404: URL was: %s', path)
