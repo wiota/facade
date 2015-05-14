@@ -19,6 +19,13 @@ def create_app(hostname):
         app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
 
     host = tools.get_host_by_hostname(hostname)
+
+    # TODO: Remove this after deployment
+    if not host: # For regular domains
+        host = tools.get_host_by_hostname("www." + hostname)
+    if not host: # For .lime.wiota.co domains
+        host = tools.get_host_by_hostname(hostname.replace('www.', ''))
+
     app.config['HOST'] = host
 
     if not host:
