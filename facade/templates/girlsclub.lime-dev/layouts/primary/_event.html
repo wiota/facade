@@ -1,4 +1,4 @@
-<div class='block event'>
+<a class='block event' href='/event/{{ vertex.slug }}'>
 {{ vertex.title }}
 
 {% if vertex.cover %}
@@ -6,4 +6,4 @@
   <img src='{{ cover.href }}?w=200'>
   {% endfor %}
 {% endif %}
-</div>
+</a>

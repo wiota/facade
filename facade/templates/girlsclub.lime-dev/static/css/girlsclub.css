@@ -1,0 +1,56 @@
+body {
+  font-size: 20px;
+  line-height: 30px;
+  font-family: "Helvetica", "Arial", "san-serif";
+  color: #000;
+  font-weight: 400;
+}
+
+.info {
+  position:fixed;
+  top:0;
+  right:0;
+  padding: 10px;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: right;
+  background-color: #ccc;
+}
+
+.info a {
+  display:block;
+}
+
+#column1 {
+  font-size: 100%;
+  line-height: 150%;
+  width: 30%;
+  margin: 10% 35%;
+}
+
+#column1 a {
+  color: #48a7d0;
+  font-size: 125%;
+  line-height: 150%;
+  display:block;
+}
+
+.block {
+  margin: 50px 0;
+}
+
+.girl {
+  width: 30%;
+}
+
+
+  #column1 {
+    font-size: 90%;
+    line-height: 150%;
+    width: 40%;
+    margin: 10% 30%;
+  }
+
+#column1 img {
+  width:100%;
+}

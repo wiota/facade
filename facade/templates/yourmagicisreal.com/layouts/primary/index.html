@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AAXXX</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/normalize.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/fonts.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
+
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/deface.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/waterfall.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/stopwatch.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/speed_bar.js')}}"></script>
+
+  <script type='text/javascript'>
+    $(document).ready(function(){
+      w = DEFACE.waterfall('.images', 50, 1);
+      sw = DEFACE.speed_bar('.frame', '.speed_bar','.speed_text');
+
+      sw.on('pause', w.stop.bind(w));
+      sw.on('resume', function(evt, speed){
+        console.log(speed);
+        w.set_speed(speed);
+        w.rewind();
+        w.start();
+      });
+
+    })
+  </script>
+
+</head>
+<body class='aaxxx'>
+
+  <div class='page'>
+
+    <!--
+    <div id='nav'>
+      <a>Simulacra</a>
+      <a href='projects.html'>Projects</a>
+      <a href='aaxxx3.html'>AA&nbsp;XXX</a>
+    </div>
+    -->
+
+    <div class='frame'>
+      <div class='title_triangle rotate'>
+        <img class='' src="{{ url_for('static.static', filename='shapes/triangle_base.svg')}}" id="shape" alt="">
+        <h1 class=''>AAXXX</h1>
+      </div>
+      <div class='speed_bar'></div>
+      <b class='speed_text rotate'></b>
+    </div>
+
+    <div class='images'>
+      {% for vertex in get_category(config, "aaxxx").succset %}
+        {% if vertex.vertex_type == 'work' %}
+          {% for cover in vertex.cover %}
+            <div class='aaxxx image'><img src='{{ cover.href }}?w=700' /></div>
+          {% endfor %}
+        {% elif vertex.vertex_type == 'photo' %}
+          <div class='aaxxx image'><img src='{{ vertex.href }}?w=700' /></div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+</html>

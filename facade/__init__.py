@@ -6,28 +6,29 @@ from toolbox.template_filters import format_nl2br
 import traceback
 
 def create_app(hostname):
-    static_folder = "./templates/%s/static/" % (hostname)
     template_folder = "./templates/%s/layouts/" % (hostname)
-    app = Flask(__name__, static_url_path="/static", static_folder=static_folder, template_folder=template_folder)
-    app.debug = os.environ.get('FLASK_DEBUG', False)
+    app = Flask(__name__, static_folder=None, template_folder=template_folder)
     db = tools.initialize_db(app)
 
-    # Get the host of the hostname
-    # We have a circular problem
-    # Ideally, we want to set the template folder
-    # with host.template. But that requires a DB
-    # call which is initialized with the app as a
-    # parameter. And the app needs the template
-    # folder as a parameter to be created.
+    dev = os.environ.get('DEVEL', 'FALSE').upper() == 'TRUE'
+    app.debug = dev
+
+    # This is required for subdomains to work
+    app.config["SERVER_NAME"] = hostname
+    if dev:
+        app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
+
     host = tools.get_host_by_hostname(hostname)
 
-    if host is None:
+    # TODO: Remove this after deployment
+    if not host: # For regular domains
+        host = tools.get_host_by_hostname("www." + hostname)
+    if not host: # For .lime.wiota.co domains
+        host = tools.get_host_by_hostname(hostname.replace('www.', ''))
 
-        if app.debug:
+    app.config['HOST'] = host
 
-            @app.route('/info')
-            def info():
-                return "Hostname: %s" % hostname
+    if not host:
 
         # This host doesn't exist. Add a ping endpoint for monitoring.
         @app.route('/ping')
@@ -50,16 +51,17 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_happenings=template_tools.get_happenings)
     app.jinja_env.globals.update(get_tag=template_tools.get_tag)
 
-    # Make it a full-fledged tenant app
-    app.config['COMMON_FOLDER'] = 'common'
-    app.config['DIRECTORY_INDEX'] = 'index.html'
-    app.config['HOST'] = host
+    # Register the www blueprint
+    from facade.views import www
+    app.register_blueprint(www.mod, subdomain="www")
 
-    # Register the frontend blueprint
-    from facade.views import frontend
-    frontend.db = db
-    frontend.config = app.config
-    app.register_blueprint(frontend.mod)
+    # Register the static blueprint
+    from facade.views import static
+    app.register_blueprint(static.mod, subdomain="static")
+
+    # Register the naked domain blueprint
+    from facade.views import naked
+    app.register_blueprint(naked.mod)
 
     # Set the error handler/mailer
     if not app.debug:
@@ -68,6 +70,6 @@ def create_app(hostname):
             tb = traceback.format_exc()
             FacadeExceptionEmail(exception, tb, host).send()
 
-    app.logger.debug("App created for %s" % (host))
+    app.logger.debug("App created for %s" % (host.hostname))
 
     return app

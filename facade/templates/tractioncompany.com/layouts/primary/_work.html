@@ -1,0 +1,11 @@
+{% if item.cover %}
+  {% for cover in item.cover %}
+    <a class="work block" href='/work/{{category.slug}}/{{item.slug}}'>
+      <img src='{{ cover.href }}?h=350' alt='' />
+    </a>
+  {% endfor %}
+{% elif item.succset[0].vertex_type == 'photo' %}
+  <a class="work block" href='/work/{{category.slug}}/{{item.slug}}'>
+      <img src='{{ item.succset[0].href }}?h=350' alt='' />
+    </a>
+{% endif %}

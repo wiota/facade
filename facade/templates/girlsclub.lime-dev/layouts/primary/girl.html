@@ -2,28 +2,38 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{{ category.title }}</title>
+  <title>{{ vertex.title }}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="icon" type="image/png" href="/static/img/favicon.ico" />
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
 
 
-  <link href="/static/css/monhegan.css" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static.static', filename='css/girlsclub.css')}}" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
-  <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
-  <script type="text/javascript" src="/static/js/underscore-min.1.5.2.js"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery-1.10.2.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+
 
 
 </head>
 
-<body class='category {{ category.layout }}'>
+<body class='vertex {{ vertex.layout }}'>
+
+  <div class='info'>
+    <h3>Page Info</h3>
+    <a>Representation: {{ representation }}.html</a>
+    <a>Vertex Type: {{ vertex.vertex_type }}</a>
+    <a>Predecessor Type: {{ predecessor.vertex_type }}</a>
+  </div>
 
   <div id='column1'>
 
-    {% for vertex in category.succset %}
+    {% for vertex in vertex.succset %}
       <div class='item'>
+
+        <div>&lt;{{ vertex.vertex_type }}&gt;</div>
 
         {% if vertex.vertex_type == "work" %}
           {% include "primary/_work.html" %}

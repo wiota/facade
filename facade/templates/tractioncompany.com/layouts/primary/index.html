@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Traction Company</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+
+
+  <link href="{{ url_for('static.static', filename="css/traction.css") }}" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery-1.10.2.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+
+</head>
+
+<body class='home'>
+
+<div class='page'>
+
+  <div id="header">
+    <div id="nameplate_div">
+      <h1>Philadelphia Traction Company</h1>
+      <a id="nameplate" href="/"><img src='{{ url_for('static.static', filename='img/tractioncompany.png')}}' width='258' height='18' alt='Philadelphia Traction Company' /></a>
+    </div>
+  </div>
+
+  {% set happenings = get_happenings(config) %}
+  <div class='happenings left_column'>
+
+    <div class='happenings_menu'>
+
+      {% for vertex in happenings.succset %}
+        {% if vertex.succset and vertex.vertex_type == "category" %}
+          <a class='happening_tag {{ vertex.slug }}'>{{ vertex.title }}</a>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+
+    <div class='happenings_display'>
+
+      {% for category in happenings.succset %}
+        {% if category.succset and category.vertex_type == "category" %}
+          <div class='display_tag {{ category.slug }}'>
+            {% for item in category.succset %}
+              {% if item.vertex_type != "work" %}
+                {% include "primary/_"+item.vertex_type+".html" %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div id='nav' class='right_column'>
+
+    {% set first = body.succset[0] %}
+    <h2><a>{{first.title}}</a></h2>
+    <ul>
+    {% for vertex in first.succset %}
+      <li class='category'><a href='/category/{{ vertex.slug }}'>{{ vertex.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    {% for rest in body.succset[1:] %}
+    <h2><a href='/category/{{rest.slug}}'>{{rest.title}}</a></h2>
+    {% endfor %}
+  </div>
+
+  <div class='about left_column'>
+
+    <div id='about_text'>
+      <h2>Shop Mission:</h2>
+
+
+      <p>"To provide an environment where established, emerging and transitioning artists can expand on their artistic practice in a cooperative setting."</p>
+
+      <p>Through sharing tools and facilities necessary for making artwork, Traction Company promotes the exchange of the resources and knowledge of its members. This collective effort creates a wide variety of opportunities through a combined network.</p>
+
+      <p>We strive to create a community of like-minded artists who are dedicated to the ongoing growth of the space while simultaneously supporting the ambitions of its individual members."</p>
+
+      <p><em>Founded in May 2007,  Traction Company is currently a hub for the diverse work of its members, representing a wide scope of form, expression, and technique.  </em></p>
+    </div>
+  </div>
+
+  <div class='footer single_column'>
+
+    <h2>Contact Traction Company via</h2>
+    <p>
+      <a href ='mailto:info@tractioncompany.com'>info@tractioncompany.com</a>
+      <a href='https://instagram.com/tractioncompany' target='_blank'>Instagram</a>
+      <a href ='https://www.facebook.com/TractionCompany' target='_blank'>Facebook</a>
+    </p>
+  </div>
+
+</div>
+
+
+<script type='text/javascript'>
+
+
+  $(document).ready(function(){
+
+    // happenings menu
+    (function(){
+      var hapmen = $('.happenings_menu .happening_tag');
+      var hapdis = $('.happenings_display .display_tag');
+
+      $.each(hapmen, function(key, val){
+        var menu = $(this);
+        var display = hapdis[key];
+
+        menu.on('click', function(){
+          hapmen.removeClass('showing')
+          menu.addClass('showing');
+          $.each(hapdis, function(){
+            $(this).hide();
+          });
+          $(display).fadeIn();
+        });
+
+
+        $(display).hide();
+
+      });
+
+      hapmen.first().addClass('showing');
+      hapdis.first().fadeIn();
+    })();
+
+    // main nav
+    (function(){
+      var navs = $('#nav h2');
+
+      $.each(navs, function(key, val){
+        var nav = $(this);
+        var subnav = $(nav.next('ul'));
+
+        if(subnav){
+          nav.on('click', function(){
+            if(subnav.css('display') == 'none'){
+              nav.addClass('showing');
+              subnav.fadeIn(100);
+            } else {
+              nav.removeClass('showing')
+              subnav.fadeOut(100);
+            }
+          });
+
+
+          subnav.hide();
+        }
+
+      });
+
+      navs.first().addClass('showing').next('ul').fadeIn();
+    });
+  });
+
+</script>
+
+</body>
+</html>

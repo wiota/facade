@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Wiota</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/badge.png')}}">
+
+    <link href="{{ url_for('static.static', filename='css/wiota1.css')}}" rel='stylesheet' type="text/css" media="screen">
+
+    <link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Comfortaa:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
+    <style type='text/css'>
+
+      #column0, #column2 {
+        font-family: 'Cardo';
+        font-size: 20px;
+        line-height: 60px;
+      }
+
+      #column0 {
+        margin-top:200px;
+        color: #f00;
+      }
+
+      #column2 {
+        margin-top: 230px;
+      }
+
+      #column1 {
+        padding: 0 20%;
+      }
+
+    </style>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-53116106-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+  </head>
+    <body>
+
+        <div class="column static" id='column0'> <!-- Background -->
+
+          <div class='quote_text'>
+                  <h2><span class='open_quote'>&ldquo;</span>You say to brick, &lsquo;What do you want, brick?&rsquo; And brick says to you, &lsquo;I like an arch.&rsquo; And you say to brick, &lsquo;Look, I want one, too, but arches are expensive and I can use a concrete lintel over you, over an opening.&rsquo; And then you say: &lsquo;What do you think of that, brick?&rsquo; Brick says: &lsquo;I like an arch.&rsquo;<span class='close_quote'>&rdquo;</span></h2>
+                  <h3>&mdash;Louis Kahn, <em>Lecture at Pratt Institute</em></h3>
+                </div>
+
+        </div>
+
+        <div class="column static" id='column1'> <!-- Midground fixed -->
+          <div class='midground circle'></div>
+
+        </div>
+
+        <div class="column static" id='column2'> <!-- Forground -->
+
+          {% if not body %}
+          {% set body = category %}
+          {% endif %}
+
+          <div class='successors text'>
+          {% for item in body.succset %}
+            <div class='item'>
+              {% if item.vertex_type == "text" %}
+                <p>{{ item.text|nl2br|safe }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+          </div>
+
+        </div>
+
+        <div class='column static' id='column4'> <!-- Wiota -->
+          <div class='company_stack'>
+            <h1>
+              <span>w</span>
+              <span>i</span>
+              <span>o</span>
+              <span>t</span>
+              <span>a</span>
+              <span>c</span>
+              <span>o</span>
+            </h1>
+          </div>
+        </div>
+
+
+        <div class='column dynamic' id='column6'> <!-- Left Main -->
+
+
+          <!--
+            <div class='wiota-is-text'>
+              <h2>Wiota is</h2> <br>
+              a design &amp; build <br>
+              company in Philadelphia.<br>
+              <hr>
+
+              Wiota uses <a href='https://github.com/wiota/'>Github</a> to build.<br>
+              <hr>
+              Wiota is our technological arch.<br>
+              <hr>
+              Wiota is Ryan Hinkel and Dustin Ingram.<br>
+
+              <h2><span class='wemake'>wiota makes</span>lime</h2>
+              <div class='lime'>
+                Lime binds your work together.<br><hr>
+                Lime is an in-browser organization tool intended to assist in documenting work.<br><hr>
+                Lime puts your body of work online.<br><hr>
+                Lime is a calcium-containing inorganic material.<br>
+              </div>
+
+              <div class='quote'>
+                <div class='quote_text'>
+                  <h2><span class='open_quote'>&ldquo;</span>You say to brick, &lsquo;What do you want, brick?&rsquo; And brick says to you, &lsquo;I like an arch.&rsquo; And you say to brick, &lsquo;Look, I want one, too, but arches are expensive and I can use a concrete lintel over you, over an opening.&rsquo; And then you say: &lsquo;What do you think of that, brick?&rsquo; Brick says: &lsquo;I like an arch.&rsquo;<span class='close_quote'>&rdquo;</span></h2>
+                  <h3>&mdash;Louis Kahn, <em>Lecture at Pratt Institute</em></h3>
+                </div>
+              </div>
+
+            </div>
+            -->
+
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ category.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/normalize.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/fonts.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
+
+
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/deface.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/waterfall.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/column_slide.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/class_toggle.js')}}"></script>
+
+
+  <script type='text/javascript'>
+
+    $(document).ready(function(){
+
+      DEFACE.column_slide('.column1', 8, 40, 20);
+      classToggle('show','.project img');
+    })
+
+  </script>
+
+  <style type="text/css">
+  </style>
+
+
+
+</head>
+<body class='projects'>
+
+
+
+  <div class='page'>
+
+    <div id='nav'>
+      <a href='/category/simulacra'>Simulacra</a>
+      <a>Projects</a>
+      <a href='/'>AA&nbsp;XXX</a>
+    </div>
+
+    {% include "projects/_category_subnav.html" %}
+
+  </div>
+
+  <div class='column1 index'>
+    {% for project in category.succset %}
+      {% if project.succset and project.vertex_type == 'work' %}
+        <a class='project_link' href='/work/{{category.slug}}/{{project.slug}}'><img src='{{project.succset[0].href}}?w=500' alt='' /></a>
+
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</body>
+</html>

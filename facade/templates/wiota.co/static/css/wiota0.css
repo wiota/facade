@@ -1,0 +1,417 @@
+/* Global Reset
+------------------------------------------------------------------------------*/
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, div, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, div {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* Wiota  ------------------------------------------------------------------ */
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font-size: 20px;
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  line-height: 30px;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {color: #ffff77;}
+
+hr {
+  text-align: center;
+  display: block;
+  height: 1px;
+  width: 4%;
+  border-style: none;
+  border-bottom: 1px dotted #e8eaec;
+  background-color: transparent;
+  margin: 1em 48%;
+}
+
+
+/* Columns ----------------------------------------------------------------- */
+
+.column {
+  position: relative;
+  margin: auto;
+  padding: 0% 20%;
+  overflow:auto;
+  overflow-x: hidden;
+}
+
+#column0 {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+}
+
+#column1 {
+  position: fixed;
+  padding: 0;
+  top: 0;
+  left: 20%;
+  right: 20%;
+}
+
+
+
+@media (max-width: 650px) {
+  .column {
+    padding: 0% 5%;
+  }
+  #column1 {
+    left: 5%;
+    right: 5%;
+    padding: 0 0 90% 0;
+  }
+}
+
+/* Shapes --------------------------------------------------------------- */
+
+.arch {
+  background-color: rgba(0,0,0,.1);
+  height:0;
+  width: 100%;
+  padding-bottom: 100%;
+  -webkit-border-bottom-left-radius: 50%;
+  -webkit-border-bottom-right-radius: 50%;
+  -moz-border-radius-bottomleft: 50%;
+  -moz-border-radius-bottomright: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.company_title {
+  width: 90%;
+  height: 0;
+  padding: 20% 0 70%;
+  margin: 5% 5% 0;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  text-transform: lowercase;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0,0,0, 0.9);
+  overflow: hidden;
+  position: relative;
+}
+  .company_title h1 {
+    font: 400 160px/1.4 "cardo";
+    margin: 0;
+  }
+  .contact {
+    margin: 0;
+    padding:0%;
+    text-align:center;
+  }
+    .contact a {
+      font-size: 24px;
+      font-weight: 200;
+      letter-spacing: 1px;
+      line-height: 24px;
+    }
+  @media (max-width: 780px) {
+    .company_title h1 {font: 700 130px/1.4 "cardo";}
+    .contact a {font-size: 20px;}
+  }
+
+  @media (max-width: 630px) {
+    .company_title h1 {font: 700 100px/1.4 "cardo";}
+    .contact a {font-size: 18px;}
+  }
+
+  @media (max-width: 450px) {
+    .company_title h1 {font: 700 90px/1.4 "cardo";}
+    .contact a {font-size: 16px;}
+  }
+
+.pyramid {
+  position:relative;
+  color: #fff;
+  width: 100%;
+  padding: 0;
+  margin: 10% 0;
+  /* background-color: rgba(31, 100, 144, 0.5); */
+}
+
+  .pyramid .shape {
+    height: 0;
+    width: 100%;
+    padding: 0 0 111.111% 0;
+  }
+
+  @media (max-width: 650px) {
+    .shape_back {
+      padding: 10% 5.5% 90%;
+      width: 90%;
+    }
+  }
+
+  .pyramid .text h2 {
+    color: #fff;
+    font: 700 40px/1.4 "cardo";
+    font-style: normal;
+    text-transform: lowercase;
+    margin: 0 0 0 0;
+    text-align: center;
+    text-indent: 0px;
+  }
+
+  .pyramid .text {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    padding-top:40%;
+    font: 400 25px/1.4 "helvetica neue";
+    text-align: center;
+  }
+
+  @media (max-width: 4000px) {
+    .pyramid .text h2 {font-size: 40px;}
+    .pyramid .text {font-size: 25px;}
+  }
+
+  @media (max-width: 1330px) {
+    .pyramid .text h2 {font-size: 33px;}
+    .pyramid .text {font-size: 21px;}
+  }
+
+  @media (max-width: 1030px) {
+    .pyramid .text h2 {font-size: 27px;}
+    .pyramid .text {font-size: 17px;}
+  }
+
+  @media (max-width: 850px) {
+    .pyramid .text h2 {font-size: 21px;}
+    .pyramid .text {font-size: 14px;}
+  }
+
+.wedo {
+  position:relative;
+  color: #0b2231;
+  width: 80%;
+  height: 0;
+  margin: 10% 10% 90%;
+  padding: 0 0 80%;
+  font-size: 24px;
+  line-height: 2.4;
+  text-align: justify;
+  background-color: rgba(255, 255, 255, 1);
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+  .wedo hr {
+    width: 15px;
+    border-bottom: 5px dotted #ddd;
+  }
+
+  .wedo h2 {
+    color: #0b2231;
+    font: 700 120px/1.4 "cardo";
+    font-style: normal;
+    margin: 0 0 20% 0;
+    text-align: center;
+    text-indent: 0px;
+  }
+
+  .wedo h2 .wemake {
+    color: #000;
+    display:block;
+    font: 400 30px/1.8 "cardo";
+    font-style: italic;
+    text-transform: lowercase;
+  }
+
+    @media (max-width: 4000px) {
+      .wedo h2 {font-size: 120px;}
+      .wedo h2 .wemake {font-size: 30px;}
+      .wedo {font-size: 32px;}
+    }
+
+    @media (max-width: 1200px) {
+      .wedo h2 {font-size: 100px;}
+      .wedo h2 .wemake {font-size: 24px;}
+      .wedo {font-size: 28px;}
+    }
+
+    @media (max-width: 1000px) {
+      .wedo h2 {font-size: 80px;}
+      .wedo h2 .wemake {font-size: 20px;}
+      .wedo {font-size: 24px;}
+    }
+
+    @media (max-width: 850px) {
+      .wedo h2 {font-size: 60px;}
+      .wedo h2 .wemake {font-size: 16px;}
+      .wedo {font-size: 20px;}
+    }
+
+    @media (max-width: 720px) {
+      .wedo h2 {font-size: 50px; margin: 0 0 10% 0;}
+    }
+
+    @media (max-width: 450px) {
+      .wedo h2 {font-size: 20px; margin: 0 0 5% 0;}
+      .wedo h2 .wemake {font-size: 12px;}
+      .wedo {font-size: 16px;}
+    }
+
+.quote_triangle {
+    position:absolute;
+    padding: 0 0 100%;
+    left:0;
+    right:0;
+  }
+
+.quote_box {
+    background-color: #e8eaec;
+    padding: 0 0 100%;
+  }
+
+.quote_arch {
+  position:relative;
+  margin: -90% 0% 0;
+  padding: 0 0 100%;
+  height: 0;
+  -webkit-border-top-left-radius: 50%;
+  -webkit-border-top-right-radius: 50%;
+  -moz-border-radius-topleft: 50%;
+  -moz-border-radius-topright: 50%;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  background-color: #1f6490;
+}
+
+.quote {
+  position:relative;
+  margin: 0;
+  padding: 50% 0% 0%;
+  background-color: #1f6490;
+}
+
+.quote_text {
+  position:relative;
+  margin: -125% 25% 0;
+  padding: 0% 0% 75%;
+}
+
+  .quote h2 {
+    color: #fff;
+    font: 400 24px/1.4 "cardo";
+    font-style: italic;
+    margin: 0 0 20px 0;
+    text-align: left;
+    text-indent: 0px;
+
+    /* text-shadow: 1px 1px #000; */
+  }
+
+
+
+  .quote h3 {
+    color: #fff;
+    font: 400 16px/1.4 "cardo";
+    margin: 0 0 20px 0;
+    text-align: left;
+    text-indent: 0px;
+
+  }
+    .quote h3 em {
+      font-style: italic;
+    }
+
+  @media (max-width: 973px) {
+    .quote h2 {font-size: 20px;}
+    .quote h3 {font-size: 16px;}
+  }
+
+  @media (max-width: 720px) {
+    .quote h2 {font-size: 16px;}
+    .quote h3 {font-size: 14px;}
+  }
+
+  @media (max-width: 450px) {
+    .quote h2 {font-size: 16px;}
+    .quote h3 {font-size: 14px;}
+  }
+
+  .quote .open_quote,
+  .quote .close_quote {
+    color: #1f6490;
+    font: 200 60px/1.4 "cardo";
+    display:none;
+    position:absolute;
+    padding: 5%;
+  }
+  .quote .open_quote {
+    top: -20%;
+    left: -35%;}
+  .quote .close_quote {
+    top: -20%;
+    right: -35%;}
+  .quote h2 .open_quote,
+  .quote h2 .close_quote {
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    }
+  .quote h2:hover .open_quote, .quote h2:hover .close_quote{
+    opacity: 1;
+  }
