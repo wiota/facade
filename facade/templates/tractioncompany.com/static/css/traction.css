@@ -131,7 +131,7 @@ body.happenings .happening p {
 #bio a.right {float: right; margin: 10px 0 8px 10px;}
 #bio a.top {margin-top: 0;}
 
-#bio p {margin: 10px 0; fon}
+#bio p {margin: 10px 0;}
 
 /* Index Block */
 .index.single_column {overflow:hidden;margin: 0 0 0 0;}
@@ -161,7 +161,7 @@ body.happenings .happening p {
 /* Alumni */
 .category.category_list {}
 
-.category.category_list a {display:block;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
+.category.category_list a {display:block; color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
 
 /* Footer */
 
