@@ -158,6 +158,11 @@ body.happenings .happening p {
 .work_show p span {display:block;}
 .work_show p.caption {position: absolute; top: 287px; left: 5px; font: normal 16px/18px 'Helvetica Neue', Helvetica, serif;color: #7d797a;}
 
+/* Alumni */
+.category.category_list {}
+
+.category.category_list a {display:block;color: #000; font: normal 16px/30px 'Helvetica Neue', Helvetica, arial san-serif; text-decoration:underline; padding: 0;background: #fff;}
+
 /* Footer */
 
 .footer {margin: 0 0 10%;}

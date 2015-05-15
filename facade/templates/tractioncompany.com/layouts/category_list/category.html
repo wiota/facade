@@ -31,7 +31,7 @@
   <div class='category_index single_column'>
 
   {% for item in category.succset %}
-    {% if item._cls == 'Vertex.Category' %}
+    {% if item.vertex_type == 'category' %}
       <a class="category list" href='/category/{{item.slug}}'>{{ item.title }}</a>
     {% endif %}
   {% endfor %}
