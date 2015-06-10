@@ -27,12 +27,10 @@
 
         {% if vertex.vertex_type == "photo" %}
           {% include "primary/_photo.html" %}
-        {% elif vertex.vertex_type == "work" %}
-          {% include "primary/_work.html" %}
+        {% elif vertex.vertex_type == "date" %}
+          {% include "primary/_date.html" %}
         {% elif vertex.vertex_type == "text" %}
           {% include "primary/_text.html" %}
-        {# elif vertex.vertex_type == "whatever" and vertex.layout#}
-          {# include vertex.layout + "/_whatever.html" #}
         {% endif %}
 
 
