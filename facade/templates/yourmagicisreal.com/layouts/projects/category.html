@@ -62,12 +62,8 @@
   </div>
 
   <div class='column1 index'>
-    {% for project in category.succset %}
-      {% if project.succset and project.vertex_type == 'work' %}
-        <a class='project_link' href='/work/{{category.slug}}/{{project.slug}}'><img src='{{project.succset[0].href}}?w=500' alt='' /></a>
 
-      {% endif %}
-    {% endfor %}
+
   </div>
 
 </body>

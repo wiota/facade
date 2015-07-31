@@ -293,6 +293,10 @@ h2 {
   color: #ff0000;
 }
 
+.simulacra .happenings .happening {
+  background-color: #ff0000;
+}
+
 .simulacra .title_circle {
   z-index: 19;
   position:absolute;
