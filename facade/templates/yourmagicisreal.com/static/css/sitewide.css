@@ -20,7 +20,7 @@ h2 {
 /* Shared --------------------------------------------------------- */
 
 .description {
-  font-family: 'Inconsolata' Arial, Helvetica, 'san-serif';
+  font-family: 'Inconsolata', Arial, Helvetica, 'san-serif';
   font-weight: 400;
 }
 
@@ -68,7 +68,7 @@ h2 {
   }
 
 .subnav {
-  font-family: 'Sequi';
+  font-family: 'Sequi', Arial, Helvetica, 'san-serif';
   font-weight: 200;
 }
 
@@ -100,6 +100,38 @@ h2 {
   -ms-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
 }
+
+.happenings .happening {
+  font-size: 140%;
+  color: #fff;
+  background-color: #00aae6;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  margin: 4% 21%;
+  width: 50%;
+  padding: 4%;
+  font-weight: normal;
+  font-family: 'Inconsolata', Arial, Helvetica, 'san-serif';
+}
+
+.happenings .happening .introduction {
+  font-size: 90%;
+}
+
+.happenings .happening h2 {
+  color: #fff;
+  font-family: 'Metropolis', Arial, Helvetica, 'san-serif';
+  margin: 30px 0;
+}
+
+.happenings .happening div {
+  color: #fff;
+  text-align: left;
+  margin: 4% 0;
+}
+
 
 
 /* Projects ---------------------------------------------------------- */
