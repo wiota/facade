@@ -1,9 +1,9 @@
-<a class='block event' href='/event/{{ vertex.slug }}'>
-{{ vertex.title }}
+<a class='item event'>
+<div class='title'>{{ vertex.title }}</div>
 
 {% if vertex.cover %}
   {% for cover in vertex.cover %}
-  <img src='{{ cover.href }}?w=200'>
+  <img src='{{ cover.href }}?w=700&h=400&function=resize_to_fill'>
   {% endfor %}
 {% endif %}
 </a>

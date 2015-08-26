@@ -21,26 +21,7 @@
 
 <body class='home'>
 
-
-
-  <div id='column1'>
-
-    {% for item in body.succset %}
-      <div class='item'><a href='/category/{{ item.slug }}'>
-        {% if not item.cover %}
-          {{item.title}}
-        {% endif %}
-        {% for cover in item.cover %}
-          <img src='{{ cover.href }}?w=600'>
-        {% endfor %}
-      </a></li>
-    {% endfor %}
-
-  </div>
-
-  <div id='column2'>
-
-  </div>
+    Nothing Here
 
 </div>
 

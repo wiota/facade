@@ -1,56 +1,195 @@
 body {
-  font-size: 20px;
+  margin:0;
+  font-size: 14px;
   line-height: 30px;
-  font-family: "Helvetica", "Arial", "san-serif";
+  font-family: "Montserrat", "Helvetica", "Arial", "san-serif";
   color: #000;
   font-weight: 400;
 }
 
-.info {
-  position:fixed;
-  top:0;
-  right:0;
-  padding: 10px;
-  font-size: 11px;
-  line-height: 14px;
-  text-align: right;
-  background-color: #ccc;
-}
+.header {}
 
-.info a {
-  display:block;
-}
-
-#column1 {
-  font-size: 100%;
-  line-height: 150%;
-  width: 30%;
-  margin: 10% 35%;
-}
-
-#column1 a {
-  color: #48a7d0;
-  font-size: 125%;
-  line-height: 150%;
-  display:block;
-}
-
-.block {
-  margin: 50px 0;
-}
-
-.girl {
-  width: 30%;
-}
-
-
-  #column1 {
-    font-size: 90%;
-    line-height: 150%;
-    width: 40%;
-    margin: 10% 30%;
+  .header .logo {
+    z-index: 100;
+    position: absolute;
+    top:0;
+    right: 0;
   }
 
-#column1 img {
-  width:100%;
+  .header .bar {
+    width: 100%;
+    height: 160px;
+    background-color: #4cddcb;
+    position: relative;
+  }
+
+    .header .bar .portrait {
+      position:absolute;
+      bottom: -40px;
+      left: 10%;
+      width: 14%;
+      height: 0;
+      padding-bottom: 14%;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+    }
+
+      .header .bar .portrait img {
+        width: 100%;
+      }
+
+  .header .nameplate {
+    height: 60px;
+    padding: 0 0 0 24%;
+    color: #777576;
+  }
+
+    .header .nameplate .firstname,
+    .header .nameplate .lastname {
+      text-transform: uppercase;
+      font-size: 125%;
+    }
+
+  .header .nav {
+    margin-top: 0px;
+    padding: 0 0 0 10%;
+    background-color: #f7f7f7;
+  }
+
+    .header .nav a {
+      display: inline-block;
+      margin: 8px 10px 8px 0;
+      padding: 8px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 85%;
+      font-weight: 100;
+      line-height: 100%;
+      color: #fff;
+      background-color: #1dbbb4;
+      border-radius: 5px;
+    }
+
+/* Block */
+
+.block {
+  padding: 0 8% 50px 10%;
+  overflow: auto;
+  position:relative;
 }
+
+  .block h2 {
+    font-size: 125%;
+    font-weight: 400;
+    color: #777576;
+    clear:both;
+  }
+
+  .block .item {
+    position:relative;
+  }
+
+    .block .item img {
+      width: 100%;
+    }
+
+  /* Work */
+
+  .block .item.work {
+    cursor: pointer;
+    width: 18.4%;
+    margin: 0 1.6% 1.6% 0;
+    float:left;
+  }
+
+    .block .item.work .title {
+      display:none;
+      padding: 10px;
+      color: #fff;
+      position:absolute;
+    }
+
+      .block .item.work:hover .title {
+        display:block;
+      }
+
+  /* Program */
+
+  .block .item.program {
+    font-size: 12px;
+  }
+
+  /* Event, Exhibition */
+
+  .block .item.event,
+  .block .item.exhibition {
+    width: 48.4%;
+    margin: 0 1.6% 1.6% 0;
+    float:left;
+  }
+
+  /* Slideshow */
+
+  .block .slideshow {
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+  }
+
+    .block .slideshow .close {
+      position: absolute;
+      font-size: 125%;
+      background-color: #4cddcb;
+      color: #fff;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      line-height: 40px;
+      text-align: center;
+      top:-40px;
+      right:0px;
+    }
+
+    .block .display {
+      clear: both;
+      float:left;
+      width: 46%;
+    }
+
+      .block .display .photo img {
+        width: 100%;
+      }
+
+    .block .info {
+      float:left;
+      width: 47%;
+      padding-left: 3%;
+      margin-left: 4%;
+      background-color: #fff;
+      box-shadow: -1px 0 0 #ccc;
+    }
+
+    .block .slideshow .thumbs {
+      clear: both;
+    }
+
+    .block .slideshow .thumb {
+      position:relative;
+      cursor: pointer;
+      float:left;
+      width: 14%;
+      padding-bottom: 14%;
+      height: 0;
+      margin: 2% 2% 0 0;
+    }
+
+      .block .slideshow .thumb img {
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+      }
