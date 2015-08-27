@@ -4,7 +4,7 @@
 {% if vertex.cover %}
   <div class='cover'>
   {% for cover in vertex.cover %}
-    <img src='{{ cover.href }}?w=500&h=500&function=crop_to_square'>
+    <img src='{{ cover.href }}?w=500&h=500&function=resize_to_fill'>
   {% endfor %}
   </div>
 
@@ -36,7 +36,7 @@
   {% for item in vertex.succset %}
     {% if item.vertex_type == "photo" %}
       <div class='thumb' id='thumb_{{ item.id }}'>
-        <img src='{{ item.href }}?w=200&h=200&function=crop_to_square'>
+        <img src='{{ item.href }}?w=200&h=200&function=resize_to_fill'>
       </div>
     {% endif %}
   {% endfor %}

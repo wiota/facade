@@ -88,16 +88,18 @@
     var $workitemcovers = $workitems.find('.cover');
 
     $workitems.on('click', function(evt){
-      var slideshow;
+      var $slideshow, $all;
       $workitemcovers.hide();
       $slideshow = $(this).next('.slideshow').show();
+      $all = $slideshow.find('.photo img');
       $slideshow.find('.close').on('click', function(){
         $slideshow.hide();
+        $all.hide();
         $workitemcovers.show();
       })
       $slideshow.find('.thumb').on('click', function(){
         var id = $(this).attr('id').slice(6)
-        $slideshow.find('.photo img').hide();
+        $all.hide();
         $slideshow.find("#photo_"+id).show();
       })
       $slideshow.find('.photo img').first().show();
