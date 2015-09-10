@@ -7,8 +7,6 @@ body {
   font-weight: 400;
 }
 
-
-
 #column1 {
   font-size: 100%;
   line-height: 150%;
@@ -25,6 +23,10 @@ body {
 
 #column1 .date {
   font-size: 75%;
+}
+
+#column1 h2 {
+  font-size: 125%;
 }
 
 @media only screen and (max-width: 1400px) {

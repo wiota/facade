@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ category.title }}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+
+
+  <link href="{{ url_for('static.static', filename='css/monhegan.css')}}" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery-1.10.2.min.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
+
+
+</head>
+
+<body class='category {{ category.layout }}'>
+
+  <div id='column1'>
+
+    {% for vertex in category.succset %}
+      <div class='item'>
+
+        {% if vertex.vertex_type == "photo" %}
+          {% include "primary/_photo.html" %}
+        {% elif vertex.vertex_type == "date" %}
+          {% include "primary/_date.html" %}
+        {% elif vertex.vertex_type == "text" %}
+          {% include "sections/_text.html" %}
+        {% endif %}
+
+
+      </div>
+    {% endfor %}
+
+    <hr>
+    <a href='/category/save-the-date'>Save the Date</a>
+    <a href='/category/reservations'>Reservations</a>
+    <a href='https://docs.google.com/spreadsheets/d/18WvmeuErj7FGTy1un3gB3Xvn37zhq7jXn2vcyA7kfCo/edit?usp=sharing'>List of Accommodations</a>
+    <a href='http://monheganboat.com/schedule/'>Monhegan Boat Line - Ferry Website</a>
+
+  </div>
+
+  <div id='column2'>
+
+
+
+  </div>
+
+</div>
+
+<script type='text/javascript'>
+
+
+  $(document).ready(function(){
+
+  });
+
+</script>
+
+</body>
+</html>
