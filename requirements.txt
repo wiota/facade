@@ -14,11 +14,11 @@ gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.6
 lxml==3.3.5
-mongoengine==0.8.7
+mongoengine==0.10.0
 newrelic==2.18.1.15
 passlib==1.6.2
 premailer==2.5.1
-pymongo==2.7
+pymongo==2.8
 pytz==2013b0
 requests==2.3.0
 six==1.9.0
