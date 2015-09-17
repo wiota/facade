@@ -25,9 +25,7 @@
 
     {% for item in body.succset %}
       <div class='item'><a href='/category/{{ item.slug }}'>
-        {% if not item.cover %}
-          {{item.title}}
-        {% endif %}
+        <h2>{{item.title}}</h2>
         {% for cover in item.cover %}
           <img src='{{ cover.href }}?w=600'>
         {% endfor %}
