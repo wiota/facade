@@ -26,7 +26,7 @@ body {
 }
 
 #column1 .end {
-  margin-bottom: 10%;
+  margin: 10% .6em;
   width: .6em;
   height: .6em;
   background-color: #48a7d0;
