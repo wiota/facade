@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Action Is Primary</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+
+
+  <script type='text/javascript'>
+
+    function toggleMenu($el){
+      console.log($el.data('visible'))
+      if($el.data('visible')){
+        $el.hide();
+        $el.data('visible', false)
+      } else {
+        $el.show();
+        $el.data('visible', true)
+      }
+    }
+
+    $(document).ready(function(){
+      var nav = $('#nav');
+      nav.data('visible', false);
+      nav.hide();
+      $('#nav-hide-show').click(toggleMenu.bind(null, nav))
+    })
+
+  </script>
+
+</head>
+<body class='home'>
+  <div class='page'>
+
+    <div class='column'>
+      <h1>Action Is Primary</h1>
+
+      <a id='nav-hide-show'>menu</a>
+      <div id='nav'>
+        {% for vertex in body.succset if vertex.vertex_type == 'page' %}
+          <a class='page'>{{ vertex.title }}</a>
+        {% endfor %}
+      </div>
+
+      <h2>3:15pm</h2>
+
+      <div class='dances'>
+        {% for vertex in body.succset if vertex.vertex_type == 'dance' %}
+          {% include "primary/_dance.html" %}
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <div class='images'>
+      {% for vertex in body.succset if vertex.vertex_type == 'photo' %}
+          <div class='image'><img src='{{ vertex.href }}?w=900' /></div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</body>
+</html>

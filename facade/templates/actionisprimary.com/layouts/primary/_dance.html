@@ -1,0 +1,11 @@
+<div class='title'>{{ vertex.title }}</div>
+{% if vertex.location %}
+  <div class='location'>{{ vertex.location }}</div>
+{% endif %}
+<div class='content'>
+{% for vertex in vertex.succset %}
+  {% if vertex.vertex_type == 'youtube' %}
+    {% include "primary/_youtube.html" %}
+  {% endif %}
+{% endfor %}
+</div>
