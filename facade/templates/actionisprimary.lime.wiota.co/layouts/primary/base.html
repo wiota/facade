@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Action Is Primary</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
+  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+
+
+  <script type='text/javascript'>
+
+    function toggleMenu($el, $trigger, $backdrop){
+
+      if($el.data('visible')){
+        $el.hide();
+        $trigger.html('menu')
+        $trigger.removeClass('open')
+        $backdrop.fadeOut();
+        $el.data('visible', false)
+      } else {
+        $el.show();
+        $trigger.html('X')
+        $trigger.addClass('open')
+        $backdrop.fadeIn();
+        $el.data('visible', true)
+      }
+    }
+
+    $(document).ready(function(){
+      var nav = $('#nav');
+      var trigger = $('#nav-hide-show');
+      var backdrop = $('<div>').addClass('backdrop').appendTo('body')
+      nav.data('visible', false);
+      nav.hide();
+      fn = toggleMenu.bind(null, nav, trigger, backdrop)
+      trigger.click(fn)
+      backdrop.click(fn)
+    })
+
+  </script>
+
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>

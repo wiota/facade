@@ -1,69 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Action Is Primary</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "primary/base.html" %}
+{% block content %}
+  <div class='column'>
+    <h1><a href='/'>Action Is Primary</a></h1>
 
-  <link rel="icon" type="image/png" href="{{ url_for('static.static', filename='img/favicon.ico')}}" />
-  <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
-  <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
+    {% include "primary/_nav.html" %}
 
-
-  <script type='text/javascript'>
-
-    function toggleMenu($el){
-      console.log($el.data('visible'))
-      if($el.data('visible')){
-        $el.hide();
-        $el.data('visible', false)
-      } else {
-        $el.show();
-        $el.data('visible', true)
-      }
-    }
-
-    $(document).ready(function(){
-      var nav = $('#nav');
-      nav.data('visible', false);
-      nav.hide();
-      $('#nav-hide-show').click(toggleMenu.bind(null, nav))
-    })
-
-  </script>
-
-</head>
-<body class='home'>
-  <div class='page'>
-
-    <div class='column'>
-      <h1>Action Is Primary</h1>
-
-      <a id='nav-hide-show'>menu</a>
-      <div id='nav'>
-        {% for vertex in body.succset if vertex.vertex_type == 'page' %}
-          <a class='page'>{{ vertex.title }}</a>
-        {% endfor %}
+    <h2>
+      <div class='clock'>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 120 120"><circle fill="#FFFFFF" stroke="#000000" stroke-width="9" stroke-miterlimit="10" cx="60" cy="60" r="50"/><line fill="none" stroke="#000000" stroke-width="9" stroke-miterlimit="10" x1="57" y1="60.5" x2="102" y2="60.5"/></svg>
       </div>
+      <div class='time'>3:15pm</div>
+    </h2>
 
-      <h2>3:15pm</h2>
 
-      <div class='dances'>
-        {% for vertex in get_vertex(config, "dances").succset if vertex.vertex_type == 'dance' %}
-          {% include "primary/_dance.html" %}
-        {% endfor %}
-      </div>
-
-    </div>
-
-    <div class='images'>
-      {% for vertex in body.succset if vertex.vertex_type == 'photo' %}
-          <div class='image'><img src='{{ vertex.href }}?w=900' /></div>
+    <div class='dances'>
+      {% for vertex in get_vertex(config, "dances").succset if vertex.vertex_type == 'dance' %}
+        {% include "primary/_dance.html" %}
       {% endfor %}
     </div>
 
   </div>
-
-</body>
-</html>
+{% endblock %}

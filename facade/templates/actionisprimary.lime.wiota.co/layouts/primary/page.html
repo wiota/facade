@@ -1,0 +1,25 @@
+{% extends "primary/base.html" %}
+{% block content %}
+  <div class='column page'>
+    <h1><a href='/'>Action Is Primary</a></h1>
+    <h2>{{ vertex.title }}</h2>
+
+      {% include "primary/_nav.html" %}
+
+
+      <div class='text'>
+        {% for vertex in vertex.succset if vertex.vertex_type == 'text' %}
+          {% include "primary/_text.html" %}
+        {% endfor %}
+        {% for vertex in vertex.succset if vertex.vertex_type == 'photo' %}
+          <div class='image'><img src='{{ vertex.href }}?w=900' /></div>
+        {% endfor %}
+        {% for vertex in vertex.succset if vertex.vertex_type == 'artist_description' %}
+          {% include "primary/_artist_description.html" %}
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </div>
+{% endblock %}

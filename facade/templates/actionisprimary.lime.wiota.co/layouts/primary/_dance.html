@@ -1,13 +1,19 @@
-<div class='title'>{{ vertex.title }}</div>
-{% if vertex.location %}
-  <div class='location'>{{ vertex.location }}</div>
-{% endif %}
-<div class='content'>
-{% for vertex in vertex.succset %}
-  {% if vertex.vertex_type == 'youtube' %}
-    {% include "primary/_youtube.html" %}
-  {% elif vertex.vertex_type == 'vimeo' %}
-    {% include "primary/_vimeo.html" %}
+<div class='dance'>
+  <div class='title'>{{ vertex.title }}</div>
+  {% if vertex.artist %}
+    <div class='artist'>{{ vertex.artist }}</div>
   {% endif %}
-{% endfor %}
+  <div class='content'>
+  {% for vertex in vertex.succset %}
+    {% if vertex.vertex_type == 'youtube' %}
+      {% include "primary/_youtube.html" %}
+    {% elif vertex.vertex_type == 'vimeo' %}
+      {% include "primary/_vimeo.html" %}
+    {% elif vertex.vertex_type == 'text' %}
+      {% include "primary/_text.html" %}
+    {% elif vertex.vertex_type == 'photo' %}
+      {% include "primary/_photo.html" %}
+    {% endif %}
+  {% endfor %}
+  </div>
 </div>

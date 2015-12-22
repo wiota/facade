@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-size: 100%;
-  font-family: monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
 a {
@@ -13,7 +13,6 @@ a:hover {
 }
 
 h1, h2 {
-  font-family: monospace;
   text-align: center;
   font-weight: normal;
   text-transform: lowercase;
@@ -25,88 +24,104 @@ h1 {
   margin: 1em 0 0;
 }
 
+h1 a {
+  text-decoration: none;
+  color: #085895;
+}
+
 h2 {
   color: #cd211f;
   font-size: 1.5em;
 }
 
+h2 .clock {width: 1em; margin: auto;}
+
 .column {
-  position:relative;
-  z-index: 10;
-  margin: 1em 25%;
+  margin: 1em 0;
 }
 
 #nav-hide-show {
-  font-size: .8em;
+  font-size: 1em;
+  line-height: 2em;
   text-align: center;
   display:block;
   cursor: pointer;
+  color: #cd211f;
+}
+
+#nav-hide-show.open {
+  font-size: 2em;
+  line-height: 1em;
+  color: #cd211f;
 }
 
 #nav {
-  background-color: #f6e37f;
-  border-radius: 1em;
+  background-color: #f0f0f0;
+  border-radius: .1em;
   text-align: center;
   font-size: 1em;
-  padding: .5em 0;
-  width: 50%;
-  margin: .5em 25%;
-
+  padding: 15% 0 35%;
+  width: 73.5%;
+  height: 0;
+  margin: .5em 13.25%;
+  position: absolute;
+  z-index: 1000;
 }
 
 #nav a {
+  color: #cd211f;
   display: block;
   padding: .5em;
   cursor: pointer;
 }
 
-.images {
-  position:absolute;
-  z-index: 1;
+.backdrop {
+  display: none;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: #cd211f;
+  opacity: .8;
 }
 
-.images .image {
-  width: 12.5%;
-  margin-bottom: 1em;
-}
-
-.images .image img {
-  max-width: 100%;
-}
-
-.images .image:nth-child(odd) {
-  float: left;
-  clear: left;
-}
-
-.images .image:nth-child(even) {
-  float: right;
-  clear: right;
-}
+/* Dances Grid */
 
 .dances {
   margin-top: 3em;
-  text-align: center;
+}
+
+.dances .dance {
+  float:left;
+  width: 22.5%;
+  margin: 2% 0 0 2%;
+}
+
+.dances .dance:nth-child(4n+1) {
+  clear:both;
 }
 
 .dances .title {
-  font-size: 1.5em;
+  font-size: 1.25em;
   margin: .5em 0 .2em;
   color: #085895;
 }
 
-.dances .location {
+.dances .artist {
   font-size: .8em;
   margin: 0 0 1em;
-  color: #d26e1e;
+  color: #000;
 }
 
 .dances .content {
-  width: 50%;
-  margin: 0 25%;
+  width: 100%;
+  margin: 0;
+}
+
+.dance .content img {
+  max-width: 100%;
 }
 
 .video {
@@ -122,4 +137,15 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Pages */
+
+.page.column {
+  width: 50%;
+  margin: 0 25%;
+}
+
+.artist_description h3{
+  font-size: 2em;
 }
