@@ -6,6 +6,8 @@
 {% for vertex in vertex.succset %}
   {% if vertex.vertex_type == 'youtube' %}
     {% include "primary/_youtube.html" %}
+  {% elif vertex.vertex_type == 'vimeo' %}
+    {% include "primary/_vimeo.html" %}
   {% endif %}
 {% endfor %}
 </div>

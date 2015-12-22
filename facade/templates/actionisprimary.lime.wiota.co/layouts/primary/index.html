@@ -50,7 +50,7 @@
       <h2>3:15pm</h2>
 
       <div class='dances'>
-        {% for vertex in body.succset if vertex.vertex_type == 'dance' %}
+        {% for vertex in get_vertex(config, "dances").succset if vertex.vertex_type == 'dance' %}
           {% include "primary/_dance.html" %}
         {% endfor %}
       </div>

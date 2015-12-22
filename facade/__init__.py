@@ -50,6 +50,7 @@ def create_app(hostname):
     app.jinja_env.globals.update(get_page=template_tools.get_page)
     app.jinja_env.globals.update(get_happenings=template_tools.get_happenings)
     app.jinja_env.globals.update(get_tag=template_tools.get_tag)
+    app.jinja_env.globals.update(get_vertex=template_tools.get_vertex)
 
     # Register the www blueprint
     from facade.views import www
