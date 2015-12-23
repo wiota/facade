@@ -65,6 +65,7 @@ h2 .clock {width: 1em; margin: auto;}
   height: 0;
   margin: .5em 13.25%;
   position: absolute;
+  left:0;
   z-index: 1000;
 }
 
