@@ -17,6 +17,9 @@
         {% for vertex in vertex.succset if vertex.vertex_type == 'artist_description' %}
           {% include "primary/_artist_description.html" %}
         {% endfor %}
+        {% for vertex in vertex.succset if vertex.vertex_type == 'event' %}
+          {% include "primary/_event.html" %}
+        {% endfor %}
       </div>
 
     </div>

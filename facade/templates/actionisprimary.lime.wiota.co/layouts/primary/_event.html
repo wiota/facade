@@ -1,0 +1,12 @@
+<div class='event'>
+  <span class='title'>{{ vertex.title }} </span>
+  {% if vertex.date %}
+    <span class='date'>// {{ vertex.date }} </span>
+  {% endif %}
+  {% if vertex.description %}
+    <span class='description'>// {{ vertex.description }} </span>
+  {% endif %}
+  {% if vertex.location %}
+    <span class='location'>// {{ vertex.location }} </span>
+  {% endif %}
+</div>
