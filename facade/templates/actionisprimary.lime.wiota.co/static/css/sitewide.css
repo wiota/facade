@@ -125,6 +125,10 @@ h2 .clock {width: 1em; margin: auto;}
   max-width: 100%;
 }
 
+.dance .block {
+  margin-bottom: 8.8888%;
+}
+
 .video {
   width: 100%;
   position:relative;
