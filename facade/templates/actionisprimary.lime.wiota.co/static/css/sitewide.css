@@ -34,7 +34,7 @@ h2 {
   font-size: 1.5em;
 }
 
-h2 #clock {width: 1em; margin: auto;}
+h2 #clock {width: 1.5em; margin: auto;}
 
 .column {
   margin: 1em 0;
@@ -49,24 +49,34 @@ h2 #clock {width: 1em; margin: auto;}
   color: #cd211f;
 }
 
-#nav-hide-show.open {
-  font-size: 2em;
-  line-height: 1em;
-  color: #cd211f;
-}
-
 #nav {
   background-color: #f0f0f0;
   border-radius: .1em;
   text-align: center;
   font-size: 1em;
-  padding: 15% 0 35%;
+  padding: 15% 0 15%;
   width: 73.5%;
-  height: 0;
   margin: .5em 13.25%;
   position: absolute;
   left:0;
   z-index: 1000;
+}
+
+#nav .close {
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2em;
+  font-size: 2em;
+}
+
+@media (max-width: 600px) {
+  #nav {
+    top: 4em;
+    width: 96%;
+    margin: .5em 2%;
+  }
 }
 
 #nav a {
@@ -78,7 +88,7 @@ h2 #clock {width: 1em; margin: auto;}
 
 .backdrop {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -129,6 +139,30 @@ h2 #clock {width: 1em; margin: auto;}
   margin-bottom: 8.8888%;
 }
 
+.dance .block .image {
+  cursor: pointer;
+}
+
+.enlarged {
+  margin: 2%;
+  z-index: 1000;
+}
+
+.photo_backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: #ffffff;
+  opacity: .9;
+}
+
+.enlarged img {
+  width: 100%;
+}
+
 .video {
   width: 100%;
   position:relative;
@@ -149,6 +183,13 @@ h2 #clock {width: 1em; margin: auto;}
 .page.column {
   width: 50%;
   margin: 0 25%;
+}
+
+@media (max-width: 600px) {
+  .page.column {
+    width: 90%;
+    margin: 0 5%;
+  }
 }
 
 .artist_description h3{

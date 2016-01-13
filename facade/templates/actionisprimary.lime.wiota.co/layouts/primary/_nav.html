@@ -1,5 +1,6 @@
 <a id='nav-hide-show'>menu</a>
 <div id='nav'>
+  <a class='close'>X</a>
   {% for vertex in get_body(config).succset if vertex.vertex_type == 'page' %}
     {% if vertex.slug == 'dances' %}
       <a href='/' class='page'>{{ vertex.title }}</a>

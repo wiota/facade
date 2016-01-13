@@ -28,6 +28,11 @@ function renderClock (m, secondHandCoor) {
   minAngle = m*6;
   hourAngle = m/2;
 
+  h = Math.floor(m/60)
+  rm = Math.round(m-(h*60))
+  if(h==0){ h=12 }
+  if(rm < 10){ rm = "0"+rm; }
+
   secondHandCoor = clockHand(centerCoor, minuteHandLength, secondAngle);
   minuteHandCoor = clockHand(centerCoor, minuteHandLength, minAngle);
   hourHandCoor = clockHand(centerCoor, hourHandLength, hourAngle);
@@ -41,6 +46,10 @@ function renderClock (m, secondHandCoor) {
     '<line fill="none" stroke="#000000" stroke-width="10" stroke-miterlimit="10" x1="60" y1="60" x2="'+hourHandCoor[0]+'" y2="'+hourHandCoor[1]+'"/>' +
     '</svg>'
   );
+
+  $('#time').text(
+    h+":"+rm+"pm"
+  )
 }
 
 function windClock () {

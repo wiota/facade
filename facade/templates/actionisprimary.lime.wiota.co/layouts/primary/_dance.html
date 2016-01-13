@@ -13,7 +13,7 @@
       {% elif vertex.vertex_type == 'text' %}
         {% include "primary/_text.html" %}
       {% elif vertex.vertex_type == 'photo' %}
-        {% include "primary/_photo.html" %}
+        <div class='image' data-large-img='{{ vertex.href}}?w=1200'><img src='{{ vertex.href }}?w=300' /></div>
       {% endif %}
     </div>
   {% endfor %}

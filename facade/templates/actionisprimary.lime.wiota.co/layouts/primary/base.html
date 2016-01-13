@@ -11,39 +11,8 @@
   <link rel="stylesheet" href="{{ url_for('static.static', filename='css/sitewide.css')}}">
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/clock.js')}}"></script>
-
-
-  <script type='text/javascript'>
-
-    function toggleMenu($el, $trigger, $backdrop){
-
-      if($el.data('visible')){
-        $el.hide();
-        $trigger.html('menu')
-        $trigger.removeClass('open')
-        $backdrop.fadeOut();
-        $el.data('visible', false)
-      } else {
-        $el.show();
-        $trigger.html('X')
-        $trigger.addClass('open')
-        $backdrop.fadeIn();
-        $el.data('visible', true)
-      }
-    }
-
-    $(document).ready(function(){
-      var nav = $('#nav');
-      var trigger = $('#nav-hide-show');
-      var backdrop = $('<div>').addClass('backdrop').appendTo('body')
-      nav.data('visible', false);
-      nav.hide();
-      fn = toggleMenu.bind(null, nav, trigger, backdrop)
-      trigger.click(fn)
-      backdrop.click(fn)
-    })
-
-  </script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/imgEnlarge.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/menu.js')}}"></script>
 
 </head>
 <body>
