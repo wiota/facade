@@ -152,13 +152,15 @@ h2 {
 
 .projects .subnav {
   position:absolute;
-  top: 2%;
+  top: 0;
   left: 2%;
   width: 20%;
+  z-index: 100;
 }
 
 .projects .subnav h1 {
   font-size: 40px;
+  line-height: 40px;
   color: #00aae6;
   text-align: left;
 }
@@ -167,13 +169,13 @@ h2 {
   background-color:#fff;
   color: #00aae6;
   display:block;
-  font-size: 40px;
+  font-size: 30px;
   margin: 40px 0;
   text-decoration: none;
 }
 
 .projects .subnav a.selected {
-  margin-left: 50px;
+  text-align: right;
 }
 
 .projects .subnav img {
@@ -181,39 +183,71 @@ h2 {
   width:100%;
 }
 
+@media (max-width: 680px) {
+  .projects .subnav {
+    position:static;
+    margin: 30px 2%;
+    width: 46%;
+  }
+
+  .projects .subnav a {
+    background-color:#fff;
+    color: #00aae6;
+    display:block;
+    font-size: 30px;
+    margin: 10px 0;
+    text-decoration: none;
+  }
+
+  .projects .subnav a.selected {
+    text-align: right;
+  }
+}
+
 /* phil column -------------------------- */
 
-.projects .column1 {position: relative;}
+.projects .column1 {
+  position: relative;
+  width: 38%;
+  padding: 40px 0 0 24%;
+  float:left;
+}
 
-.projects .handle {border-radius: 50%; cursor: ew-resize;display:block;position:absolute;}
-.projects .handle .label_above {position:relative; text-align: center; display:block; font-family: 'helvetica', 'arial', 'san-serif';}
+.projects .column1 h2 {
+  margin-top:0;
+}
 
-
-.projects .index {text-align: right;}
-.projects .index img {width: 50%;}
-
-.projects .index .handle {height: 50px; width: 50px; background: #f5ea3d;}
-.projects .index .handle .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
-.projects .index .dragger {top:-25px; left: -25px;}
-.projects .index .sizer {top:-25px; right: -25px;}
-
-/* full ------------------------------ */
-
-.projects .full img {width: 60%; float:left; margin: 2px 3% 5px -30%; position:relative;}
-.projects .full img.show {width: 130%; float:none; margin: 2px 2px 2px -30%; position:relative;}
-
-
-.projects .full .handle {height: 50px; width: 50px; background: #f5ea3d;}
-.projects .full .handle .label_above {padding: 16px 0; font-size: 20px; color: #fff;}
-.projects .full .dragger {top:-25px; left: -25px;}
-.projects .full .sizer {top:-25px; right: -25px;}
+@media (max-width: 680px) {
+  .projects .column1 {
+    position: absolute;
+    width: 49%;
+    top: 0;
+    right: 0;
+    padding: 20px 0 0 0%;
+  }
+}
 
 /* waterfall ---------------------------- */
 
-.projects .waterfall {
+.projects .column3 {
+  width: 36%;
+  padding: 30px 0 0 2%;
+  float:left;
   z-index: 16;
   cursor: pointer;
   position: relative;
+}
+
+
+@media (max-width: 680px) {
+  .projects .column3 {
+    width: 50%;
+    padding: 10px 0 0 0;
+    float:left;
+    z-index: 16;
+    cursor: pointer;
+    position: relative;
+  }
 }
 
 .projects .speed_text {
@@ -230,24 +264,24 @@ h2 {
 
 .projects .waterfall .play {
   position:absolute;
-  margin: 0% 0% 0 0%;
+  margin: 100px 40%;
   width: 20%;
-  right: -20%;
+  right: 0%;
   z-index: 100;
   transition: all .5s;
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
+  transform: scale(0.5) rotate(90deg);
+  -webkit-transform: scale(0.5) rotate(90deg);
+  -moz-transform: scale(0.5) rotate(90deg);
+  -ms-transform: scale(0.5) rotate(90deg);
+  -o-transform: scale(0.5) rotate(90deg);
 }
 
 .projects .waterfall .play:hover {
-  transform: scale(1.9) rotate(90deg);
-  -webkit-transform: scale(1.9) rotate(90deg);
-  -moz-transform: scale(1.9) rotate(90deg);
-  -ms-transform: scale(1.9) rotate(90deg);
-  -o-transform: scale(1.9) rotate(90deg);
+  transform: scale(1) rotate(90deg);
+  -webkit-transform: scale(1) rotate(90deg);
+  -moz-transform: scale(1) rotate(90deg);
+  -ms-transform: scale(1) rotate(90deg);
+  -o-transform: scale(1) rotate(90deg);
 }
 
 .projects .waterfall_item {opacity: 1;width: 50%; float:left; margin: 0; position:relative;}
@@ -267,19 +301,10 @@ h2 {
   z-index: 48;
 }
 
-.projects .waterfall_load {height: 30px; margin: 0 0 7px; background-color: #ff97ca;}
-.projects .waterfall_load .scrub_bar {position:absolute; height: 30px; width: 0;background-color: #f5ea3d; transition: all .2s;}
-.projects .waterfall_load .range_bar {position:absolute; height: 30px; width: 0;background-color: #ffffff; transition: all .2s;}
+.projects .waterfall_load {position:fixed; z-index: 200; top: 0; left: 0; right: 0; height: 20px; margin: 0 0 7px; background-color: #f5ea3d;}
+.projects .waterfall_load .scrub_bar {position:absolute; height: 20px; width: 0;background-color: #93ecc3; transition: all .2s;}
+.projects .waterfall_load .range_bar {position:absolute; height: 20px; width: 0;background-color: #ffffff; transition: all .2s;}
 
-
-.projects .waterfall .handle {height: 30px;width:30px;background-color: #ff97ca; transition: all .5s;}
-.projects .waterfall .handle .label_above {padding: 8px 0; font-size: 16px; color: #fff;}
-.projects .waterfall .dragger {top: 0; left: -15px;}
-.projects .waterfall .sizer {top: 0; right: -15px;}
-
-.projects .waterfall .handle:hover {height: 50px; width: 50px; background: #f5ea3d;}
-.projects .waterfall .dragger:hover {top:-12.5px; left: -25px;}
-.projects .waterfall .sizer:hover {top:-12.5px; right: -25px;}
 
 /* Simulacra --------------------------------------------------------- */
 
