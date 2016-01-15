@@ -9,7 +9,7 @@
     <h2>{{ next_happening.title }}</h2>
   {% endif %}
   {% if next_happening.description %}
-    <div class='description'>{{ next_happening.description }}</div>
+    <div class='description'>{{ next_happening.description|nl2br|safe }}</div>
   {% endif %}
   {% if next_happening.date %}
     <div class='date'>{{ next_happening.date }}</div>
