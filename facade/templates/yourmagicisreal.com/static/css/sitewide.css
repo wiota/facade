@@ -11,6 +11,8 @@ h1 {
   font-weight: normal;
   text-align: center;
   z-index: 20;
+  font-size: 60px;
+  line-height: 60px;
 }
 
 h2 {
@@ -116,6 +118,31 @@ h2 {
   font-family: 'Inconsolata', Arial, Helvetica, 'san-serif';
 }
 
+.happenings.hide {
+  display:none;
+}
+
+.happenings .display_close {
+  position:absolute;
+  display: block;
+  z-index: 500;
+  font-size: 16px;
+  top:5%;
+  right: 2%;
+  color:#f4827e;
+}
+
+.happenings .display_close span {
+  font-size: 50px;
+}
+
+@media (max-width: 680px) {
+  .happenings .happening {
+    margin: 150px 2%;
+    width: 88%;
+  }
+}
+
 .happenings .happening .introduction {
   font-size: 90%;
 }
@@ -126,13 +153,21 @@ h2 {
   margin: 30px 0;
 }
 
+.happenings .happening a {
+  color: #b9ffff;
+}
+
 .happenings .happening div {
   color: #fff;
   text-align: left;
   margin: 4% 0;
 }
 
-
+.display_close {
+  cursor: pointer;
+  font-family: 'Sequi';
+  font-weight: 600;
+}
 
 /* Projects ---------------------------------------------------------- */
 
@@ -396,23 +431,19 @@ h2 {
 .simulacra .subnav a.center {text-align: center;}
 .simulacra .subnav a.right {text-align: right;}
 
-.simulacra .display_close {
-  cursor: pointer;
+.simulacra .display_close.simulacra  {
   display:none;
   position:fixed;
   z-index: 500;
   font-size: 20px;
   top:5%;
   right: 5%;
-  font-family: 'Sequi';
-  font-weight: 600;
   color:#f4827e;
 }
-  .simulacra .display_close:hover {
-
+  .simulacra .display_close.simulacra:hover {
     color: #5bce52;
   }
-.simulacra .display_close span {
+.simulacra .display_close.simulacra span {
   font-size: 200px;
 }
 
@@ -473,6 +504,8 @@ h2 {
 .aaxxx #nav {
   left: auto;
   right: 2%;
+  top: auto;
+  bottom: 2%;
 }
 
 .aaxxx #nav a {

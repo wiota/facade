@@ -1,0 +1,24 @@
+{% set happenings = get_happenings(config) %}
+{% set next_happening = happenings.succset[0] %}
+
+{% if next_happening %}
+<div class='happening'>
+  <a class='display_close'>close<span>X</span></a>
+  <div class='introduction'>Something is happening soon</div>
+  {% if next_happening.title %}
+    <h2>{{ next_happening.title }}</h2>
+  {% endif %}
+  {% if next_happening.description %}
+    <div class='description'>{{ next_happening.description }}</div>
+  {% endif %}
+  {% if next_happening.date %}
+    <div class='date'>{{ next_happening.date }}</div>
+  {% endif %}
+  {% if next_happening.location %}
+    <div class='location'>{{ next_happening.location }}</div>
+  {% endif %}
+  {% if next_happening.link %}
+    <a class='link' href='{{ next_happening.link }}'>{{ next_happening.link }}</a>
+  {% endif %}
+</div>
+{% endif %}

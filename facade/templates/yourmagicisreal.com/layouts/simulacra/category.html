@@ -20,11 +20,13 @@
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/title_slide.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/layers.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/openable.js')}}"></script>
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/class_toggle.js')}}"></script>
 
 
 
   <script type='text/javascript'>
     $(document).ready(function(){
+      classToggle('hide','.happenings', '.happenings .display_close');
       var a = new title_slide('.title_circle', 10, 400, '0', '-200%');
       var l = new layer('.column2', 'auto');
       var o = new openable('a.show');
@@ -40,12 +42,7 @@
 <body class='simulacra'>
 
   <div class='happenings'>
-    <div class='happening'>
-      <div class='introduction'>Something is happening soon</div>
-      <h2>The thing</h2>
-      <div class='description'>A little bit about the thing</div>
-      <div class='date'>August 27th 2015</div>
-    </div>
+    {% include "primary/_happening.html" %}
   </div>
 
   <div class='page'>
@@ -60,7 +57,7 @@
 
     <div class='title_circle'><h1>{{ category.title }}</h1></div>
 
-    <a class='display_close'>close<span>X</span></a>
+    <a class='display_close simulacra'>close<span>X</span></a>
 
     <div class='column2 subnav'>
     {% for work in category.succset %}

@@ -17,11 +17,13 @@
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
 
+  <script type="text/javascript" src="{{ url_for('static.static', filename='js/class_toggle.js')}}"></script>
 
 
 
   <script type='text/javascript'>
     $(document).ready(function(){
+      classToggle('hide','.happenings', '.happenings .display_close');
     })
   </script>
 
@@ -38,9 +40,14 @@
       <a href='/category/simulacra'>Simulacra</a>
       <a href='/category/projects'>Projects</a>
       <a href='/'>AA&nbsp;XXX</a>
+      <a>Contact</a>
     </div>
 
+    <!--<div class='happenings'>
+      {% include "primary/_happening.html" %}
+    </div>-->
 
+    <h1 class=''>{{ category.title }}</h1>
 
     <div class='column1'>
 

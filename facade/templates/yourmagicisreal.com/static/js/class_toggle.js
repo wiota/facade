@@ -1,4 +1,4 @@
-var classToggle = (function(cls, selector){
+var classToggle = (function(cls, selector, trigger){
   var baseCss = {};
   var $images = null;
 
@@ -8,8 +8,8 @@ var classToggle = (function(cls, selector){
 
   function init(selector){
     var t = this;
-    $images = $(selector).on("click", function(){
-      toggleShow($(this));
+    $images = $(trigger).on("click", function(){
+      toggleShow($(selector));
     });
   }
 
