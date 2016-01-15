@@ -19,7 +19,7 @@ h2 {
 
 /* Shared --------------------------------------------------------- */
 
-.description {
+.description, .text {
   font-family: 'Inconsolata', Arial, Helvetica, 'san-serif';
   font-weight: 400;
 }
@@ -29,8 +29,8 @@ h2 {
   position:fixed;
   z-index: 50;
   padding: 0;
-  width: 120px;
-  height: 120px;
+  width: 132px;
+  height: 132px;
   text-align: center;
   font-weight: 900;
   letter-spacing: 1px;
@@ -55,8 +55,8 @@ h2 {
 
 #nav a {
   display: block;
-  padding-top: 9%;
-  height:24%;
+  padding-top: 7px;
+  height:26px;
   background-color: #f5ea3d;
   color: #ffffff;
   text-decoration: none;
@@ -585,5 +585,60 @@ h2 {
 
 }
 
+/* Contact  --------------------------------------------------------- */
+
+.contact #nav {
+  left: auto;
+  right: 2%;
+}
+
+.contact #nav a {
+  background-color: #fff;
+  color: #000;
+}
+
+.contact #nav a:hover {
+  background-color:#000;
+  color: #fff;
+}
+
+.contact .column1 {
+  position: relative;
+  width: 38%;
+  padding: 40px 0 0 24%;
+  float:left;
+}
 
 
+@media (max-width: 680px) {
+  .contact .column1 {
+    position: absolute;
+    width: 49%;
+    top: 0;
+    right: 0;
+    padding: 20px 0 0 0%;
+  }
+}
+
+.contact h1 {
+  position: absolute;
+  top: 0;
+  left: 2%;
+  margin: 40px 0;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.contact .column1 img {
+  width: 50%;
+  margin: 20px 25%;
+}
+
+.contact .column1 .text {
+  margin: 20px 0;
+}
+
+.contact .happenings .happening {
+  background-color: #000;
+  color: #fff;
+}

@@ -17,17 +17,11 @@
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/jquery.min.js')}}"></script>
   <script type="text/javascript" src="{{ url_for('static.static', filename='js/underscore-min.1.5.2.js')}}"></script>
 
-  <script type="text/javascript" src="{{ url_for('static.static', filename='js/title_slide.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static.static', filename='js/layers.js')}}"></script>
-  <script type="text/javascript" src="{{ url_for('static.static', filename='js/openable.js')}}"></script>
 
 
 
   <script type='text/javascript'>
     $(document).ready(function(){
-      var a = new title_slide('.title_circle', 10, 400, '0', '-200%');
-      var l = new layer('.column2', 'auto');
-      var o = new openable('a.show');
     })
   </script>
 
@@ -37,67 +31,32 @@
 
 
 </head>
-<body class='simulacra'>
-
-
-
+<body class='contact'>
   <div class='page'>
 
     <div id='nav'>
-      <a>Simulacra</a>
+      <a href='/category/simulacra'>Simulacra</a>
       <a href='/category/projects'>Projects</a>
       <a href='/'>AA&nbsp;XXX</a>
     </div>
 
 
-    <div class='title_circle'><h1>{{ category.title }}</h1></div>
-
-    <a class='display_close'>close<span>X</span></a>
-
-    <div class='column2 subnav'>
-    {% for work in category.succset %}
-      {% if work.succset|length > 1 %}
-        {% set class = ['left', 'center', 'right'] | random() | string() %}
-        <a class='{{class}} show' rel='link_{{work.id}}'>{{work.title}}</a>
-      {% endif %}
-    {% endfor %}
-    </div>
 
     <div class='column1'>
 
-      {% for work in category.succset %}
-        {% if work.succset|length > 1 %}
+      {% for item in category.succset %}
+        {% if item.vertex_type == 'text' %}
+          {% if item.title %}
+            <h2 class='title'>{{ item.title }}</h2>
+          {% endif %}
+          {% if item.text %}
+            <div class='text'>{{ item.text }}</div>
+          {% endif %}
+        {% endif %}
 
-        <div id='display_{{work.id}}' class='work high openable'>
-          <a class='show' rel='link_{{work.id}}'>
-            {% for cover in work.cover %}
-              <img src='{{cover.href}}' alt='' />
-            {% endfor %}
-          </a>
-          <div class='additional'>
-            {% for media in work.succset %}
-            <img src='{{media.href}}' alt='' />
-            {% endfor %}
-
-            {% if work.title %}
-              <h2>{{work.title}}</h2>
-            {% endif %}
-
-            {% if work.description %}
-              <div class='description'>{{work.description|nl2br|safe}}</div>
-            {% endif %}
-
-
-          </div>
-        </div>
-
-
-        {% elif work.succset %}
-
-        <div class='work low'>
-          <a class=''>
-            <img src='{{work.succset[0].href}}' alt='' />
-          </a>
+        {% if item.vertex_type == 'photo' %}
+        <div class='photo'>
+            <img src='{{item.href}}?w=1000' alt='' />
         </div>
 
         {% endif %}
