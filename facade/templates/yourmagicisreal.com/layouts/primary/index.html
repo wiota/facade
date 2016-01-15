@@ -62,10 +62,10 @@
       {% for vertex in get_category(config, "aaxxx").succset %}
         {% if vertex.vertex_type == 'work' %}
           {% for cover in vertex.cover %}
-            <div class='aaxxx image'><img src='{{ cover.href }}?w=700' /></div>
+            <div class='aaxxx image'><img src='{{ cover.href }}?w=500' /></div>
           {% endfor %}
         {% elif vertex.vertex_type == 'photo' %}
-          <div class='aaxxx image'><img src='{{ vertex.href }}?w=700' /></div>
+          <div class='aaxxx image'><img src='{{ vertex.href }}?w=500' /></div>
         {% endif %}
       {% endfor %}
     </div>
