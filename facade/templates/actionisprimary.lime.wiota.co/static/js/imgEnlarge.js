@@ -1,5 +1,5 @@
-function renderImg(src){
-  return $("<div class='enlarged'><img src='"+src+"' /></div>")
+function renderImg(src, className){
+  return $("<div class='"+className+"'><img src='"+src+"' /></div>")
 }
 
 function renderBackdrop(){
@@ -19,10 +19,16 @@ function toCssUnits(number, unit){
   );
 }
 
-function place(src, parent){
+function place(src, parent, el){
+  var screenRatio = $(window).width() / $(window).height();
+  var imgRatio = el.width() / el.height();
   var offset = $(window).scrollTop();
   var backdrop = mount(renderBackdrop(), parent);
-  var img = mount(renderImg(src), parent);
+  if(screenRatio > imgRatio){
+    var img = mount(renderImg(src, 'enlarged tall'), parent);
+  } else {
+    var img = mount(renderImg(src, 'enlarged'), parent);
+  }
 
   function fn (){
     backdrop.remove();
@@ -41,7 +47,7 @@ function enlarger(el, parent){
   var element = $(el);
   var parent = $(parent);
   var src = element.data('large-img');
-  var fn = place.bind(null, src, parent)
+  var fn = place.bind(null, src, parent, element)
   element.on('click', fn)
 }
 

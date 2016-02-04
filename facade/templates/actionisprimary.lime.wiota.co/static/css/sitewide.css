@@ -160,6 +160,21 @@ h2 #clock {width: 1.5em; margin: auto;}
   z-index: 1000;
 }
 
+.enlarged img {
+  width: 100%;
+}
+
+.enlarged.tall {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.enlarged.tall img {
+  width: auto;
+  height: 96%;
+}
+
 .photo_backdrop {
   position: fixed;
   top: 0;
@@ -171,9 +186,6 @@ h2 #clock {width: 1.5em; margin: auto;}
   opacity: .9;
 }
 
-.enlarged img {
-  width: 100%;
-}
 
 .video {
   width: 100%;
