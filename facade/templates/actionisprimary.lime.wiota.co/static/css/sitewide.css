@@ -71,9 +71,21 @@ h2 #clock {width: 1.5em; margin: auto;}
   font-size: 2em;
 }
 
+.home_text {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  width: 73.5%;
+  margin: .5em 13.25%;
+}
+
 @media (max-width: 600px) {
   #nav {
     top: 4em;
+    width: 96%;
+    margin: .5em 2%;
+  }
+
+  .home_text {
     width: 96%;
     margin: .5em 2%;
   }

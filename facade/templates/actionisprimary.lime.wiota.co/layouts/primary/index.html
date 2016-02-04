@@ -10,6 +10,11 @@
       <div id='time'>3:15pm</div>
     </h2>
 
+    <div class='home_text'>
+      {% for vertex in get_body(config).succset if vertex.vertex_type == 'text' %}
+        {{ vertex.text|nl2br|safe }}
+      {% endfor %}
+    </div>
 
     <div class='dances'>
       {% for vertex in get_vertex(config, "dances").succset if vertex.vertex_type == 'dance' %}
