@@ -51,10 +51,20 @@ function enlarger(el, parent){
   element.on('click', fn)
 }
 
+function pagePlace(parent, event){
+  var element = $(event.target);
+  var parent = $(parent);
+  var src = element.data('large-img');
+  place(src, parent, element)
+}
+
+function pageEnlarge(el, parent){
+  $(el).on('click', pagePlace.bind(null, parent));
+}
 
 $(document).ready( function () {
-  $('.dance .content .image').each(function () {
-    enlarger(this, 'body');
-  });
+  var t = new Date().valueOf();
+  pageEnlarge('.dance .content .image', 'body')
+  console.log(new Date().valueOf() - t);
 })
 

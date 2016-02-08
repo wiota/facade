@@ -85,6 +85,12 @@ h2 #clock {width: 1.5em; margin: auto;}
     margin: .5em 2%;
   }
 
+  #nav .close {
+    height: 1em;
+    padding-bottom: 0;
+    font-size: 2em;
+  }
+
   .home_text {
     width: 96%;
     margin: .5em 2%;
