@@ -1,6 +1,6 @@
 var videoEnlarger = (function(){
   function renderYoutube(src, className){
-    return $("<div class='"+className+"'><iframe src="+src+" width='500' height='500' frameborder='0' allowfullscreen></iframe></div>");
+    return $("<div class='"+className+"'><iframe src='"+src+"' width='500' height='500' frameborder='0' allowfullscreen></iframe></div>");
   }
 
   function renderBackdrop(){

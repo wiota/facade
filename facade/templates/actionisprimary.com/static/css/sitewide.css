@@ -201,16 +201,26 @@ h2 #clock {width: 1.5em; margin: auto;}
   opacity: .9;
 }
 
+.video_backdrop:after {
+  font-family: 'Inconsolata', monospace;
+  content: "X";
+  color: #fff;
+  position: fixed;
+  font-size: 3em;
+  top: 11px;
+  right: 11px;
+}
+
 .enlarged.video {
   position: relative;
   z-index: 2000;
   background-color: transparent;
-  width: 70vmin;
+  width: 80vmin;
   left: 50%;
   height: 0;
   margin-top: 2%;
-  margin-left: -35vmin;
-  padding-bottom: 70vmin;
+  margin-left: -40vmin;
+  padding-bottom: 80vmin;
 }
 
 .video {
