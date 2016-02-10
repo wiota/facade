@@ -43,28 +43,18 @@ function place(src, parent, el){
   backdrop.on('click', fn);
 }
 
-function enlarger(el, parent){
-  var element = $(el);
-  var parent = $(parent);
-  var src = element.data('large-img');
-  var fn = place.bind(null, src, parent, element)
-  element.on('click', fn)
-}
-
 function pagePlace(parent, event){
-  var element = $(event.target);
+  var element = $(event.target.parentNode);
   var parent = $(parent);
   var src = element.data('large-img');
   place(src, parent, element)
 }
 
-function pageEnlarge(el, parent){
-  $(el).on('click', pagePlace.bind(null, parent));
+function pageEnlarge(selector, parent){
+  $(selector).on('click', pagePlace.bind(null, parent));
 }
 
 $(document).ready( function () {
-  var t = new Date().valueOf();
   pageEnlarge('.dance .content .image', 'body')
-  console.log(new Date().valueOf() - t);
 })
 
