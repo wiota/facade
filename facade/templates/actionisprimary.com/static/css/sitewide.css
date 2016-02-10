@@ -209,7 +209,7 @@ h2 #clock {width: 1.5em; margin: auto;}
   left: 50%;
   height: 0;
   margin-top: 2%;
-  margin-left: -35vm;
+  margin-left: -35vmin;
   padding-bottom: 70vmin;
 }
 
