@@ -5,7 +5,7 @@ from flask import Flask
 import newrelic.agent
 
 app = Flask(__name__)
-app.debug = os.environ.get('DEVEL', 'FALSE').upper() == 'TRUE'
+app.debug = os.environ.get('FLASK_DEBUG', False)
 app.wsgi_app = Landlord(create_app, subdomains=['www', 'static'])
 newrelic.agent.initialize('newrelic.ini')
 
