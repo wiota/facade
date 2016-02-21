@@ -1,8 +1,6 @@
 FROM ubuntu:14.04
 MAINTAINER Wiota Co
 
-COPY . /opt/facade/
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     python-dev \
@@ -13,8 +11,9 @@ RUN apt-get update && apt-get install -y \
     libxslt-dev \
     python-lxml
 
-
 EXPOSE 80
+
+COPY . /opt/facade/
 
 WORKDIR /opt/facade
 
