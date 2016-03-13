@@ -2,7 +2,7 @@
 <div id='nav'>
   <a class='close'>X</a>
   <a href='/' class='page'>Dances</a>
-  <a href='http://actionisprimary.tumblr.com/' class='page'>Public 315s</a>
+  <a href='http://actionisprimary.tumblr.com/' target='_blank' class='page'>Public 315s</a>
   {% for vertex in get_body(config).succset if vertex.vertex_type == 'page' %}
     {% if vertex.slug != 'dances' %}
       <a href='/page/{{ vertex.slug }}' class='page'>{{ vertex.title }}</a>
