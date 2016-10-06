@@ -19,6 +19,11 @@ def create_app(hostname):
     # This is required for subdomains to work
     app.config["SERVER_NAME"] = hostname
 
+    # REMOVE THIS WHEN ACTUALLY MOVING TO DOCKERIZATION #
+    if app.debug:
+        app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
+    #####################################################
+
     app.logger.debug("SERVER_NAME is: %s" % (app.config["SERVER_NAME"]))
 
     host = tools.get_host_by_hostname(hostname)
