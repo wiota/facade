@@ -3,23 +3,20 @@ from flask import Flask
 from toolbox import tools, template_tools
 from toolbox.emailer import FacadeExceptionEmail
 from toolbox.template_filters import format_nl2br
-from toolbox.models import Host
 import traceback
 
 def create_app(hostname):
     template_folder = "./templates/%s/layouts/" % (hostname)
     app = Flask(__name__, static_folder=None, template_folder=template_folder)
-
-    app.debug = os.environ.get('FLASK_DEBUG', 'FALSE').upper() == 'TRUE'
-
-    app.logger.debug("Attempting to create app for %s" % (hostname))
-
     db = tools.initialize_db(app)
+
+    dev = os.environ.get('DEVEL', 'FALSE').upper() == 'TRUE'
+    app.debug = dev
 
     # This is required for subdomains to work
     app.config["SERVER_NAME"] = hostname
-
-    app.logger.debug("SERVER_NAME is: %s" % (app.config["SERVER_NAME"]))
+    if dev:
+        app.config["SERVER_NAME"] += ":%s" % (os.environ.get('PORT'))
 
     host = tools.get_host_by_hostname(hostname)
 
@@ -31,11 +28,8 @@ def create_app(hostname):
 
     app.config['HOST'] = host
 
-    app.logger.debug("HOST is: %s" % (app.config["HOST"]))
-
     if not host:
-        app.logger.debug("No host found for: %s" % (hostname))
-        app.logger.debug([host.hostname for host in Host.objects()])
+
         # This host doesn't exist. Add a ping endpoint for monitoring.
         @app.route('/ping')
         def ping():
